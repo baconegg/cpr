@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:annotation-config />
+	<context:component-scan base-package="org.shinyul.service" />
+	<context:component-scan base-package="org.shinyul.util" />
+
+	<!-- mybatis -->
+	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource">
+		<property value="net.sf.log4jdbc.DriverSpy" name="driverClassName" />
+		<!-- <property value="jdbc:log4jdbc:oracle:thin:@192.168.0.25:1521:orcl" name="url" /> -->
+		<!-- <property value="jjy" name="username" /> -->
+		<property value="jdbc:log4jdbc:oracle:thin:@14.63.226.20:1521:orcl" name="url" />
+		<property value="edy" name="username" />
+		<property value="1234" name="password" />
+		<property value="1" name="initialSize" />
+		<property value="100" name="maxActive" />
+		<property value="3000" name="maxWait" />
+	</bean>
+
+	<!-- transaction manager -->
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+		<property ref="dataSource" name="dataSource" />
+	</bean>
+
+	<!-- session Factory -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+		<property ref="dataSource" name="dataSource" />
+		<property value="classpath*:org/shinyul/mapper/**/*.xml" name="mapperLocations" />
+	</bean>
+
+	<!-- mapper -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property value="org.shinyul.mapper" name="basePackage" />
+	</bean>
+
+	<!-- transaction -->
+	<tx:annotation-driven />
+
+
+
+	<!-- 긁어온 부분 멀티 파트 리졸버 사용을 위한 설정... -->
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes 2MB -->
+		<!-- 업로드 제한 크기가 2메가 인듯화다 나중에 수정해줄것... -->
+		<property name="maxUploadSize" value="3000000" />
+	</bean>
+
+
+	<!-- scheduler -->
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+		<property name="alwaysUseFullPath" value="true" />
+	</bean>
+
+	<task:scheduler id="Scheduledtest" pool-size="10" />
+	<task:executor id="Scheduledtestexecutor" pool-size="10" />
+	<task:annotation-driven />
+
+	<!-- 인터셉터 입니다... -->
+    <mvc:annotation-driven/>
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<!-- 모든 경로에 대해서는 /** 입니다 -->
+    		<!-- 콘솔에 찍히는 맵핑 경로를 보고 써 줍시다... 앞에다 cpr 괜히 붙여서 몇시간 뻘짓함 ;;; -->
+    		<!-- <mvc:mapping path="/product/**"/> -->
+    		<!-- <mvc:exclude-mapping path="/product/list/*"/> -->
+    		<!-- 밑에껄로 테스트해본 결과 잘 가로 챕니다.. -->
+    		<!-- <mvc:mapping path="/product/list/*"/>
+    		<mvc:mapping path="/product/view/**"/> -->    		
+    		<mvc:mapping path="/member/viewInfo/**"/>
+    		<mvc:mapping path="/member/modify/**"/>
+    		<mvc:mapping path="/member/remove/**"/>
+    		<mvc:mapping path="/product/register/**"/>
+    		<mvc:mapping path="/product/registerAction"/>
+    		<mvc:mapping path="/product/modify"/>    		  		
+    		<mvc:mapping path="/product/modifyAction"/>
+    		<mvc:mapping path="/product/remove"/>
+    		<mvc:mapping path="/request/**"/>
+<!--     		<mvc:mapping path="/reserve/**"/> -->
+   		<bean class="org.shinyul.control.LoginChkInterceptor"/>
+    	</mvc:interceptor>
+    	<!-- 밑에껀 모든 경로에 적용이 된다 -->    	 	
+		<!-- <bean class="org.shinyul.control.ChkInterceptor"/> -->		
+    </mvc:interceptors>
+    <!-- 여기까지 제대로 잘 되는 설정입니다~!!! -->
+	
+</beans>

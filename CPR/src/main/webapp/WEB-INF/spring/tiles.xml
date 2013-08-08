@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+
+	<!-- list  Common -->
+    <definition name="layout-list" template="/WEB-INF/views/tiles/listTemplate.jsp">
+	    <put-attribute name="meta" value="/WEB-INF/views/common/meta.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+    </definition>
+        
+	<!-- viewCommon  -->
+    <definition name="layout-view" template="/WEB-INF/views/tiles/singleTemplate.jsp">
+	    <put-attribute name="meta" value="/WEB-INF/views/common/meta.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+        <put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+    </definition>
+    
+    <!-- test -->
+     <definition name="layout-test" template="/WEB-INF/views/tiles/singleTemplate.jsp">
+	    <put-attribute name="meta" value="/WEB-INF/views/common/meta.jsp" />
+	    <put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+        <put-attribute name="header" value="" />
+    </definition>
+       
+    <!-- ======================================================================== -->
+     <!-- member  -->
+     <!-- member join  -->
+    <definition name="*/join" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/join.jsp" />
+    </definition>	
+    
+     <!-- member view  -->
+    <definition name="*/viewCustomer" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/viewCustomer.jsp" />
+    </definition>	    
+    
+      <!-- member view  -->
+    <definition name="*/viewSeller" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/viewSeller.jsp" />
+    </definition>	    
+    
+     <!-- ======================================================================== -->
+    <!-- product -->
+     <!-- product view -->
+    <definition name="*/view" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/view.jsp" />
+    </definition>
+    
+    <!-- product viewError  -->
+    <definition name="*/error" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/viewError.jsp" />
+    </definition>   
+    
+     <!-- seller product register  -->
+    <definition name="*/register" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/register.jsp" />
+    </definition>	
+    
+     <!-- seller product update  -->
+    <definition name="*/modify" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/modify.jsp" />
+    </definition>	
+    
+   <!-- ======================================================================== -->
+    <!-- list -->
+    <definition name="*/list" extends="layout-list" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/list.jsp" />
+    </definition>  
+    
+    <!-- main spatial  -->     
+    <!-- index  -->
+    <definition name="*/index" extends="layout-list" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/index.jsp" />
+    </definition>
+    
+     <!-- price  -->
+    <definition name="*/price" extends="layout-list" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/price.jsp" />
+    </definition>	
+    
+    <!-- shopInfo(메인에서 시장클릭시 넘어가는 시장내부)  -->
+<!--     <definition name="*/shopInfo" extends="layout-list" >  -->
+<!--         <put-attribute name="body" value="/WEB-INF/views/{1}/shopInfo.jsp" /> -->
+<!--     </definition>     -->
+    
+     <!-- shopDist(현재위치 기반으로 거리계산)  -->
+    <definition name="*/mapByDistance" extends="layout-list" > 
+        <put-attribute name="body" value="/WEB-INF/views/{1}/mapByDistance.jsp" />
+    </definition>
+    
+    
+    
+    <!-- ======================================================================== -->
+    <!-- 역 경매  -->    
+     <!-- register  -->
+    <definition name="request/regist" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/request/register.jsp" />
+    </definition>	
+    
+     <!-- view  -->
+    <definition name="request/view" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/request/view.jsp" />
+    </definition>	
+    
+     <!-- modify  -->
+    <definition name="request/modify" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/request/modify.jsp" />
+    </definition>	
+     <!-- modify  -->
+    <definition name="request/list" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/request/list.jsp" />
+    </definition>	
+    
+    <!-- ======================================================================== -->
+    <!-- 예약하기 -->
+    <definition name="reserve/list" extends="layout-view" > 
+        <put-attribute name="body" value="/WEB-INF/views/reserve/list.jsp" />
+    </definition>	
+    
+</tiles-definitions>

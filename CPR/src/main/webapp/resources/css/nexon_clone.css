@@ -1,0 +1,20 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, acronym, address, big, cite, code, img, ins, kbd, q, s, samp, small, strike, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;}
+body {line-height:1;}
+ol, ul {list-style:none; }
+
+.middle {overflow:hidden;width:900px;margin:0 auto;background:transparent url(../images/default/join/step_join.gif) repeat-y 186px top;}
+.sideSec {float:left;width:186px;padding-top:30px;}
+
+.middle .sideSec ul {width:186px;margin-bottom:35px;background:url(../images/default/join/step_join.gif) no-repeat left top;}
+
+.middle .sideSec ul li {width:186px;height:140px;}
+.middle .sideSec ul li span {display:block;width:186px;height:140px;}
+.middle .sideSec ul li .on {background:url(../images/default/join/step_join.gif) no-repeat -186px top;}
+.middle .sideSec ul .step1 .on {background-position:-186px top;}
+.middle .sideSec ul .step2 .on {background-position:-186px -140px;}
+.middle .sideSec ul .step3 .on {background-position:-186px -280px;}
+.middle .sideSec ul .step4 .on {background-position:-186px -420px;}
+
+.middle .sideSec ul li .step {display:none;}body {
+}
+

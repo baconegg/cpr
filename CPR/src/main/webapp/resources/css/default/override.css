@@ -1,0 +1,217 @@
+@charset "UTF-8";
+/* CSS Document */
+.wpb_content_element.span12.wpb_text_column {
+    margin-bottom: 0.5em;
+}
+.wpb_gallery .wpb_gallery_slides {
+	background:#333;
+}
+
+/*아오*/
+.vc_text_separator  {
+	border-bottom:none;
+
+}
+.vc_separator div {
+	background-color:#f5f5f5 !important;
+	margin:0;
+	padding:0;
+	top:0;
+}
+.designers {
+	border-top:thin solid #CCCCCC;
+	margin:2em 0 0 0;	
+	font-weight:400;
+	width:100%;
+	text-align:left;	
+}
+
+.left-side p:first-child
+{
+	/*font-weight:900;*/
+	font-family:'Nanum Gothic', sans-serif;
+	font-weight:700;
+}
+
+.left-side p,.pic-title p {
+	/*color:#333;*/
+	margin-bottom:0.1em;
+	line-height:1.2em;
+}
+
+.left-side a {
+	color:#999;
+}
+.pic-title p {
+	font:'NanumGothic',sans-serif;
+	font-weight:400;
+	color:#999;
+	
+}
+.profile .wpb_wrapper .row-fluid .wpb_single_image {
+	margin-bottom:5px;
+}
+.profile p{
+	padding-left:0.5em;
+}
+.profile p:first-child{
+	position:relative;
+	color:#333;
+/* 	background-color:#fc3; */
+/* 	background-color: rgba(201, 227, 239, 255); */
+	background-color: rgb(249, 249, 249);
+	padding:0.2em 0.5em;
+}
+/*슬라이드 네모 위치*/
+.wpb_gallery .wpb_gallery_slides .flex-control-nav a {
+	border-radius:0;
+	margin-left:6px;
+	background:#333;
+}
+li img {
+	vertical-align:auto;
+}
+.social {
+	margin:1em 0 0 0;	
+}
+#content h2, .other_projects_footer {
+	top:-2em;
+}
+.fb_like, .twitter-share-button, .wpb_pinterest {
+	
+	width:110px !important;
+	float:left;
+
+
+}
+
+.wpb_single_image {
+	overflow:hidden;
+}
+.wpb_single_image img {
+ 	width:100%;
+}
+.wpb_separator {
+	border-bottom-color:#CCCCCC;
+	margin:0 0 2em 0;
+}
+
+/*
+//404*/
+
+#err404 {
+	display:block;
+	text-align:center;
+	left:auto;
+	height:100%;
+	min-height:100%;
+	max-height:100%;
+}
+#err404 img {
+	margin:40px 0;
+	vertical-align:middle;
+	position:relative;
+	max-width:80%;
+	right:-4%;
+}
+
+#relink {
+	border-top:thin solid #999999;	
+	padding:10px 0;
+}
+#relink a {
+	color:#333;
+	font-weight:900;
+	margin:10px 20px 0;
+}
+footer p {
+	
+	font-size:0.5em;
+}
+/*designers*/
+.image-note {
+	border-top:thin solid #999;
+	padding-top:5px;
+}
+
+.image-note p {
+	text-align:left;
+}
+
+.identity img {
+width:auto;
+}
+.sponser img {
+	float:right;
+	text-align:right;
+	width:auto;
+}
+.hidden-desktop img, .hidden-desktop p {
+	display:none;
+}
+
+
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+.profile p:first-child{
+	padding-left:0.5em;
+	text-align:left;
+}
+.profile p {
+	padding:0 0.5em;
+	font-size:0.8em;
+	text-align:right;
+}
+
+
+}
+
+
+@media only screen and (max-width: 480px) {
+.fb_like, .twitter-share-button {
+		margin:7px 0 0 0;
+}
+.left-side img {
+	min-width:100%;
+	max-width:100%;
+	vertical-align:text-bottom;
+}
+.name-box {
+	position:relative;
+	width:inherit;
+	height:auto;
+}
+.profile {
+	position:relative;
+	max-width:100% !important;
+	min-width::100%;
+}
+.left-side .wpb_single_image {
+	/*이거에 따라서 이름이랑 이멜이 위아래로 바뀜.*/
+	overflow:visible;
+}
+.designers {
+	text-align:right;
+}
+.fb_like, .twitter-share-button, .wpb_pinterest  {
+	float:none;
+}
+.sponser img 
+{
+	width:100%;
+}
+}
+.wpb_flexslider {
+		position: relative;
+        padding-bottom: 56.25%;
+        height: auto;
+}
+.wpb_top_slider ul li iframe:first-child {
+		
+		position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+		
+}
