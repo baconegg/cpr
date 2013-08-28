@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/flat-ui.css" />
+<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/css" />
 <html>
 <body>	
 		<!-- 왼쪽 사이드 메뉴	-->
@@ -27,76 +30,75 @@
 							<div id="logindiv" class="logHide" style="width: 175px">
 								<form id="loginform" class="logHide" action="/cpr/member/login" method="post">
 									<input type="hidden" id="hrefPath" name="hpath" />
-									<input id="uid" class="logType" type="text" name="userId" placeholder="id" style="max-width:165px" />
-									<input id="upw" class="logType" type="password" name="userPw" placeholder="pw" style="max-width:165px"/><br /><br />																
-									<div align="right">
-										<input id="loginBtn" class="logHide" type="submit" value="로그인 야호"  />
-									</div>									
+									<input id="uid" class="logType" type="text" name="userId" title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
+									<input id="upw" class="logType" type="password" name="userPw" title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px"/><br />																
+									
+										<input id="loginBtn" class="logHide" type="submit" value="로그인 "  />
+																		
 								</form>
 							</div>							
 						</c:when>
 						<c:otherwise>							
 							<div id="logoutdiv" class="logShow">
 									<!-- <input id="getuserId" type="text" class="logShow" style="background-color: transparent" readonly="readonly"/> -->
-									<p id="getuserId" style="color: white">${sessionScope.memberName } 님 환영합니다 :)<p><br/><br/>
 									<form id="logoutform" class="logShow" action="/cpr/member/logout" method="post">
-										<input type="hidden" id="hrefPath" name="hpath"/>									
-										<div align="right">
-											<input id="logoutBtn" class="logShow" type="submit" value="로그아웃 야호"  />
-										</div>
-									</form>									
+										<input type="hidden" id="hrefPath" name="hpath"/>								
+									<p id="getuserId" style="color: white">${sessionScope.memberName } 님 
+										<input id="logoutBtn" class="btn btn-large btn-block btn-success" type="submit" value="로그아웃"  />
+									</p>							
+									</form>		
 							</div>
 						</c:otherwise>
 					</c:choose>					
 					<!-- 여기까지 로그인 텟스트중... -->
 					<div style="margin-top: 30px; margin-bottom: 30px"></div>
 					
-				<div id="headerBg">
+				<div id="headerBg" align="center">
 <!-- 					<nav id="nav-main" class="nav-collapseE clearfix" role="navigation"> -->
 <!-- 						<div class="menu-first-container"> -->
 							<ul id="menu-first" class="main-nav">
-								<li id="menu-item-1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
-									<a href="/cpr/">Home</a>
+								<li id="menu-item-1" class="btn btn-primary" style="display:inline-block">
+									<a style="padding-left: 10px;" href="/cpr/">처음으로</a>
 								</li>
-								<li id="menu-item-2" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
-									<a href="/cpr/mapByDistance">Map</a>
+								<li id="menu-item-2" class="btn btn-primary" style="display:inline-block">
+									<a href="/cpr/mapByDistance">시장찾기</a>
 								</li>
-								<li id="menu-item-3" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
-									<a href="/cpr/member/join">Join</a>
+								<li id="menu-item-3" class="btn btn-primary" style="display:inline-block" >
+									<a href="/cpr/member/join">회원가입 </a>
 								</li>
-								<li id="menu-item-4" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
+								<li id="menu-item-4" class="btn btn-primary" style="display:none">
 									<c:choose>
-										<c:when test="${sessionScope.memberIdx == null}">
-											<a href="/cpr/member/viewInfo/0">개인정보보기</a>
+										<c:when test="${sessionScope.memberIdx == null}" >
+											<a href="/cpr/member/viewInfo/0">개인정보 </a>
 										</c:when>
 										<c:otherwise>
-											<a href="/cpr/member/viewInfo/${sessionScope.memberIdx}">개인정보보기</a>
+											<a href="/cpr/member/viewInfo/${sessionScope.memberIdx}">개인정보 </a>
 										</c:otherwise>
 									</c:choose>
 								</li>
-								<li id="menu-item-10" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1" style="display:none">
-								
-								</li>									
-								<!-- 세션의 멤버 레벨에 따라 틀려져야 됭디... 참 골때린다... -->
 								<c:choose>										
-										<c:when test="${sessionScope.selIdx != null}">
-											<li id="menu-item-5" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
-												<a href="/cpr/product/register">상품 등록</a>
-											</li>
+									<c:when test="${sessionScope.selIdx != null}">
+										<li id="menu-item-10" class="btn btn-primary" style="display:inline-block">
+											<a href="/cpr/product/register">상품등록 </a>
+										</li>
 									</c:when>										
 								</c:choose>
-<!-- 								<li id="menu-item-6" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">									 -->
-<!-- 								</li> -->
-								<li id="menu-item-7" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1">
+								<li id="menu-item-5" class="btn btn-primary" style="display:none">									
+								</li>
+								<li id="menu-item-7" class="btn btn-primary" style="display:inline-block">
 									<a href="/cpr/price">가격비교</a>
 								</li>
-								<li id="menu-item-9" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1" style="display:none">
-									<a href="/cpr/reserve/list?page=1">예약 확인 게시판</a>									
+								<li id="menu-item-9" class="btn btn-primary" style="display:none" >
+									<a href="/cpr/reserve/list?page=1">예약확인 </a>									
 								</li>
-								<li id="menu-item-8" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1" style="display:none">
-									<a href="/cpr/request/list?page=1">역경매 게시판</a>									
+								<li id="menu-item-8" class="btn btn-primary" style="display:none" >
+									<a href="/cpr/request/list?page=1">패키지매칭 </a>									
 								</li>								
 							</ul>
+						
+		                
+							
+							
 <!-- 					<nav id="nav-footer"> -->
 <!-- 						<ul> -->
 <!-- 							<li> -->
@@ -117,7 +119,7 @@
 		</header>
 		<!-- 왼쪽 사이드 끝-->	
 	<script type="text/javascript">
-	
+	//$('#menu-item-7').css('display', 'inline-block');
 	// 로그인 예외 처리...
 	function chk(){
 		//lh.js에선 세션값을 못 찍길래 여기로 가져옴...
@@ -130,9 +132,10 @@
 		}else if(loginchk){
 			if(loginchk==0){
 				//alert('신율 게시판 Beta.ver 0.1 로그인 포인트는 없습니다!!!');
-				
-				$('#menu-item-9').attr('style', 'display:block');
-				$('#menu-item-8').attr('style', 'display:block');				
+				$('#menu-item-4').css('display', 'inline-block');
+				$('#menu-item-9').css('display', 'inline-block');
+				$('#menu-item-8').css('display', 'inline-block');
+				$('#menu-item-3').css('display', 'none');			
 				
 				return;
 			}else if(loginchk==1){
@@ -151,6 +154,18 @@
 	var selIdx = '${sessionScope.selIdx}';	
 	$('#sel').val(selIdx);
 // 	console.log('selIdx : ' + selIdx);
+
+	var inhtml = '';
+	var memLev = '${sessionScope.memberLev}';
+
+	if(memLev == 2){
+		inhtml += '<a href="/cpr/product/list/'+ selIdx +'">상점으로</a>';
+		$('#menu-item-5').attr("style","display:inline-block");
+		$('#menu-item-5').html(inhtml);
+	}else{
+		$('#menu-item-5').attr("style","display:none");
+	}
+
 	</script>
 	
 	<script type='text/javascript' src="/cpr/resources/js/lh.js"></script>

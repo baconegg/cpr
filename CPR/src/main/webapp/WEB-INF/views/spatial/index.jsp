@@ -1,4 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <link rel="stylesheet" href="/cpr/resources/css/nivo/nivo-slider.css" type="text/css" media="screen" />
 <link rel="stylesheet" href="/cpr/resources/css/nivo/style.css" type="text/css" media="screen" />
@@ -24,7 +24,8 @@
 	function showMap(latitude, longitude){
 		
 	  	//currentPoint = new nhn.api.map.LatLng(latitude, longitude);
-		currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
+ 		currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
+		//currentPoint = new nhn.api.map.LatLng(37.487427, 126.927525); // 현재 위치 신원시장 입구로 강제설정
 		
 		// 맵 초기 환경 설정 (줌 레벨 10)
 		mapInitialSetting(10);
@@ -50,13 +51,17 @@
 				// 현재 위치 아이콘 클릭했을 때는 상점으로 이동 안 되게
 				if(oTarget._sTitle == '현재 위치'){
 						
-					console.log('startMarker click');
+					//console.log('startMarker click');
 					mapInfoTestWindow.setVisible(false);
 				
 				} else{
 				
-					var clickLat = oCustomEvent.point.y;
-					var clickLng = oCustomEvent.point.x;
+					//test
+					//var clickLat = oCustomEvent.point.y;
+					//var clickLng = oCustomEvent.point.x;
+					
+					var clickLat = 37.4823;
+					var clickLng = 126.9271;
 					
 					// 클릭한 시장의 상점 정보 로드
 					fnGetMarketCoord(clickLat, clickLng);
@@ -102,9 +107,9 @@
 		
 		$.post('/cpr/getMarketCoord',{curLat:clickLat,curLng:clickLng}).done(function(data){
 
-			console.log("marIdx : " + data.marIdx);
-			console.log("targetLat : " + data.targetLat);
-			console.log("targetLng : " + data.targetLng);
+			//console.log("marIdx : " + data.marIdx);
+			//console.log("targetLat : " + data.targetLat);
+			//console.log("targetLng : " + data.targetLng);
 			
 			// 1. 상점 정보 불러와서 지도에 찍기
 			// ** 공통 X
@@ -116,8 +121,8 @@
 			// 3. 상점 클릭시 상품 리스트 페이지로 이동
 			moveToProductList();
 			  
-			//역경매 메뉴 만들기..
-			$('#menu-item-7').attr('style', 'display:block');
+			//역경매 메뉴 만들기..header에 로그인시 생성되도록 되어 있음... 그래서 필요없을듯
+			//$('#menu-item-8').attr('style', 'display: inline-block');
 			
 		}); // end ajax-getMarketCoord
 		
@@ -126,7 +131,10 @@
 	// 1. 상점 정보 불러와서 지도에 찍기
 	function fnShopInfo(marIdx, targetLat, targetLng){
 		
-		$.post('/cpr/shopInfo', {"marIdx" : marIdx}).done(function(data2){
+		//test
+		marIdx = 290;
+
+		$.post('/cpr/shopInfo', {"marIdx": marIdx}).done(function(data2){
 
 			oMap.clearOverlay();
 
@@ -159,7 +167,7 @@
 	} // end fnShopInfo
 	
 	// 사이드메뉴에 해당할때마다 밑에꺼 복사해서 붙여 넣어줄것!!!/////////////////////////////////////////////////	
-	$('#menu-item-1').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+	$('#menu-item-1').attr('class', 'change btn btn-primary');
 // 	var inhtml = '<a href="http://">링크링크</a>';	
 // 	$('#menu-item-5').html(inhtml);
 	

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,6 +8,10 @@
 	<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=10)">
 	<meta http-equiv="Page-Exit" content="revealTrans(Duration=2.0,Transition=10)">
 	
+	<link rel="shortcut icon" href="/cpr/resources/images/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="/cpr/resources/images/favicon.ico" type="image/x-icon">
+
+
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 	<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>		
@@ -32,14 +36,10 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- naver map -->
+	<!-- port : 8089 -->
 	<!-- port : 8080  -->
-	<!-- localhost  -->
-	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b618902412b59c49a0b58308b7109296"></script>
-	<!-- 192.168.0.19 -->
-<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=8c4299a97f499e44691f10e044473b52"></script> -->
-	<!-- 192.168.0.11 -->
-<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=71ad7ffe5e60c9cc4f0409c7f5262072"></script> -->
-	<!-- 192.168.0.14 -->
+	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b6d44081e928091483fa5cd24b281171"></script>
+<!-- 		<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=71ad7ffe5e60c9cc4f0409c7f5262072"></script> -->
 <!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=f45de31316bf6b7049f1e41c6e8826fc"></script> -->
 	
 	<script type="text/javascript">
@@ -69,6 +69,12 @@
 	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://hongikdmd.com/meme/xmlrpc.php?rsd" />
 	<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://hongikdmd.com/meme/wp-includes/wlwmanifest.xml" />	
 	<link rel='stylesheet' id='wpb-responsive-css'  href='/cpr/resources/css/nexon_clone.css' type='text/css' media='screen' />	
+	
+	<!-- /////////////////////////////////////////////////////////flat-ui관련////////////////////////////////////////////////////////////////////// -->
+	<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/flat-ui.css" />
+	<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/css" />
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 	<style type="text/css">
 		.recentcomments a {
 			display: inline !important;

@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <html>
 
@@ -106,8 +106,8 @@
 																	<input type="hidden"  name="productImg" value="${pVo.productImg}"/>
 																	<input type="hidden"  name="productImgUUID" value="${pVo.productImgUUID}"/>
 																	<div align="right">
-																		<input type="button"  id="btnModifyAction" value="완료"/>&nbsp;&nbsp;&nbsp;
-																		<input type="button"  id="btnCancel" value="취소"/>
+																		<input type="button" class="btn btn-large btn-block btn-success"  id="btnModifyAction" value="완료"/>&nbsp;&nbsp;&nbsp;
+																		<input type="button" class="btn btn-large btn-block btn-success"  id="btnCancel" value="취소"/>
 																	</div>
 																</p>	
 																
@@ -323,15 +323,15 @@
 	// 이프 엘스로 나누어 줘야 됨...
 	var inhtml = '';
 	var memLev = '${sessionScope.memberLev}';	
-	console.log(memLev);	
-// 	if(memLev == 2){
-// 		inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(셀러)</a>';
-// 	}else{
-// 		inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(커스터머)</a>';
-// 	}
-	
-	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기</a>';	
+	//console.log(memLev);	
+	//if(memLev == 2){
+	//	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(셀러)</a>';
+	//}else{
+	//	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(커스터머)</a>';
+	//}
+	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기</a>';
 	$('#menu-item-5').html(inhtml);
-	$('#menu-item-5').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+	
+	$('#menu-item-5').attr('class', 'change btn btn-primary');
 	</script>
 </body></html>

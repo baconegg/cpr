@@ -1,4 +1,4 @@
-/**
+﻿/**
  * HTML5 GEOLOCATION
  * and
  * load function showMap()
@@ -132,8 +132,8 @@ function mapInitialSetting(zoomLevel){
 
 function showMap(latitude, longitude){
 		
-	  	currentPoint = new nhn.api.map.LatLng(latitude, longitude);
-		//currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
+//	  	currentPoint = new nhn.api.map.LatLng(latitude, longitude);
+		currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
 		
 		// 맵 초기 환경 설정 (줌 레벨 10)
 		mapInitialSetting(9);
@@ -191,9 +191,9 @@ function showMap(latitude, longitude){
 
 //map 버튼 제어
 $('#userAddress').on('click', function(){
-	$('#map').attr("style", "display:block");	
+	$('#map').attr("style", "display:inline-block");	
 });
 
 $('#sel_Address').on('click', function(){
-	$('#map').attr("style", "display:block");
+	$('#map').attr("style", "display:inline-block");
 });

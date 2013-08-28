@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+ 
 <%-- 
 // 	session.setAttribute("customer", 5);
 // 	session.setAttribute("seller", 2);
@@ -106,17 +106,17 @@
 																	
 																		<!-- <input type="button" value="수정" id="modifyBtn">&nbsp;&nbsp;&nbsp; -->
 																		<c:if test="${ReserveVO.reserveFlag == 0 }">	
-																			<input type="button" value="예약취소" id="cancelBtn">&nbsp;&nbsp;&nbsp;
+																			<input class="btn btn-large btn-block btn-success" type="button" value="예약취소" id="cancelBtn">&nbsp;&nbsp;&nbsp;
 																		</c:if>
-																		<input type="button" value="목록" id="listBtn">
+																		<input class="btn btn-large btn-block btn-success" type="button" value="목록" id="listBtn">
 																		
 																	</c:when>
 																	<c:otherwise>
 																		<br/>
-																		<input type="button" value="목록" id="listBtn">
+																		<input class="btn btn-large btn-block btn-success" type="button" value="목록" id="listBtn">
 																		
 																		<c:if test="${ReserveVO.selIdx == sessionScope.selIdx }">
-																			<input type="button" value="상품준비완료" id="orderBtn">
+																			<input class="btn btn-large btn-block btn-success" type="button" value="상품준비완료" id="orderBtn">
 																		</c:if>
 																	</c:otherwise>
 																</c:choose>
@@ -340,7 +340,8 @@ $('#cancelBtn').on('click',function(){
 
 		
  
- //역경매 메뉴 만들기..
-	$('#menu-item-7').attr('style', 'display:block');
+ 	//역경매 메뉴 만들기..
+//	$('#menu-item-8').attr('style', 'display: inline-block');
+	$('#menu-item-9').attr('class', 'change btn btn-primary');
 
 </script>

@@ -7,7 +7,7 @@
 navigator.geolocation.getCurrentPosition(
     successCallback,
     errorCallback_highAccuracy,
-    {maximumAge:600000, timeout:2000, enableHighAccuracy: true}
+    {maximumAge:600000, timeout:5000, enableHighAccuracy: true}
 
 ); 
 
@@ -31,8 +31,7 @@ function errorCallback_highAccuracy(position) {
         msg += "POSITION_UNAVAILABLE";
     msg += ", msg = "+error.message;
     
-//    $('body').append(msg);
-    console.log(msg);
+    $('body').append(msg);
 }
 
 function errorCallback_lowAccuracy(position) {
@@ -45,8 +44,7 @@ function errorCallback_lowAccuracy(position) {
         msg += "TIMEOUT";
     msg += ", msg = "+error.message;
     
-//  $('body').append(msg);
-    console.log(msg);
+   $('body').append(msg);
    
 // 실패했을 때 서울시청 위치를 지도 중앙으로
    showMap(37.5675451, 126.9773356);
@@ -60,15 +58,8 @@ function successCallback(position) {
 // 	    $('#traceLng').val(longitude);
 
     // 		현재위치 신원시장 입구로 강제설정 -- 나중에 값 받아와서 세팅...
-	$('#traceLat').val(latitude);
-	$('#traceLng').val(longitude);
-    
-//    showMap(latitude, longitude);
-    console.log("hey?");
-    console.log(latitude);
-    console.log(longitude);
-    
+	$('#traceLat').val(37.4815787);
+	$('#traceLng').val(126.9284316);
     
     showMap(latitude, longitude);
-    
 }

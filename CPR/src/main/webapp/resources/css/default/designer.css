@@ -5,7 +5,9 @@ body
 position: relative;
 }
 #banner {
-	overflow: hidden;}
+	/* overflow: hidden;
+	 */
+	}
 #nav-footer {
 	/*background-image: url("images/line.png");
     background-repeat: repeat-x;*/
@@ -20,19 +22,20 @@ position: relative;
 	}
 	
 	#nav-footer a {
-		display:inline-block;
+		/* display:inline-block; */
 		float:left;
 		/*width:33px;
 		height:33px;
 		margin:2px;	*/
-		position:relative;
-		line-height:1em;
+		/* position:relative; */
+		/* line-height:1em; */
 	}
 	#nav-footer li {
-		overflow: hidden;
+		/* overflow: hidden; */
 	}
 	#nav-footer a:hover {
-		background:none;}
+		/* background:none; */
+	}
 	
 	#nav-footer img { 
 		width:auto;

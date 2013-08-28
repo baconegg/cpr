@@ -116,12 +116,12 @@ $("#btnToModify").on('click', function(){
 $("#btnDelete").on('click', function(){	
 	
 	var productIdx = $('#productIdx').val();
-	console.log("productIdx : " + productIdx);
-	console.log("productIdx : " + typeof(productIdx));
+//	console.log("productIdx : " + productIdx);
+//	console.log("productIdx : " + typeof(productIdx));
 	
 	if(confirm("정말 삭제 하시겠습니까?")){
 		$.post('/cpr/product/remove', {'productIdx' : productIdx}).done(function(){		
-			console.log("ajax갔다옴.");		
+//			console.log("ajax갔다옴.");		
 			alert("삭제 되었습니다.");
 			location.href="/cpr/product/list/" + selIdx;
 		});		

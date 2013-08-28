@@ -59,6 +59,7 @@ function webSocket() {
 	    	
 	    // 커넥션을 열때 요쪽으로 여십셔... 실제 서비스할땐 12. 어쩌고 거기로 해주면 될꺼 가트다...
 	    // open connection
+//	    var connection = new WebSocket('ws://192.168.0.24:1337');
 	    var connection = new WebSocket('ws://localhost:1337');
 	
 	//    connection.onopen = function () {

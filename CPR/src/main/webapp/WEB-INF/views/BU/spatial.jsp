@@ -30,7 +30,7 @@
 
 <body class="single single-portfolio postid-83 chrome wpb-js-composer js-comp-ver-3.3.2">
 
-<!-- naver map -->
+<!-- naver map -->	<!-- 나중에 지도 없애기 버튼을 위한 디스플레이 속성 -->
 <div id="map" style="border:1px solid #000;"></div>
 <input type="button" id="shop" value="shop" />
 
@@ -47,8 +47,7 @@
 <script>
 	var oMap;
 	var currentPoint;
-// 	navigator.geolocation.getCurrentPosition(
-	navigator.geolocation.watchPosition(
+	navigator.geolocation.getCurrentPosition(
 	    successCallback,
 	    errorCallback_highAccuracy,
 	    {maximumAge:600000, timeout:5000, enableHighAccuracy: true}

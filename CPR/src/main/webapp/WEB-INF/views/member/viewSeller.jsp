@@ -1,42 +1,21 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <html>
 <body style="margin-left: 1px">
 
 	<div id="wrap" class="wrap" role="document">
-		<!--슬라이드용 이미지-->
-<!-- 		<div class="row-fluid"> -->
-<!-- 			<div class="span12 wpb_top_slider wpb_gallery"> -->
-<!-- 				<span id="portfolio_top_loader"></span> -->
-<!-- 				<div class="wpb_gallery_slides flexslider wpb_flexslider" data-interval="5" data-flex_fx="fade"> -->
-<!-- 					<ul class="slides"> -->
-<!-- 						
-<!-- 							<li> -->
-<!-- 								<iframe src="http://player.vimeo.com/video/52622122" width="100" height="56" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe> -->
-<!-- 							</li>-->
-<!-- 						"../resources/images/market-wallpaper-1024x576.jpg" -->
-<!-- 						<li><img src="/cpr/resources/images/de	fault/join/01.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 						<li><img src="/cpr/resources/images/default/join/02.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 						<li><img src="/cpr/resources/images/default/join/03.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 						<li><img src="/cpr/resources/images/default/join/04.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 						<li><img src="/cpr/resources/images/default/join/05.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 						<li><img src="/cpr/resources/images/default/join/06.jpg" class="attachment-large" alt="upnup_Slide_1" /></li> -->
-<!-- 					</ul> -->
-<!-- 				</div> -->
-<!-- 			</div> -->
-			<!-- 슬라이드 끝 -->
-			<!-- END .wpb_top_slider -->
-<!-- 		</div> -->
+		
+		
 		<div id="top-title"></div>
 		<div id="content" class="row-fluid">
 			<div id="main" class="span12" role="main">
 				<div class="wpb_content_wrapper">
 					<article class="post-83 portfolio type-portfolio status-publish hentry" id="post-83">
 						<header>
-							<h1 class="entry-title">회원정보수정</h1>
-<!-- 							<p class="portfolio_categories"> -->
-<!-- 								<a href="http://hongikdmd.com/meme/portfolio/category/interaction/" title="???">???</a> -->
-<!-- 							</p> -->
+							<h1 class="entry-title">회 원 &nbsp;&nbsp;&nbsp;정 보</h1>
+							<!-- <p class="portfolio_categories">
+								<a href="http://hongikdmd.com/meme/portfolio/category/interaction/" title="???">???</a>
+							</p> -->
 							<!-- <span class="post-format video_project_format"></span> -->
 							<style type="text/css">
 .s-text {
@@ -62,9 +41,7 @@
 						<div class="row-fluid">
 							<div class="wpb_content_element span6 identity column_container">
 								<div class="wpb_wrapper">
-									<div class="vc_text_separator wpb_content_element separator_align_left designers">
-										<div>회원정보수정</div>
-									</div>
+									
 									<div class="row-fluid">
 										<div class="wpb_content_element span12 wpb_text_column">
 											<div class="wpb_wrapper"></div>
@@ -77,8 +54,8 @@
 								<div class="wpb_wrapper">
 									<div class="row-fluid">
 										<div class="wpb_content_element span12 wpb_text_column">
-											<div class="wpb_wrapper" id="join_seller">
-												<h3>회원 정보</h3>
+											<div class="wpb_wrapper" id="join_seller" align="left">
+												
 												<form id="info" method="post" enctype="multipart/form-data">
 													<br />
 													<p>
@@ -236,7 +213,6 @@
 		$('#modifySeller').on('click', function() {
 			var fdata = new FormData($('#info')[0]);
 			var selIdx = $('#sel_IDX').val();
-			var memberIdx = $('#member_IDX').val(); 
 			$.ajax({
 				url : '/cpr/member/modify/seller',
 				type : "POST",
@@ -246,6 +222,7 @@
 				processData : false,
 				success : function() {
 					alert("정보 수정이 완료되었습니다.");
+// 					location.href = "/cpr/member/viewSeller/" + selIdx;
 					location.href = "/cpr/member/viewInfo/" + memberIdx;
 				}
 			});
@@ -277,7 +254,7 @@
 		$('#m_CODE').on('change', function() {
 			var mCode = $(this).val();
 			$.post('/cpr/member/join/market', {'mCode' : mCode}).done(function(data) {
-				console.log(data);
+// 				console.log(data);
 				marketOpt(data);				
 				//구 바뀌면서 시장 바뀔때 덩달아 다른 값들도 바꿔서 세팅해줘야 되므로 ...;;;
 				var gnmid = $('#opt_0').attr('name');
@@ -312,19 +289,20 @@
 
 		// 탈퇴 처리!!!//////////////////////////////////////////////////////////////////////////////////////
 		$('.remove').on('click',function() {
-			if (confirm('셀러가 탈퇴하겟다고???') == true) {
+			if (confirm('탈퇴하시겠습니까?') == true) {
 				var jsonObj = JSON.parse(JSON.stringify($('#info').serializeObject()));
 				$.post('/cpr/member/remove/seller', jsonObj).done(function(data) {
-					alert("넌 이미 죽어있따!!!");
+					alert("탈퇴되셨습니다.");
 					location.href = "/cpr/member/join";
 				});
 			} else {
-				alert('셀러 살았따!!! ???');
+// 				alert('탈퇴 취소');
 			}
 		});
 		
 		// 사이드메뉴에 해당할때마다 밑에꺼 복사해서 붙여 넣어줄것!!!/////////////////////////////////////////////////	
-		$('#menu-item-4').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+// 		$('#menu-item-4').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+		$('#menu-item-4').attr('class', 'change btn btn-primary');
 	</script>
 
 </body>

@@ -1,49 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <body style="margin-left: 1px">
 
 		<div id="wrap" class="wrap" role="document">
-			<!--슬라이드용 이미지-->
 			<div class="row-fluid">
-				<!-- <div class="span12 wpb_top_slider wpb_gallery">
-					<span id="portfolio_top_loader"></span>
-					<div class="wpb_gallery_slides flexslider wpb_flexslider" data-interval="5" data-flex_fx="fade">
-						<ul class="slides">
-							
-							<li>
-								<iframe src="http://player.vimeo.com/video/52622122" width="100" height="56" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-							</li>
-							"../resources/images/market-wallpaper-1024x576.jpg"
-						  	<li>
-						  	   <img  src="/cpr/resources/images/default/join/01.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-							<li>
-						  	   <img  src="/cpr/resources/images/default/join/02.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-							<li>
-						  	   <img  src="/cpr/resources/images/default/join/03.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-							<li>
-						  	   <img  src="/cpr/resources/images/default/join/04.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-							<li>
-						  	   <img  src="/cpr/resources/images/default/join/05.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-							<li>
-						  	   <img  src="/cpr/resources/images/default/join/06.jpg"
-								class="attachment-large" alt="upnup_Slide_1" />
-							</li>
-        				</ul>
-					</div>
-				</div> -->
-				<!-- 등록화면 위에 슬라이드 더러워서 태구가 버렸음... -->
-				<!-- 슬라이드 끝 -->
-				<!-- END .wpb_top_slider -->
 			</div>			
 			<div id="top-title"></div>
 			<div id="content" class="row-fluid">
@@ -51,11 +11,9 @@
 					<div class="wpb_content_wrapper">
 						<article class="post-83 portfolio type-portfolio status-publish hentry" id="post-83">
 							<header>
-								<h1 class="entry-title">!!!</h1>
+								<h1 class="entry-title" >상 품 &nbsp;&nbsp;&nbsp;등 록</h1>
 								<p class="portfolio_categories">
-									<a href="http://hongikdmd.com/meme/portfolio/category/interaction/" title="???">???</a>
 								</p>
-								<!-- <span class="post-format video_project_format"></span> -->
 								<style type="text/css">
 									.s-text {
 										display: none;
@@ -72,67 +30,25 @@
 								</style>
 							</header>
 																					
-								<div class="entry-content">
-									<div class="row-fluid">
-										<div class="wpb_content_element span3 left-side1 column_container">
-											<div class="wpb_wrapper">
-												<!-- 1 start -->
-												<div class="row-fluid">
-													<div class="wpb_content_element wpb_single_image span12	">
-														<div class="wpb_wrapper">
-															<!--<img src="qtest.jpg" width="400" height="130" />-->
-															
-															
-															    	<div class=" wpb_wrapper" id="manual" name="manual">
-															    		<h3>상품 등록 설명 </h3>
-															    		<p class=" PIN_1373356420229_hazClick" >&lt판매 유형&gt<br/> 
-															    		 단품 , 묶음 상품 선택 하시면 됩니다.<br/><br/>
-															    		 &lt태그 카테고리&gt<br/> <br/>
-															    		 태그에 상활별(시간,날씨등) 조건에 따라 사이트에서 노출 됩니다 (중복선택불가)<br/><br/>
-															    		 &lt판매 방식&gt<br/> <br/>
-															    		 일반, 특가, 떨이, 한정  상품 노출시 상품명 앞에 표시 됩니다 (기본 일반으로 설정되어있습니다.) <br/><br/>
-															    		 &lt상품명&gt<br/> <br/>
-															    		 단품시 상품명 , 패키지시 요리명을 입력해주세요<br/><br/>
-															    		 &lt판매가&gt<br/> <br/>
-															    		 상품 판매가를 합산하여 올려주시면 됩니다 .<br/><br/>
-															    		 &lt상품설명&gt<br/> <br/>
-															    		 상품 설명을 넣어주시면 됩니다 ( 패키지 상품시에는 상품 구성 내역을  이곳에 넣어주세요 ) <br/><br/>
-															    		
-															    		  </p>
-															    	</div>
-															
-															 
-															
-														</div>
-													</div>
-												</div>											
-											</div>
-										</div>
-						
-									
-							
-									<div class="wpb_content_element span9 column_container">
+									<div class="wpb_content_element span9 column_container" id="size1">
 										<div class="wpb_wrapper">
 											<div class="row-fluid">
 												<div class="wpb_content_element span12 wpb_text_column">
 
 													<div class="wpb_wrapper">
-															
-															<h3>상품등록</h3>		
 																												
 															<form id="product" method="post" enctype="multipart/form-data">
-																<input type="hidden" id="hrefPath" name="hpath"/>														
 																<br/>
 																<p><br/>
 																		판매유형<br/>
-																		<select name="productPackage">
+																		<select name="productPackage" title="단품 , 묶음 상품  선택">
 																		<option value="0" >단품</option>
 																		<option value="1" >묶음 상품</option>
 																		</select>
 																</p><br/>
-																<p>	<br/>
+																<p>	
 																	카테고리<br/>
-																	<select name="tagIdx">
+																	<select name="tagIdx" title="상품 태그 (아침 ,점심,저녁 , 기본 등등)">
 																		<option value="0">기본</option>
 																		<option value="1">아침</option>
 																		<option value="2">점심</option>
@@ -150,9 +66,9 @@
 																		<option value="14">간식</option>																		
 																	</select>
 																</p><br/>
-																<p><br/>
+																<p>
 																	판매방식<br/>
-																	<select name="productEvent">
+																	<select name="productEvent" title="판매 방식 특가, 일반, 떨이, 한정 중 선택">
 																		<option value="0" >일반</option>
 																		<option value="1" >특가</option>
 																		<option value="2" >떨이</option>
@@ -161,26 +77,39 @@
 																</p><br />
 																<p>
 																	 	상품명 <br/> 
-																	 	<input type="text" name="productName" />
+																	 	<input type="text" name="productName" title="상품명" placeholder="상품명 입력해주세요" />
 																</p><br/>
 																<p>
 																		원산지<br/>
-																		<input type="text" name="productOrigin" />
+																		<input type="text" name="productOrigin" title="원산지" placeholder="원사지 입력해주세요" />
 																</p><br/>
 																<p>
 																		상품가격<br/>												
-																		<input type="text" name="productPrice" value="0" />
+																		<input type="text" name="productPrice" title="상품가격" placeholder="상품가격 입력해주세요 (숫자로 입력해주세요)" value="0" />
 																</p><br/>
 																<p>
 																		상품설명<br/> 
-																		<input type="text" name="productInfo" value="" />																	
-																</p><br/>		
+<!-- 																		<input name="productInfo" title="상품설명" placeholder="상품 설명 입력해주세요 (패키지 상품시 상품 구성 입력 해주세요)" /> -->
+																		<textarea rows="5" name="productInfo" title="상품설명" placeholder="상품 설명 입력해주세요 (패키지 상품시 상품 구성 입력 해주세요)" >
+																		</textarea>																	
+																</p><br/>
+																
+																		
 																<p>
-																	 상품이미지 등록<br/> 
+																	상품이미지 등록<br/> 
 																	 <input type="file" name="files" /> 
 																</p><br/>
-																<input type="hidden" name="selIdx" value="${sessionScope.selIdx}" />																
-																<input id="registerBtn" type="button" value="상품등록" />														
+																<input type="hidden" name="selIdx" value="${sessionScope.selIdx}" />
+																<input type="hidden" id="hrefPath" name="hpath"/>
+																
+<!-- 																<div class="span3" align="center"> -->
+<!-- 														          <a href="" class="btn btn-large btn-block btn-success" id="registerBtn"><strong>상품 등록</strong></a> -->
+<!-- 														        </div>			<br/>	<br/>	<br/>-->			
+										 
+																<div class="span3" align="center">
+																	<input id="registerBtn" class="btn btn-large btn-block btn-success"  type="button" value="상품등록" />			
+																 </div><br/><br/><br/>							
+																 				
 															</form>		
 																								
 													</div>
@@ -205,10 +134,10 @@
 	<script type="text/javascript">
 	 $('#registerBtn').on('click',function(){			
 			var fdata = new FormData($('#product')[0]);			
-			console.log(fdata);					
+			//console.log(fdata);					
 			
 			$.ajax({
-				url:'registerAction',
+				url:'/cpr/product/registerAction',
 				type:'POST',
 				data: fdata,
 				cache: false,
@@ -232,18 +161,32 @@
 		        },
 				success: function(data) {
 			    	if(data == 1){
-			    		alert("상품 등록 성공했다 ... ");
+			    		alert("상품 등록 성공");
 			    		location.href = "/cpr/product/list/" + ${sessionScope.selIdx };
 			    	}else{
 			    		alert("상품 등록 실패");
 			    	}
 			    }
-			});			
+			});	
+			
 		});
 
-	// 사이드메뉴에 해당할때마다 밑에꺼 복사해서 붙여 넣어줄것!!!/////////////////////////////////////////////////	
-	$('#menu-item-5').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+	// 사이드메뉴에 해당할때마다 밑에꺼 복사해서 붙여 넣어줄것!!!/////////////////////////////////////////////////
+	$('#menu-item-10').attr('class', 'change btn btn-primary');
+
 	 
+	window.onload = function(){
+		
+		$('#size').width('80px');
+		
+		$('#size1').css('float','left');
+
+		
+		/* $("#manual").css("width", "200px"); */
+	};
+	
+	
+	
 	</script>
 </body>
 </html>

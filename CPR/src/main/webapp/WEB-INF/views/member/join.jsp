@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,13 +9,21 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.js"></script>
 <script src="/cpr/resources/js/jquery.form.js"></script>
 
+<div id="wrap" class="wrap" role="document">
+<!-- 			<div class="row-fluid"> -->
+<!-- 			</div> -->
 		<div id="top-title"></div>
 			<div id="content" class="row-fluid">
+			
+			<div class="customContent">
+			
 				<div id="main" class="span12" role="main">
 					<div class="wpb_content_wrapper">
 						<article class="post-83 portfolio type-portfolio status-publish hentry" id="post-83">
 							<header>
-								<h1 class="entry-title">회원 가입</h1>
+								<h1 class="entry-title" >회원 가입</h1>
+								<p class="portfolio_categories">
+								</p>
 								<style type="text/css">
 									.s-text {
 										display: none;
@@ -32,39 +40,38 @@
 								</style>
 							</header>
 																				
-								<div class="entry-content">
-									<div class="row-fluid">
-										<div class="wpb_content_element span3 left-side1 column_container">
-											<div class="wpb_wrapper">
-												<!-- 1 start -->
-												<div class="row-fluid">
-													<div class="wpb_content_element wpb_single_image span12	">
-														<div class="wpb_wrapper">
-															<!--<img src="qtest.jpg" width="400" height="130" />-->
+<!-- 								<div class="entry-content"> -->
+<!-- 									<div class="row-fluid"> -->
+<!-- 										<div class="wpb_content_element span3 left-side1 column_container"> -->
+<!-- 											<div class="wpb_wrapper"> -->
+<!-- 												1 start -->
+<!-- 												<div class="row-fluid"> -->
+<!-- 													<div class="wpb_content_element wpb_single_image span12	"> -->
+<!-- 														<div class="wpb_wrapper"> -->
+<!-- 															<img src="qtest.jpg" width="400" height="130" /> -->
 															
-															<div class="middle">
-															     <div class="sideSec" id="joinImage" >
-															         <ul>
-															            <li class="step1"><span id="st01" class="on"><span class="step">step1. 약관동의</span></span></li>
-														                <li class="step2"><span id="st02" class=""><span class="step">step2. 기본정보입력</span></span></li>
-														                <li class="step3"><span id="st03" class=""><span class="step">step3. 가입완료</span></span></li>
-														             </ul>
-															      </div>
-															 </div>															
-														</div>
-													</div>
-												</div>											
-											</div>
-										</div>
+<!-- 															<div class="middle"> -->
+<!-- 															     <div class="sideSec" id="joinImage" > -->
+<!-- 															         <ul> -->
+<!-- 															            <li class="step1"><span id="st01" class="on"><span class="step">step1. 약관동의</span></span></li> -->
+<!-- 														                <li class="step2"><span id="st02" class=""><span class="step">step2. 기본정보입력</span></span></li> -->
+<!-- 														                <li class="step3"><span id="st03" class=""><span class="step">step3. 가입완료</span></span></li> -->
+<!-- 														             </ul> -->
+<!-- 															      </div> -->
+<!-- 															 </div>															 -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div>											 -->
+<!-- 											</div> -->
+<!-- 										</div> -->
 										
 									
-									<div class="wpb_content_element span9 column_container" >
+									<div class="wpb_content_element span8 column_container" >
 										<div class="wpb_wrapper">
 											<div class="row-fluid">
 												<div class="wpb_content_element span12 wpb_text_column">
 													<div class="wpb_wrapper" id="join01">
-
-														<h3>회원가입...</h3>
+<!-- 														<h3>회원가입...</h3> -->
 														<p>
 															<br/><h2>약관동의</h2><br/>
 															베타테스트 중입니다...<br/>
@@ -72,12 +79,13 @@
 														</p>
 														<p><br/>
 															동의함:<input type="checkbox" id="chkBox">
+														</p><br/>
+<!-- 														<div class="span3" align="center">											 -->
+														<p>				
+															<input id="btn_customer"  type="button" class="btn btn-large btn-block btn-success" value="구매 회원 가입" style="display:none;" >
+															<input id="btn_seller" type="button" class="btn btn-large btn-block btn-success" value="판매 회원 가입" style="display:none;">															
 														</p>
-														
-														<p>															
-															<input id="btn_customer"  type="button" value="구매 회원 가입" style="display:none;" > 
-															<input id="btn_seller" type="button" value="판매 회원 가입" style="display:none;">															
-														</p>
+<!-- 														</div>  -->
 														
 													</div>
 												</div>
@@ -87,15 +95,15 @@
 									
 									
 									<!-- 소비자 -->
-									<div class="wpb_content_element span9 column_container" >
+									<div class="wpb_content_element span8 column_container" >
 										 <div class="wpb_wrapper">
 											<div class="row-fluid">
 												<div class="wpb_content_element span12 wpb_text_column">
 													
 													<div class="wpb_wrapper" id="join_customer" style="display:none">														
 														<form id="join_customer_form" method="post" modelAttribute="valichk" action="join/customer">														
-															<h3>회원가입... 소비자</h3>
-																<br/>
+<!-- 															<h3>회원가입... 소비자</h3> -->
+<!-- 																<br/> -->
 <!-- 																<p>상세정보입력..</p> -->
 																<br/>
 																<p>
@@ -125,7 +133,9 @@
 																<p>		
 																<!-- 위도 --> <input type="hidden" id="curstomerLAT" name="memberLAT" value="" >
 																<!-- 경도 --> <input type="hidden" id="customerLNG" name="memberLNG" value="" >									
-																	<input id="agreeBtn_cu" type="button" value="다음">
+																	<div class="span3" align="center">
+																		<input id="agreeBtn_cu" class="btn btn-large btn-block btn-success" type="button" value="다음">
+																	</div>
 																</p>
 															</fieldset>
 														</form>
@@ -138,7 +148,7 @@
 									
 									
 									<!-- 상인 -->
-									<div class="wpb_content_element span9 column_container">
+									<div class="wpb_content_element span8 column_container">
 										<div class="wpb_wrapper">
 											<div class="row-fluid">
 												<div class="wpb_content_element span12 wpb_text_column">
@@ -146,9 +156,9 @@
 													<div class="wpb_wrapper" id="join_seller"
 														style="display: none">
 														<form id="join_seller_form" method="post" action="join/seller" enctype="multipart/form-data">
-															<h3>회원가입... 판매자</h3>
+<!-- 															<h3>회원가입... 판매자</h3> -->
 															<!-- TBL_MEMBER -->
-															<br/>
+<!-- 															<br/> -->
 <!-- 															<p>상세정보입력..</p> -->
 															<br/>
 															<p>
@@ -223,7 +233,7 @@
 																 </select>
 															</p><br />
 															<p>
-																상세주소<br /> <input id="sel_Address" type="text"	name="selAddress" readonly="readonly"/>
+																상세주소(클릭해 주세요.)<br /> <input id="sel_Address" type="text" name="selAddress" readonly="readonly"/>
 															</p><br />
 															<p>
 																상점번호<br /> <input id="sel_Store_NO" type="text" name="selStoreNo" />
@@ -236,7 +246,7 @@
 															</p><br />
 															<!-- TBL_SELLER_IMG -->
 															<p>
-																이미지</br> <input id="sel_Img" type="file" name="selImg" />
+																이미지<br/> <input id="sel_Img" type="file" name="selImg" />
 															</p><br />	
 																														
 															<!-- button!!! -->
@@ -245,7 +255,10 @@
 																<input type="hidden" id="guname_MARID" name="guNameMarId">
 												<!-- 위도 --> <input type="hidden" id="selLAT" name="memberLAT" value="" >
 												<!-- 경도 --> <input type="hidden" id="selLNG" name="memberLNG" value="" >
-																<input id="agreeBtn_se" type="button" value="다음">																
+															
+																<div class="span3" align="center">
+																		<input id="agreeBtn_se" class="btn btn-large btn-block btn-success" type="button" value="다음">
+																	</div>
 															</p>
 															<br />
 														</form>														
@@ -255,20 +268,21 @@
 										</div>
 									</div>
 									
-									<div class="wpb_content_element span9 column_container" >
+									<div class="wpb_content_element span8 column_container" >
 										<div class="wpb_wrapper">
 											<div class="row-fluid">
 												<div class="wpb_content_element span12 wpb_text_column">
 													<div class="wpb_wrapper" id="join03" style="display:none">
-														<h3>회원가입...</h3>
+<!-- 														<h3>회원가입...</h3> -->
 														<p>
-															가입완료
+															가입완료 <br/>
+															가입을 축하드립니다!!!
 														</p>
-														<p>
-															<h1>가입을 축하드립니다!!!</h1></br>															
-														</p>
+<!-- 														<p> -->
+<!-- 															<h1>가입을 축하드립니다!!!</h1><br/>															 -->
+<!-- 														</p> -->
 														<p>																														
-															<input id="agreeBtn03"  type="button" value="메인페이지로">															
+															<input id="agreeBtn03"  class="btn btn-large btn-block btn-success" type="button" value="메인페이지로">															
 														</p>
 													</div>
 												</div>
@@ -277,33 +291,24 @@
 									</div>
 									
 								</div>	
-								
+								</article>
 							<!-- footer in body	-->
 							<div class="wpb_separator wpb_content_element "></div>								
 							
 						</div>
-						
-						<footer></footer>
-
+<!-- 						<footer></footer> -->
 					</article>
+					<!-- end .wpb_content_wrapper -->
+					<div class="footer-h3" >
+						<!-- naver map -->
+						<div id="map" style="border:1px solid #000; display:none;" align="center"></div>
+					</div>
+					
 				</div>
-				<!-- end .wpb_content_wrapper -->
-			</div><!-- /#main -->
-			
-			<div class="footer-h3">
-			
-			<!-- naver map -->	<!-- 나중에 지도 없애기 버튼을 위한 디스플레이 속성 -->
-			<div id="map" style="border:1px solid #000; display:none;" align="center"></div>
-				<form name="selectLocation" >
-					<input name="latInput" type="hidden" id="latInput" value="" />
-					<input name="lngInput" type="hidden" id="lngInput" value="" />
-				</form>		
-			
-		</div><!-- /#content -->
-		</div><!-- /#wrap -->
-		
-		
-		
+					
+				</div>
+
+	</div> <!-- 		/#wrap -->
 		<script type="text/javascript">
 						
 			// 구 선택 이벤트 제어
@@ -339,7 +344,8 @@
 			});
 			
 			// 사이드메뉴에 해당할때마다 밑에꺼 복사해서 붙여 넣어줄것!!!/////////////////////////////////////////////////	
-			$('#menu-item-3').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+// 			$('#menu-item-3').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+			$('#menu-item-3').attr('class', 'change btn btn-primary');
 			
 		</script>						
 

@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+ 
 <%-- 
 // 	session.setAttribute("customer", 5);
 // 	session.setAttribute("seller", 2);
@@ -608,7 +608,8 @@ function replyList(replylist){
  */
 		
  
- //역경매 메뉴 만들기..
-	$('#menu-item-7').attr('style', 'display:block');
+ 	//역경매 메뉴 만들기..
+//	$('#menu-item-8').attr('style', 'display: inline-block');
+	$('#menu-item-9').attr('class', 'change btn btn-primary');
 
 </script>

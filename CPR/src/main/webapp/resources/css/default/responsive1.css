@@ -24,7 +24,7 @@ h2 {
 .footer-h3 {	
 	padding:0 40px;
 	min-width:96px;
-	margin-left:1087px;	
+	/* margin-left:1040px;	 */
 	top:-2em;
 }
 
@@ -386,7 +386,7 @@ h3 {
 	/*모바일용 네비게이션 바 배경색 바꾸기 쉐수세쉐수수세ㅜ!!!*/
 	.site_nav .main-nav {
 /* 		background: #2f2f2f; */
-		background: rgb(249,249,249);
+		background: #8dc63f;
 /* 		border-bottom: 1px solid #444; */
 		text-align: left;
 /* 		margin-top: 15px; */
@@ -497,4 +497,8 @@ h3 {
 		width: 370px;
 	}
 	.portfolio_thumb > header .post-format { left:44%; }
+}
+
+#footer-h-3 {
+	margin-left: 0px;
 }

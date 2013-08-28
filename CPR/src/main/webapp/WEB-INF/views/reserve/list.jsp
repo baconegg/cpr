@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.shinyul.domain.Criteria"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script type="text/javascript">
-	console.log("${sessionScope.cri}");
-	console.log("----------------------------");
+// 	console.log("${sessionScope.cri}");
+// 	console.log("----------------------------");
 </script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,7 +24,7 @@
 				        <div class="wpb_content_wrapper">
 					       <article class="post-68 portfolio type-portfolio status-publish hentry" id="post-68">
 					          <header>
-					        	<h1 class="entry-title">예약 리스트</h1>
+					        	<h1 class="entry-title" align="center" style="font-weight:bold" >주 문 &nbsp;&nbsp;&nbsp;현 황</h1>
 					        	<span class="post-format"></span>
 					            <style type="text/css">
 							        .s-text {display:none;}
@@ -34,7 +34,7 @@
 					        	</style>
 					      	  </header>
 					   
-						<div class="row-fluid">	
+						<div class="row-fluid"  align="center">	
 								 
 					 		<table id="listTable">
 					 			<colgroup>
@@ -61,12 +61,13 @@
 					 				</tr>
 					 			</thead>
 					 			<tbody id="tbodyList">
+					 				<tr><td colspan="9" class="line1"></td></tr>
 					 				<c:forEach items="${list}" var="list" >
 					 				<tr>
 					 					<td>${list.reserveIdx }</td>
 						 				<td>${list.reserveTime }</td>
-						 				<td>
-						 				<a href="view?reserveIdx=${list.reserveIdx }">${list.productName }</a>
+						 				<td id="titleList">
+						 				<a id="reserveViews"  href="view?reserveIdx=${list.reserveIdx }" >${list.productName }</a>
 						 				</td>
 						 				<td>${list.reserveQty }</td>
 						 				<td>${list.productPrice }</td>
@@ -89,12 +90,13 @@
 					 		</table>
 					 		 
 					    </div> 
-					    <div id="paging">					    	
+					    <div id="paging" align="center">					    	
 					    </div><br/>
-					    <div id="search_list">
-					    	<form action="/cpr/reserve/list" id="formSearch" method="get" >
+					    <div id="search_list" align="center" >
+					    	<form action="/cpr/reserve/list" id="formSearch" method="get"  >
+						    	
 						    	<select name="type" id="type">
-						    		<option value="">선택해 주세요</option>
+						    		<option value="">선택 해주세요</option>
 						    		<option value="title">제목 + 내용</option>
 						    		<option value="reserveDate">신청일</option>
 						    		<option value="reserveReceiveTime">수령시간</option>
@@ -110,8 +112,9 @@
 						    		</c:choose>
 						    	</select>
 						    	<input type="hidden" id="page" name="page" value="1">
-						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword}"><br/>
-						    	<input type="submit" value="검색" id="btnSearch">
+						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword}">
+								<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a>
+								
 					    	</form>
 					    </div>    
 					    
@@ -147,16 +150,16 @@
 	function paging(){
 		
 		if(startPage > 1){
-			innerHTML += "["+"<a>"+"이전"+"</a>"+"]";
+			innerHTML += "["+"<a id='page' style='font-weight:bold;'> "+"이전"+" </a>"+"]";
 			
 		};
 		
 		for(var i= startPage; i <= endPage; i++){
-			innerHTML += "["+"<a>"+i+"</a>"+"]";
+			innerHTML += "["+"<a id='page' style='font-weight:bold'> "+i+" </strong></a>"+"]";
 		}
 		
 		if(total % 100 == 1 && endPage > 10){
-			innerHTML += "["+"<a>"+"다음"+"</a>"+"]";
+			innerHTML += "["+"<a id='page' style='font-weight:bold;'> "+"다음"+" </strong></a>"+" ]";
 		}
 
 		return innerHTML;
@@ -183,7 +186,8 @@
 		
 	
 	//역경매 메뉴 만들기..
-	$('#menu-item-7').attr('style', 'display:block');
+//	$('#menu-item-8').attr('style', 'display: inline-block');
+	$('#menu-item-9').attr('class', 'change btn btn-primary');
 	
 </script>
 </body>

@@ -1,6 +1,6 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
+ 
 <%-- <% --%>
 <!--  	session.setAttribute("customer", 5); -->
 <%-- %> --%>
@@ -12,24 +12,33 @@
 <div id="content_wrap" >
         
     <div id="wrap" class="wrap" role="document">
-        
-			<!-- 제일 위부분의 파란색 바 -->
-        	<div id="top-title"></div>
-        	
-			    <div id="content" class="row-fluid">
-				     <div id="main" class="span12" role="main">
-				        <div class="wpb_content_wrapper">
-					       <article class="post-68 portfolio type-portfolio status-publish hentry" id="post-68">
-					          <header>
-					        	<h1 class="entry-title">역 경매 수정페이지</h1>
-					        	<span class="post-format"></span>
-					            <style type="text/css">
-							        .s-text {display:none;}
-									.post > header .post-format, .portfolio > header .post-format {background-size:80%}
-									.format-video > header .post-format, .portfolio > header .post-format.video_project_format {background-image:none;}
-									.summary h3 { font-size:12px; 	}
-					        	</style>
-					      	  </header>
+       <div class="row-fluid">
+			</div>			
+			<div id="top-title"></div>
+			<div id="content" class="row-fluid">
+				<div id="main" class="span12" role="main">
+					<div class="wpb_content_wrapper">
+						<article class="post-83 portfolio type-portfolio status-publish hentry" id="post-83">
+							<header>
+								<h1 class="entry-title">패키지 매칭 상세 수정</h1>
+								<p class="portfolio_categories">
+								</p>
+<!-- 								<span class="post-format video_project_format"></span> -->
+								<style type="text/css">
+									.s-text {
+										display: none;
+									}
+									.post > header .post-format, .portfolio > header .post-format {
+										background-size: 80%
+									}
+									.format-video > header .post-format, .portfolio > header .post-format.video_project_format {
+										background-image: none;
+									}
+									.summary h3 {
+										font-size: 12px;
+									}
+								</style>
+							</header>
 				      
 						      <div class="row-fluid">
 						
@@ -55,48 +64,47 @@
 													<div class="wpb_content_element span12 wpb_text_column">
 														<div class="wpb_wrapper">
 															
-															<h3>역 경매 글</h3>
+<!-- 															<h3>역 경매 글</h3> -->
 															<form id="modifyForm" method="post" action="registAction" >
 									
 															<p>
-																<br />제목
-																<input type="text" name="title" id="title" value="${RequestVO.title }" />
+																<br/><h2>제목</h2><br/>
+																<input type="text" name="title" id="title" value="${RequestVO.title }" title="${RequestVO.title }"  />
 																<input type="hidden" name="idx" id="idx" value="${RequestVO.idx }" />
-															
+															</p><br /><br/>
+															<p>
+																	<br/><h2>시장</h2><br/>
+																  	<input type="text" placeholder="지역구를 입력해 주세요." style="width: 200px" id="tags" name="guName" value="" />
+																   <input type="text" placeholder="시장을 입력해 주세요." style="width: 200px" id="market" name="marketName" value="" />
+																   <input type="hidden" style="width: 200px" id="customerIdx" name="customerIdx" value="${RequestVO.customerIdx }" />
+															</p><br/><br/>
+															<p>
+															<br /><h2>상품 내역</h2></br>
+																<div id="itemDiv">
+																</div>						
+																<input type="hidden" style="width: 200px" id="items" name="items" value="" />
+															</p>
+															<p>
+															<h2> 수취시간</h2><br/>
+																 <input placeholder="수취시간을 선택해 주세요." type="text" id="receiveTime" name="receiveTime" value="${RequestVO.receiveTime }" />
+															</p><br/><br/>		
+															<p>
+																<h2>요청 사항</h2><br/>
+<!-- 																<input type="text" id="memo" name="memo"value="${RequestVO.memo }" /> -->
+																<textarea placeholder="요청사항이 있으시면 기재해 주세요."  rows="5" type="text" id="memo" name="memo" >
+																	${RequestVO.memo }
+																</textarea>
 															</p><br />
-															<p>
-																
-														
-																  구: 
-																  <input type="text" style="width: 200px" id="tags" name="guName" value="" />
-																  시장: 
-																  <input type="text" style="width: 200px" id="market" name="marketName" value="" />
-																  <input type="hidden" style="width: 200px" id="customerIdx" name="customerIdx" value="${RequestVO.customerIdx }" />
 															
- 
-															</p><br/>
-															상품 내역<br/>
-															<div id="itemDiv">
-															</div>						
-															<input type="hidden" style="width: 200px" id="items" name="items" value="" />
-															<p>
-															 수취시간 
-																 <input type="text" id="receiveTime" name="receiveTime" value="${RequestVO.receiveTime }" >
-																</p>
-																<p>
-																<br />요청 사항</br>
-																<input type="text" id="memo" name="memo" value="${RequestVO.memo }" />
-																<p>
 																 <!-- =============================================세션에서 받아와라 ~! 위에 세션선언함 ========================================================= -->					
 																<c:choose >																	
-<%-- 																	<c:when test="${sessionScope.customer == RequestVO.customerIdx}"> --%>
-																	<c:when test="${sessionScope.customer == '5'}">
-																		<input type="button" value="수정완료" id="modifyBtn">&nbsp;&nbsp;&nbsp;
-																		<input type="button" value="수정취소" id="backBtn">&nbsp;&nbsp;&nbsp;
-																		<input type="button" value="목록" id="listBtn">
+																	<c:when test="${sessionScope.customerIdx == RequestVO.customerIdx}">
+																		<input type="button" value="수정완료" id="modifyBtn" class="btn btn-large btn-block btn-success" >&nbsp;&nbsp;&nbsp;
+																		<input type="button" value="수정취소" id="backBtn" class="btn btn-large btn-block btn-success" >&nbsp;&nbsp;&nbsp;
+																		<input type="button" value="목록" id="listBtn" class="btn btn-large btn-block btn-success" >
 																	</c:when>
 																	<c:otherwise>
-																		<input type="button" value="목록" id="listBtn">
+																		<input type="button" value="목록" id="listBtn" class="btn btn-large btn-block btn-success" >
 																	</c:otherwise>
 																</c:choose>
 										<!-- ====================================================================================================== -->				
@@ -115,13 +123,8 @@
 												</div> 
 											</div> </div>		
 											
-											
-											
-											
 												</div> 
 											
-															
-															    
 															</div> 
 														</div> 
 													  </div>
@@ -160,7 +163,7 @@
 				     </div><!-- /#main -->
 				      
 				        <div class="footer-h3"><br/>
-						    <h2>지랄지랄 시장 대표상품</h2><br/>
+						    <h2>시장 대표상품</h2><br/>
 							<div class="row-fluid other_projects_footer">
 							<br/>
 								 <c:forEach var="list" items="${list}">
@@ -256,7 +259,7 @@ $(function() {
 
 window.onload = function(){
 	
-	if('${sessionScope.customer}' == '${RequestVO.customerIdx}' ) {
+	if('${sessionScope.customerIdx}' == '${RequestVO.customerIdx}' ) {
 		
 
   	$('#receiveTime').datetimepicker({
@@ -289,16 +292,15 @@ window.onload = function(){
 		if( ( i % 3 ) == 1 ){
 			add++;
 			html += '<div id="item'+add+'">';
-			html += '상품명 : <input style="width:110px" type="text" id="itemName'+add+'" name ="itemName'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
-		
+			html += '<input placeholder="상품명" title="상품명" style="width:100px" type="text" id="itemName'+add+'" name ="itemName'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
 		}else if( ( i % 3 ) == 2 ){
-			html += '수량 : <input style="width:110px" type="text" id="itemQty'+add+'" name ="itemQty'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
+			html += '<input placeholder="수량" title="수량" style="width:40px" type="text" id="itemQty'+add+'" name ="itemQty'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
 		
 		}else if( ( i % 3 ) == 0 ){
-			html += '가격 : <input style="width:110px" type="text" id="itemPrice'+add+'" name ="itemPrice'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
+			html += '<input placeholder="가격" title="가격" style="width:70px" type="text" id="itemPrice'+add+'" name ="itemPrice'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp';
 		
 			if(i==3){
-				html += '<input type="button" id="itemAdd" name="itemAdd" value="상품추가" />&nbsp;&nbsp;<input type="button" value="상품삭제" id="removeBtn1">';
+				html += '<input type="button" id="itemAdd" name="itemAdd" value="상품추가" class="btn btn-large btn-block" />&nbsp;&nbsp;<input type="button" value="상품삭제" id="removeBtn1" class="btn btn-large btn-block" />';
 			}
 			html += '</div>';
 		}
@@ -313,14 +315,14 @@ $('#itemAdd').on('click', function(){
         alert("10개 까지만 추가 할수있습니다 ");
         return false;
 	}   
-	console.log("itemAdd들어오냐?");
+// 	console.log("itemAdd들어오냐?");
 	add++;
 	var html = "";
-		html += '<div id="item'+add+'">상품명 : <input style="width:110px" type="text" class="itemName"  id="itemName'+add+'" name="itemName'+add+'" value="" />&nbsp;&nbsp'
-				+'수량 : <input style="width:110px" type="text" id="itemQty'+add+'" name="itemQty'+add+'" value="" />&nbsp'
-				+' 가격 : <input style="width:110px" type="text" id="itemPrice'+add+'" name="itemPrice'+add+'" value="" />&nbsp'
+		html += '<div id="item'+add+'"><input placeholder="상품명" title="상품명" style="width:100px" type="text" id="itemName'+add+'" name ="itemName'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbsp;';
+				+'<input placeholder="수량" title="수량" style="width:40px" type="text" id="itemQty'+add+'" name ="itemQty'+add+'" value="'+itemAdd[i]+'"/>&nbsp;&nbspp;';
+				+' <input type="button" id="itemAdd" name="itemAdd" value="상품추가" class="btn btn-large btn-block" />&nbsp;&nbsp;';
 				+'</div>';
-	console.log(add);
+// 	console.log(add);
 	
 	/*  $('#itemAddDiv').innerhtml(html);
 	 */
@@ -352,78 +354,70 @@ $('#itemAdd').on('click', function(){
     
 });
 
-
-
  $('#modifyBtn').on("click",function(){
  	if(confirm("글을 수정 하시겠습니까?")){
- 			console.log("modifyBtn 누름");
- 			console.log(add);
- 			var msg = '';
- 			console.log(add);
- 			for(var i = 1; i <= add; i++){
- 			console.log(i);
- 		   	    var itemName = $('#itemName' + i).val();
- 		   	 	console.log(itemName);
- 		   	 	msg +=itemName.replace(/(^\s*)|(\s*$)/gi, "")+",";
- 		   	 	
- 		   	    var	itemQty = $('#itemQty' + i).val();
- 		   	 	console.log(itemQty);
- 		   	 	msg +=itemQty.replace(/(^\s*)|(\s*$)/gi, "")+",";
- 		   	 	
- 		   		
- 		   	 	var itemPrice = $('#itemPrice' + i).val();
- 		   		console.log(itemPrice);
- 		   	 	msg +=itemPrice.replace(/(^\s*)|(\s*$)/gi, "")+"/";
- 			}
- 			console.log(msg);
- 			$('#items').val(msg);
- 		
- 			
-
- 			var tags = $('#tags').val();
- 			$('#tags').val((tags.replace(/(^\s*)|(\s*$)/gi, ""))+",");		
- 		
- 			var market = $('#market').val();
- 			$('#market').val(market.replace(/(^\s*)|(\s*$)/gi, ""));		
- 		
- 		
- 			var obj = $('#modifyForm');
- 			var json = JSON.parse(JSON.stringify(obj.serializeObject()));
- 			
- 			 
- 			 
- 			$.post('modifyAction',json).done(function(data){
- 				if(data=="1"){
- 					alert("수정 성공");
- 					/* location.href="" */
- 				}else if(data == "2"){
- 					alert("수정 실패 ");
- 				}
- 				
- 			}); 
- 	}else{
- 		return;
- 	}
- });
+		//  			console.log("modifyBtn 누름");
+		//  			console.log(add);
+		 			var msg = '';
+		//  			console.log(add);
+		 			for(var i = 1; i <= add; i++){
+		//  			console.log(i);
+		 		   	    var itemName = $('#itemName' + i).val();
+		//  		   	 	console.log(itemName);
+		 		   	 	msg +=itemName.replace(/(^\s*)|(\s*$)/gi, "")+",";
+		 		   	 	
+		 		   	    var	itemQty = $('#itemQty' + i).val();
+		//  		   	 	console.log(itemQty);
+		 		   	 	msg +=itemQty.replace(/(^\s*)|(\s*$)/gi, "")+",";
+		 		   	 	
+		 		   		
+		 		   	 	var itemPrice = $('#itemPrice' + i).val();
+		//  		   		console.log(itemPrice);
+		 		   	 	msg +=itemPrice.replace(/(^\s*)|(\s*$)/gi, "")+"/";
+		 			}
+		//  			console.log(msg);
+		 			$('#items').val(msg);
+		 		
+		 			
+		
+		 			var tags = $('#tags').val();
+		 			$('#tags').val((tags.replace(/(^\s*)|(\s*$)/gi, ""))+",");		
+		 		
+		 			var market = $('#market').val();
+		 			$('#market').val(market.replace(/(^\s*)|(\s*$)/gi, ""));		
+		 		
+		 		
+		 			var obj = $('#modifyForm');
+		 			var json = JSON.parse(JSON.stringify(obj.serializeObject()));
+		 			
+		 			$.post('modifyAction',json).done(function(data){
+		 				if(data=="1"){
+		 					alert("수정 성공");
+		 					/* 나중에 페이지 받아와서 넣어줘야 됨...  */
+		 					location.href="/cpr/request/list?page=1";
+		 				}else if(data == "2"){
+		 					alert("수정 실패 ");
+		 				}
+		 				
+		 			}); 
+		 	}else{
+		 		return;
+		 	}
+		 });
 	}else{
 		location.href="view?idx="+${RequestVO.idx}; 
 	}
 };//윈도우 온 로드 ~ 
 
-
-
-
-
-
 $('#backBtn').on('click',function(){
-	if('${sessionScope.customer}'=='${RequestVO.customerIdx}' ){
+	if('${sessionScope.customerIdx}'=='${RequestVO.customerIdx}' ){
 		if(confirm("글을 수정 취소 하시겠습니까?")){
 			location.href="view?idx=${RequestVO.idx}&gunamemarid=${RequestVO.gunameMarid}";
 		}else{
 			return;
 		}
 	}else{
-		alret('작성하신 글이 아니니다.');
+		alret('작성하신 글이 아닙니다.');
 		location.href="view?idx=${RequestVO.idx}&gunamemarid=${RequestVO.gunameMarid}"
 	}
 });
@@ -434,7 +428,7 @@ $('#listBtn').on('click',function(){
 });
 
 //역경매 메뉴 만들기..
-$('#menu-item-7').attr('style', 'display:block');
-$('#menu-item-7').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
-
+//$('#menu-item-8').attr('style', 'display:inline-block');
+// $('#menu-item-7').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+$('#menu-item-8').attr('class', 'change btn btn-primary');
 </script>

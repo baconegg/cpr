@@ -6,8 +6,6 @@
 
 var oMap;
 var startMarker;
-var oLabel;
-var oIcon;
 var zoomLevel;
 var circle;
 var radius;
@@ -18,7 +16,7 @@ function mapInitialSetting(zoomLevel){
 	var browserHeight = document.body.clientHeight;
 	
 	console.log('browser size : ' + browserWidth + ' * ' + browserHeight);
-
+	
 	// 자기중심 반경 계산해 찍을 때 - 12
 	// 서울시 - 8~9
 	// 시장 내부 전경을 찍어줄땐??
@@ -64,7 +62,7 @@ function mapInitialSetting(zoomLevel){
 	var oSize = new nhn.api.map.Size(28, 37);
 	var oOffset = new nhn.api.map.Size(14, 37);
  // var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset); //
-	oIcon = new nhn.api.map.Icon('/cpr/resources/images/default/spatial/person.png', oSize, oOffset);
+	var oIcon = new nhn.api.map.Icon('/cpr/resources/images/default/spatial/person.png', oSize, oOffset);
 	
 	// 현재 위치 마커 찍기
 	startMarker = new nhn.api.map.Marker(oIcon, {title : '현재 위치'});
@@ -72,46 +70,11 @@ function mapInitialSetting(zoomLevel){
 	oMap.addOverlay(startMarker);
 
 	// 현재 위치 마커에 라벨 추가
-	oLabel = new nhn.api.map.MarkerLabel();
+	var oLabel = new nhn.api.map.MarkerLabel();
 	oMap.addOverlay(oLabel);
 	oLabel.setVisible(true, startMarker);
 
 }	// end mapInitialSetting
-
-
-function fnNewCurrentLocation(){
-//	oMap.removeOverlay(startMarker);
-//	oMap.removeOverlay(oLabel);
-	oMap.clearOverlay();
-	console.log("fnNewCurrentLocation");
-	
-	// 현재 위치 사람 아이콘 설정
-	var oSize = new nhn.api.map.Size(28, 37);
-	var oOffset = new nhn.api.map.Size(14, 37);
- // var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset); //
-	oIcon = new nhn.api.map.Icon('/cpr/resources/images/default/spatial/person.png', oSize, oOffset);
-	
-	// 현재 위치 마커 찍기
-	startMarker = new nhn.api.map.Marker(oIcon, {title : '현재 위치'});
-	
-//	var testPointY = currentPoint.y - Math.random() * (-0.0005);
-//	var testPointX = currentPoint.x - Math.random() * (-0.0005);
-//	
-//	var testPoint = new nhn.api.map.LatLng(testPointY, testPointX);
-//	startMarker.setPoint(testPoint); 
-	startMarker.setPoint(currentPoint); 
-	oMap.addOverlay(startMarker);
-
-	// 현재 위치 마커에 라벨 추가
-	oLabel = new nhn.api.map.MarkerLabel();
-	oMap.addOverlay(oLabel);
-	oLabel.setVisible(true, startMarker);
-
-	
-//	fnShopInfo(testPoint);
-	
-	
-}
 
 
 function drawCircle(rad){

@@ -1,16 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-
-<%-- <% --%>
-// 	session.setAttribute("customer", 5);
-// 	session.setAttribute("seller", 2);
-// 	session.setAttribute("Lev", "seller");
-<%-- %> --%>
-
-<html>
-
-
+<html> 
 <body style="margin-left: 1px">
+<script type="text/javascript">
+// 	console.log('세숀');
+// 	console.log('${sessionScope.selIdx}');
+</script>
 
 <div id="content_wrap" >
         
@@ -24,7 +19,7 @@
 				        <div class="wpb_content_wrapper">
 					       <article class="post-68 portfolio type-portfolio status-publish hentry" id="post-68">
 					          <header>
-					        	<h1 class="entry-title">역경매 상세</h1>
+					        	<h1 class="entry-title">패키지 매칭 상세</h1>
 					        	<span class="post-format"></span>
 					            <style type="text/css">
 							        .s-text {display:none;}
@@ -79,43 +74,46 @@
 																${RequestVO.memo}
 																<br/>
 																
-																
 																<div id="totalPrice">	
 																
 																</div><br/>
 																											
-																<h1>
+																
 											<!-- =============================================세션에서 받아와라 ~! 위에 세션선언함 ========================================================= -->					
-																<c:choose >																	
-<%-- 																	<c:when test="${sessionScope.customer == RequestVO.customerIdx}"> --%>
-																	<c:when test="${sessionScope.customer == '5'}">
-																		<br/>
-																		<input type="button" value="수정" id="modifyBtn">&nbsp;&nbsp;&nbsp;
-																		<input type="button" value="삭제" id="deleteBtn">&nbsp;&nbsp;&nbsp;
-																		<input type="button" value="목록" id="listBtn">
+																<c:choose>
+																	<c:when test="${sessionScope.customerIdx == RequestVO.customerIdx}"> 
+																			<br/>
+																			<input type="button" value="수정" id="modifyBtn" class="btn btn-large btn-block btn-success" />&nbsp;&nbsp;&nbsp;
+																			<input type="button" value="삭제" id="deleteBtn" class="btn btn-large btn-block btn-success" />&nbsp;&nbsp;&nbsp;
+																			<input type="button" value="목록" id="listBtn" class="btn btn-large btn-block btn-success" />
 																	</c:when>
 																	<c:otherwise>
 																		<br/>
-																		<input type="button" value="목록" id="listBtn">
+																		<input type="button" value="목록" id="listBtn" name="listBtn" class="btn btn-large btn-block btn-success" />
 																	</c:otherwise>
 																</c:choose>
 										<!-- ====================================================================================================== -->				
-																</h1><br/>	
+																<br/>	
 																</form>	<br/>
 										<!-- =========================================상인만 댓글 쓸수 있다네 ====세션에서 받아와라 ~! 위에 세션선언함 ========================================================= -->					
 																  <%--   <c:choose >		 --%>															
-																		
 																		<%-- <c:when test="${sessionScope.seller =! null}"> --%>
 																		<c:if test="${sessionScope.selIdx != null}">
-																			<br/>
-																			<form id="replyRegister" method="post">
-																			<input  type="hidden" id="selIdx"  name="selIdx" value="${sessionScope.selIdx }"  />
-																			<input  type="hidden" id="requestIdx"  name="requestIdx" value="${RequestVO.idx}"  />
-																			<input style="width:87%" type="text" id="replys"  name="replys"   />&nbsp;&nbsp;
-																			<input type="button" value="경매 등록" id="replyBtn" />&nbsp;&nbsp;
-																			</form>
+																			<c:if test="${RequestVO.flag < 2 }">
+																				<br/>
+																				<form id="replyRegister" method="post">
+																					<input  type="hidden" id="selIdx"  name="selIdx" value="${sessionScope.selIdx }"  />
+																					<input  type="hidden" id="requestIdx"  name="requestIdx" value="${RequestVO.idx}"  />
+																					
+																					<input placeholder="경매 참여시 글을 입력해 주세요." style="width:95%" type="text" id="replys"  name="replys" />&nbsp;&nbsp;
+																				
+																					<div align="right">		
+																						<br/>
+																						<input type="button" value="경매 등록" id="replyBtn" name="replyBtn" class="btn btn-large btn-block btn-success" />&nbsp;&nbsp;
+																					</div>
+																				</form>
+																			</c:if>
 																		</c:if>
-																		
 																	<%-- 	</c:when>
 																		<c:otherwise>
 																		<br/>?
@@ -141,39 +139,41 @@
 
 																		<div class="entry-content">
 																			<div class="row-fluid">
-																				<div class="wpb_content_element span3 left-side1 column_container">
+																				<div class="wpb_content_element span4 left-side1 column_container">
 																					<div class="wpb_wrapper">
 																						<div class="row-fluid">
 																							<div class="wpb_content_element wpb_single_image span12">				
 																								<div  id="buttonDIV">
+																								
 																												<c:if test="${replyList.replyFlag == 2 }">
 																													
-																													<%-- <table class="tradeComplete" style="width:200;height:200;" background="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${replyList.selImgUUID }" class="attachment-medium" >
+																													 <table class="tradeComplete" style="width:225px;height:225px;" background="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${replyList.selImgUUID }" class="attachment-medium" >
 																														<tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
 																														<tr>
 																														<td style="color:white;font-size:30px;background-color:black;opacity:0.8;" >
 																														완료 
 																														</td>
 																														</tr>
-																													</table> --%>
+																													</table>
 																													<br>
-																													<img style="width:225;height:225" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${replyList.selImgUUID }"  class="attachment-medium" title="완료" >
+																													<%-- <img style="width:225;height:225" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${replyList.selImgUUID }"  class="attachment-medium" title="완료" > --%>
 																												</c:if>
 																												<c:if test="${replyList.replyFlag < 2 }">
 																													<br>
 																													<img style="width:225;height:225" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${replyList.selImgUUID }"  class="attachment-medium" >
 																												</c:if>
 																											
-																												<c:if test="${sessionScope.seller == replyList.selIdx }">
-																													<input type="button" id="replyModifyBtn" name="replyModifyBtn" data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }"  value="경매 수정" />
-																													<input type="button" id="replyRemoveBtn" name="replyRemoveBtn"  data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }" value="경매 삭제" />
-																												</c:if>
-																										
-																												<c:if test="${sessionScope.customer == RequestVO.customerIdx}">
-																													<c:if test="${RequestVO.flag == 1 } ">
-																													<input type="button" id="replyTenderBtn" name="replyTenderBtn" data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }"  value="경매 입찰" />
+																												<c:if test="${sessionScope.selIdx == replyList.selIdx }">
+																													<c:if test="${RequestVO.flag < 2 }">
+																													<input type="button" class="btn btn-large btn-block btn-success" id="replyModifyBtn" name="replyModifyBtn" data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }"  value="경매 수정" />
+																													<input type="button" class="btn btn-large btn-block btn-success" id="replyRemoveBtn" name="replyRemoveBtn"  data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }" value="경매 삭제" />
 																													</c:if>
-																													<c:if test="${RequestVO.flag == 2 } ">
+																												</c:if>
+																												<c:if test="${sessionScope.customerIdx == RequestVO.customerIdx}">
+																													<c:if test="${RequestVO.flag == 1 }">
+																													<input type="button" class="btn btn-large btn-block btn-success" id="replyTenderBtn" name="replyTenderBtn" data-replyIdx="${replyList.replyIdx }" data-reqestIdx="${replyList.requestIdx }"  value="경매 입찰" />
+																													</c:if>
+																													<c:if test="${RequestVO.flag == 2 }">
 																													</c:if>
 																												</c:if>
 																												
@@ -234,19 +234,19 @@
 							<!-- footer... -->
 							<!-- =================================================================== -->
 								
-										<div class="row-fluid">
-											<div class="wpb_content_element span12 social column_container">
-												<div class="wpb_wrapper">
-													 <div class="fb_like wpb_content_element fb_type_button_count">
-													 	<iframe src="http://www.facebook.com/plugins/like.php?href=http://hongikdmd.com/meme/portfolio/item/eat-color-it-color/&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowtransparency="true">
-													 	</iframe>
-													 </div>
-													 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.1372833608.html#_=1373361839687&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=http%3A%2F%2Fhongikdmd.com%2Fmeme%2Fportfolio%2Fitem%2Feat-color-it-color%2F&amp;size=m&amp;text=Eat%20Color!%20It%20Color!&amp;url=http%3A%2F%2Fhongikdmd.com%2Fmeme%2Fportfolio%2Fitem%2Feat-color-it-color%2F" class="twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 110px; height: 20px;">
-													 </iframe>
-													 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>								 
-												</div> 
-											</div> 
-										 </div>
+<!-- 										<div class="row-fluid"> -->
+<!-- 											<div class="wpb_content_element span12 social column_container"> -->
+<!-- 												<div class="wpb_wrapper"> -->
+<!-- 													 <div class="fb_like wpb_content_element fb_type_button_count"> -->
+<!-- 													 	<iframe src="http://www.facebook.com/plugins/like.php?href=http://hongikdmd.com/meme/portfolio/item/eat-color-it-color/&amp;layout=button_count&amp;show_faces=false&amp;action=like&amp;colorscheme=light" scrolling="no" frameborder="0" allowtransparency="true"> -->
+<!-- 													 	</iframe> -->
+<!-- 													 </div> -->
+<!-- 													 <iframe allowtransparency="true" frameborder="0" scrolling="no" src="http://platform.twitter.com/widgets/tweet_button.1372833608.html#_=1373361839687&amp;count=horizontal&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=http%3A%2F%2Fhongikdmd.com%2Fmeme%2Fportfolio%2Fitem%2Feat-color-it-color%2F&amp;size=m&amp;text=Eat%20Color!%20It%20Color!&amp;url=http%3A%2F%2Fhongikdmd.com%2Fmeme%2Fportfolio%2Fitem%2Feat-color-it-color%2F" class="twitter-share-button twitter-count-horizontal" title="Twitter Tweet Button" data-twttr-rendered="true" style="width: 110px; height: 20px;"> -->
+<!-- 													 </iframe> -->
+<!-- 													 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>								  -->
+<!-- 												</div>  -->
+<!-- 											</div>  -->
+<!-- 										 </div> -->
 						              
 									
 						
@@ -259,13 +259,13 @@
 				  	    </div> <!-- end .wpb_content_wrapper -->
 				     </div><!-- /#main -->
 				      
-				        <div class="footer-h3"><br/>
-						    <h2>지랄지랄  시장 대표상품</h2><br/>
+				        <div class="footer-h3" id="footer-h-3"><br/>
+						    <h2>시장 대표상품</h2><br/>
 							<div class="row-fluid other_projects_footer">
 							<br/>
 								 <c:forEach var="list" items="${list}">
-									 <article id="post-72" class="post-72 portfolio type-portfolio status-publish hentry portfolio_thumb span2">
-										<a href="../../view/customer?productIdx=${list.productIdx }">
+									 <article class="post-72 portfolio type-portfolio status-publish hentry portfolio_thumb span2">   <!-- id="post-72" -->
+										<a href="/cpr/product/view/customer?productIdx=${list.productIdx }">
 											  <div class="post-thumb" style="top: 0px; z-index: 0;" >
 												<div class="cover"></div>
 												
@@ -299,17 +299,17 @@
 
 <script>
 
-/* ==============================================상품 내역 파씽 씨발...====================================================== */
+/* ==============================================상품 내역 파씽 ====================================================== */
 var item = '${RequestVO.items}';
 var items = item.split("/");
-console.log(item.length);
+// console.log(item.length);
 var itemAdd = (","+items.toString()).split(",");	
 
-console.log(itemAdd);
-console.log(itemAdd.length);
-console.log(itemAdd[0]);
-console.log(parseInt(itemAdd.length / 3)*3);
-console.log(parseInt( 4 % 3) );
+// console.log(itemAdd);
+// console.log(itemAdd.length);
+// console.log(itemAdd[0]);
+// console.log(parseInt(itemAdd.length / 3)*3);
+// console.log(parseInt( 4 % 3) );
 
 
 var html = "";
@@ -318,13 +318,13 @@ for ( var i = 1; i <= parseInt(itemAdd.length / 3)*3 ; i++) {
 	if( ( i % 3 ) == 1 ){
 		html += '<div id="itemAdd'+i+'">';
 		html += '상품명 : '+itemAdd[i]+'&nbsp;&nbsp';
-		console.log(itemAdd[i]);
+// 		console.log(itemAdd[i]);
 	}else if( ( i % 3 ) == 2 ){
 		html += ' 수량 : '+itemAdd[i]+'&nbsp;&nbsp';
-		console.log(itemAdd[i]);
+// 		console.log(itemAdd[i]);
 	}else if( ( i % 3 ) == 0 ){
 		html += ' 가격 : '+itemAdd[i];
-		console.log(itemAdd[i]);
+// 		console.log(itemAdd[i]);
 		html += '</div>';
 	}
 } 
@@ -334,7 +334,7 @@ for ( var i = 1; i <= parseInt(itemAdd.length / 3)*3 ; i++) {
 $('#itemAdd').html(html);
 /* =========================================수정======================================================= */
 $('#modifyBtn').on('click',function(){
-	if('${sessionScope.customer}'=='${RequestVO.customerIdx}' ){
+	if('${sessionScope.customerIdx}'=='${RequestVO.customerIdx}' ){
 		if(confirm("글을 수정 하시겠습니까?")){
 			location.href="modify?idx=${RequestVO.idx}&gunamemarid=${RequestVO.gunameMarid}";
 		}else{
@@ -349,7 +349,7 @@ $('#modifyBtn').on('click',function(){
 
 /* =========================================삭제======================================================= */
 $('#deleteBtn').on('click',function(){
-	if('${sessionScope.customer}'=='${RequestVO.customerIdx}' ){
+	if('${sessionScope.customerIdx}'=='${RequestVO.customerIdx}' ){
 		if(confirm("글을 삭제 하시겠습니까?")){
 			 
 			$.post('remove',{ "idx":$('#requestIdx').val() }).done(function(data){
@@ -365,7 +365,7 @@ $('#deleteBtn').on('click',function(){
 			return;
 		}
 	}else{
-		alert('작성하신 글이 아니니다.');
+		alert('작성하신 글이 아닙니다.');
 	}
 });
 /* =========================================리스트======================================================= */
@@ -376,13 +376,12 @@ function replyList(replylist){
 	
 	var replyAdd ="";
 	
-	
 	console.log(replylist.length);
 	for ( var i = 0; i < replylist.length; i++) {
 		replyAdd += '<div class="row-fluid">'
 				  + '<div class="entry-content">'
 				  + '<div class="row-fluid">'
-				  +	'<div class="wpb_content_element span3 left-side1 column_container">'
+				  +	'<div class="wpb_content_element span4 left-side1 column_container">'
 				  +	'<div class="wpb_wrapper">'
 				  +	'<div class="row-fluid">'
 				  +	'<div class="wpb_content_element wpb_single_image span12">'
@@ -391,15 +390,15 @@ function replyList(replylist){
 					replyAdd += '<br>'
 							  + '<img style="width:200px;height:200px" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/'+replylist[i].selImgUUID+'" class="attachment-medium" alt="">'
 							  + '<td style="color: red;font-size:40px" >';
-							 
 				}else{
 					replyAdd += '<br><img style="width:200px;height:200px" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/'+replylist[i].selImgUUID+'" class="attachment-medium" alt="">'
 				}  
-				if('${sessionScope.seller}' == replylist[i].selIdx){
-					replyAdd +=	'<input type="button" id="replyModifyBtn" name="replyModifyBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 수정" />  <input type="button" id="replyRemoveBtn" name="replyRemoveBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 삭제" />';
-				}else if("${sessionScope.customer}" == "${RequestVO.customerIdx}" ){
-					if( '${RequestVO.flag}' =="1" ){
-						replyAdd +=	'<input type="button" id="replyTenderBtn" name="replyTenderBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 입찰" />';
+				if('${sessionScope.selIdx}' == replylist[i].selIdx){
+					replyAdd +=	'<input class="btn btn-large btn-block btn-success" type="button" id="replyModifyBtn" name="replyModifyBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 수정" />  <input class="btn btn-large btn-block btn-success" type="button" id="replyRemoveBtn" name="replyRemoveBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 삭제" />';
+				}else if("${sessionScope.customerIdx}" == "${RequestVO.customerIdx}" ){
+					if( replylist[i].replyFlag =="1" ){
+						console.log('들아오지 1이냐 ?');
+						replyAdd +=	'<input class="btn btn-large btn-block btn-success" type="button" id="replyTenderBtn" name="replyTenderBtn" data-replyIdx="'+replylist[i].replyIdx+'" data-reqestIdx='+replylist[i].requestIdx+' value="경매 입찰" />';
 					}
 				}                																						
 		replyAdd +=	'</div>' 
@@ -429,7 +428,7 @@ function replyList(replylist){
 				  +	'<div class="wpb_content_element span6 wpb_text_column">'
 				  +	'<div class="wpb_wrapper">'
 				  +	'<p>'
-				  +	'<h2 style="background:silver;padding:4px">경매 등록 내역</h2>'
+				  +	'<h2 style="background:silver; padding:4px;">경매 등록 내역</h2>'
 				  +	'<input style="width: 97%; height: 130px; border: 0px; background: none;" type="text" id="reply'+ replylist[i].replyIdx +'" name="reply'+ replylist[i].replyIdx +'" value="'+ replylist[i].replys +'"readonly="readonly" />'
 				  +	'</p>'
 				  +	'</div>' 
@@ -442,49 +441,41 @@ function replyList(replylist){
 	}
 		
 	$('#replyAdd').html(replyAdd);
-	 
 	
-};
-	
-	
-	
-	
-	
-	
+}; // replyList end
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	 window.onload = function(){
-		 
+	  
+// 	$('#footer-h-3').css('margin-left','1px'); 
 	
 	$('#replyBtn').on('click',function(){
-		console.log('replyBtn 클릭 했지요 ');
+// 		console.log('replyBtn 클릭 했지요 ');
 		var reply = $('#replyRegister');
 		var json = JSON.parse(JSON.stringify(reply.serializeObject()));
 		
-		console.log($('#selIdx').val());
-		console.log($('#requestIdx').val());
-		console.log($('#replys').val());
+// 		console.log($('#selIdx').val());
+// 		console.log($('#requestIdx').val());
+// 		console.log($('#replys').val());
 		$('#replys').val("");
 		$.post('replyRegisterAction',json).done(function(data){
 			
-			console.log(data);
-			
+// 			console.log(data);
 			replyList(data);
 	
 		});
 	});	
 		
 		 
-		 $('#listBtn').on('click',function(){
-				console.log('들어왔아ㅓ요 listBtn');
+		 $("#listBtn").on('click',function(){
+// 			alert("나와!");
+// 			console.log('들어왔아ㅓ요 listBtn');
 				location.href="list?page=${sessionScope.cri.page}";
 			});
 
-		 
-		 
 	    $('#replyAdd').delegate("#buttonDIV #replyModifyBtn","click",function(data){
-		/* $('#replyModifyBtn').on('click',function(){ */
-			
-			console.log($(this).attr("data-replyIdx"));
-			console.log($(this).attr("data-reqestIdx"));
+// 		$('#replyModifyBtn').on('click',function(){
+// 			console.log($(this).attr("data-replyIdx"));
+// 			console.log($(this).attr("data-reqestIdx"));
 			var replyIdx = $(this).attr("data-replyIdx");
 			var requestIdx = $(this).attr("data-reqestIdx");
 			
@@ -501,56 +492,52 @@ function replyList(replylist){
 				$(this).val("경매 수정");
 			
 				$.post('replyModify',{"replyIdx": replyIdx , "requestIdx":requestIdx , "replys": $('#reply'+$(this).attr("data-replyIdx")).val() }).done(function(data){
-					
-					console.log(data);
-					
+// 					console.log(data);
 					replyList(data);
 				});
 				
 			}
 		
 			
-		});	 
+// 		});
+		
+		});
 		
 		 $('#replyAdd').delegate("#buttonDIV #replyRemoveBtn","click",function(data){
-	/* 	 $('#replyRemoveBtn').on('click',function(){ */
-			
-			console.log($(this).attr("data-replyIdx"));
-			console.log($(this).attr("data-reqestIdx"));
+	 	
+		/*  $('#replyRemoveBtn').on('click',function(){  */
+// 			console.log($(this).attr("data-replyIdx"));
+// 			console.log($(this).attr("data-reqestIdx"));
 			var replyIdx = $(this).attr("data-replyIdx");
 			var requestIdx = $(this).attr("data-reqestIdx");
 			 
 			 $.post('replyRemove',{"replyIdx": replyIdx , "requestIdx":requestIdx}).done(function(data){
-				
-				console.log(data);
-				
+// 				console.log(data);
 				replyList(data);
 		
 			});  
-		});
+	 });
+// 		});
 		 
 		 $('#replyAdd').delegate("#buttonDIV #replyTenderBtn","click",function(data){
-	/* 	 $('#replyTenderBtn').on('click',function(){ */
-			
-			console.log($(this).attr("data-replyIdx"));
-			console.log($(this).attr("data-reqestIdx"));
+// 			 $('#replyTenderBtn').on('click',function(){
+//  			console.log($(this).attr("data-replyIdx"));
+// 			console.log($(this).attr("data-reqestIdx"));
 			var replyIdx = $(this).attr("data-replyIdx");
-			var reqestIdx = $(this).attr("data-reqestIdx");
+			var requestIdx = $(this).attr("data-reqestIdx");
 			
-			$.post('replyTender',{"replyIdx": replyIdx , "reqestIdx":reqestIdx}).done(function(data){
-				
-				console.log(data);
-				
+			$.post('replyTender',{"replyIdx": replyIdx , "requestIdx":requestIdx}).done(function(data){
+// 				console.log(data);
 				replyList(data);
 		
-			});
-		});
+				});
+// 			});
+ 		  }); 
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+}; //onload end
 		 
-		 
-	 };
-	 
-		
 	//역경매 메뉴 만들기..
-	$('#menu-item-7').attr('style', 'display:block');
-	$('#menu-item-7').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+//	$('#menu-item-8').attr('style', 'display:inline-block');
+// 	$('#menu-item-8').attr('class', 'current-menu-item menu-item-type-post_type menu-item-object-page menu-item-1');
+	$('#menu-item-8').attr('class', 'change btn btn-primary');		 
 </script>
