@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.MemberMapper">
+
+	<!-- 판매자... -->
+	<insert id="createSeller" parameterType="org.shinyul.domain.MemberSellerVO">
+		INSERT ALL
+		INTO tbl_member
+		(
+			member_idx
+			,member_id
+			,member_pw
+			,member_tel
+			,member_lev
+			,member_name
+		)
+		VALUES
+		(
+			seq_member.nextval
+			,#{memberId}
+			,#{memberPw}
+			,#{memberTel}
+			,2
+			,#{memberName}		
+		)
+		INTO tbl_seller
+		(
+			sel_idx
+			,member_idx
+			,mar_idx
+			,guname_marid
+			,sel_type
+			,sel_store
+			,sel_address
+			,sel_store_no
+			,sel_info
+			,sel_like			
+			,sel_seller_loc
+		)
+		VALUES
+		(
+			seq_seller.nextval
+			,seq_member.currval
+			,#{marIdx}
+			,#{guNameMarId}		
+			,#{selType}
+			,#{selStore}
+			,#{selAddress}
+			,#{selStoreNo}
+			,#{selInfo}	
+			,0			
+			,sdo_geometry(
+				2001
+				,8307
+				,sdo_point_type(#{memberLNG}, #{memberLAT}, null)
+				,null
+				,null
+			)
+		)
+		INTO tbl_seller_img
+		(
+			sel_idx
+			,sel_img
+			,sel_img_uuid
+		)
+		VALUES
+		(
+			seq_seller.currval
+			,#{selImgOri}
+			,#{selImgUUID}
+		)
+		SELECT * FROM DUAL
+	</insert>
+
+	<!-- 판매자 가입시 시장 정보 읽어오기...(구 기준/m_code...)  -->
+	<select id="readSuperstoreInfo" parameterType="org.shinyul.domain.MarketVO" resultType="org.shinyul.domain.MarketVO">
+		select
+			mar_idx marIdx
+			,m_code mCode
+			,guname guname
+			,mar_id marId
+			,m_addr mAddr
+			,m_tel mTel
+			,lat lat
+			,lng lng
+			,guname_marid gunameMarid
+			,mar_loc marLoc
+		from
+			tbl_market
+		where
+			m_code=#{mCode}
+			
+	</select>
+	
+	<!-- 판매자 정보 -->
+	<select id="readSeller" parameterType="int" resultType="org.shinyul.domain.MemberSellerVO">
+		SELECT
+			mIdx memberIdx,
+			selIdx,
+			marIdx,
+			memberId,
+			memberPw,
+			memberTel,
+			memberName,
+			memberReg,
+			guNameMarId,
+			selType,
+			selStore,
+			selAddress,
+			selStoreNo,
+			selInfo,
+			selLike,
+			selImgOri,
+			selImgUUID,		
+			workType,
+			marId,
+			mCode
+		FROM
+		(
+		SELECT
+			c.member_idx mIdx,
+			a.SEL_IDX selIdx,
+			a.MAR_IDX marIdx,
+			c.member_id memberId,
+			c.member_pw memberPw,
+			c.member_Tel memberTel,
+			c.member_Name memberName,
+			to_char(c.member_reg, 'yy-MM-dd hh:mm:ss') memberReg,		
+			a.MEMBER_IDX memberIdx,
+			a.guName_MarId guNameMarId,
+			a.SEL_TYPE selType,
+			a.SEL_STORE selStore,
+			a.SEL_ADDRESS selAddress,
+			a.SEL_STORE_NO selStoreNo,
+			a.SEL_INFO selInfo,
+			a.SEL_LIKE selLike,
+			b.SEL_IMG selImgOri,
+			b.SEL_IMG_UUID selImgUUID,
+			d.WORK_TYPE workType,
+			e.MAR_ID marId,
+			e.m_code mCode
+		FROM
+			tbl_seller a, tbl_seller_img b, tbl_member c, tbl_seller_type d, tbl_market e
+		WHERE
+			a.SEL_IDX = b.SEL_IDX AND a.MEMBER_IDX = c.MEMBER_IDX AND a.SEL_TYPE = d.SEL_TYPE AND a.MAR_IDX = e.MAR_IDX
+		)
+		WHERE
+			memberIdx = #{memberIdx}
+	</select>
+	
+	<!-- 판매자 업데이트 --><!-- 시간 나면 머지? -->
+	<update id="updateSeller" parameterType="org.shinyul.domain.MemberSellerVO">
+		UPDATE
+			tbl_member
+		SET
+			member_pw=#{memberPw},
+			member_tel=#{memberTel}
+		WHERE
+			member_idx=#{memberIdx}
+	</update>
+	<!-- 시장 좌표 업뎃을 해야 하는데... 셀렉트로??? -->
+	<update id="updateSellerTwo" parameterType="org.shinyul.domain.MemberSellerVO">
+		UPDATE
+			tbl_seller
+		SET
+			mar_idx=#{marIdx},
+			sel_type=#{selType},
+			sel_store=#{selStore},
+			sel_address=#{selAddress},
+			sel_store_no=#{selStoreNo},
+			sel_info=#{selInfo},
+			guname_marid=#{guNameMarId}
+		WHERE
+			sel_idx=#{selIdx}
+	</update>
+	<update id="updateSellerThree" parameterType="org.shinyul.domain.MemberSellerVO">
+		UPDATE
+			tbl_seller_img
+		SET
+			sel_img=#{selImgOri},
+			sel_img_uuid=#{selImgUUID}
+		WHERE
+			sel_idx=#{selIdx}
+		
+	</update>
+	<!-- 여기까지 판매자 정보 업데이트 -->
+	
+	<!-- 판매자 탈퇴!!! -->
+	<delete id="deleteSeller" parameterType="org.shinyul.domain.MemberSellerVO">
+		DELETE
+			tbl_member
+		WHERE
+			member_idx=#{memberIdx}
+	</delete>
+	<delete id="deleteSellerTwo" parameterType="org.shinyul.domain.MemberSellerVO">
+		DELETE
+			tbl_seller
+		WHERE
+			sel_idx=#{selIdx}
+	</delete>
+	<delete id="deleteSellerThree" parameterType="org.shinyul.domain.MemberSellerVO">
+		DELETE
+			tbl_seller_img
+		WHERE
+			sel_idx=#{selIdx}
+	</delete>
+
+	<!-- ///////////////////////////////////////////////////////////////////////////////// -->	
+	<!-- 소비자 -->
+	<insert id="createCustomer" parameterType="org.shinyul.domain.MemberCustomerVO">
+		INSERT ALL
+		INTO tbl_member
+		(
+			member_idx
+			,member_id
+			,member_pw
+			,member_tel
+			,member_lev
+			,member_name
+		)
+		VALUES
+		(
+			seq_member.nextval
+			,#{memberId}
+			,#{memberPw}
+			,#{memberTel}
+			,1
+			,#{memberName}		
+		)
+		INTO tbl_customer
+		(
+			customer_idx
+			,member_idx
+			,customer_address
+		)
+		VALUES
+		(
+			seq_customer.nextval
+			,seq_member.currval
+			,#{customerAddress}
+		)
+		SELECT * FROM DUAL
+	</insert>
+	
+	<!-- 소비자 정보 -->
+	<select id="readCustomer" parameterType="int" resultType="org.shinyul.domain.MemberCustomerVO">
+		SELECT
+			customerIdx,
+			customerAddress,
+			memberIdx,
+			memberId,
+			memberPw,
+			memberTel,
+			memberName,
+			memberReg
+		FROM
+		(
+		SELECT
+			a.customer_Idx customerIdx,
+			a.customer_Address customerAddress,
+			c.member_idx memberIdx,
+			c.member_id memberId,
+			c.member_pw memberPw,
+			c.member_Tel memberTel,
+			c.member_Name memberName,
+		to_char(c.member_reg, 'yy-MM-dd hh:mm:ss') memberReg				
+		FROM
+			tbl_customer a, tbl_member c
+		WHERE
+			a.member_idx = c.member_idx)
+		WHERE
+			memberIdx = #{memberIdx}
+	</select>
+
+	<!-- 소비자 업데이트 --><!-- 시간 나면 머지? -->
+	<update id="updateCustomer" parameterType="org.shinyul.domain.MemberCustomerVO">
+		UPDATE
+			tbl_member
+		SET
+			member_pw=#{memberPw},
+			member_tel=#{memberTel}
+		WHERE
+			member_idx=#{memberIdx}
+	</update>
+	<update id="updateCustomerTwo" parameterType="org.shinyul.domain.MemberCustomerVO">
+		UPDATE
+			tbl_customer
+		SET
+			customer_address=#{customerAddress}
+		WHERE
+			member_idx=#{memberIdx}
+	</update>
+	<!-- 여기까지 소비자 정보 업데이트 -->
+	
+	<delete id="deleteCustomer" parameterType="org.shinyul.domain.MemberCustomerVO">
+		DELETE
+			tbl_member
+		WHERE
+			member_idx=#{memberIdx}
+	</delete>	
+	<delete id="deleteCustomerTwo" parameterType="org.shinyul.domain.MemberCustomerVO">
+		DELETE
+			tbl_customer
+		WHERE
+			member_idx=#{memberIdx}
+	</delete>
+	
+	<!-- 로그인 처리 -->
+	<select id="loginchk"  parameterType="String" resultType="org.shinyul.domain.MemberCommonVO">
+		SELECT
+			member_idx memberIdx,
+			member_id memberId,
+			member_pw memberPw,
+			member_lev memberLev,
+			member_name memberName
+		FROM
+			tbl_member
+		WHERE
+			member_id = #{memberId}
+	</select>
+	<select id="getSelIdx" parameterType="int" resultType="int">
+		SELECT
+			sel_idx selIdx
+		FROM 
+			tbl_seller
+		WHERE
+			member_idx = #{memberIdx}
+	</select>
+	<select id="getCustomerIdx" parameterType="int" resultType="int">
+		SELECT
+			customer_Idx customerIdx
+		FROM 
+			tbl_customer
+		WHERE
+			member_idx = #{memberIdx}
+	</select>
+</mapper>
+

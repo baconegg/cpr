@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.ReserveMapper">
+
+	<insert id="create" parameterType="org.shinyul.domain.ReserveVO">		
+		INSERT INTO tbl_reserve
+		(
+			reserve_idx,
+			product_idx,
+			customer_idx,
+			reserve_qty,
+			reserve_memo,
+			reserve_receive_time 
+		)
+		VALUES
+		( 
+			SEQ_RESERVE.NEXTVAL,
+			#{productIdx},
+			#{customerIdx},
+			#{reserveQty},
+			#{reserveMemo},
+			#{reserveReceiveTime} 
+		)
+	</insert>
+	
+	<select id="view" parameterType="int"  resultType="org.shinyul.domain.ReserveVO">
+		SELECT   R.RESERVE_IDX reserveIdx
+		        ,R.RESERVE_TIME reserveTime
+		        ,P.PRODUCT_IDX productIdx
+		        ,P.PRODUCT_NAME productName
+		        ,P.PRODUCT_INFO productInfo
+		        ,P.PRODUCT_PRICE productPrice
+		        ,R.RESERVE_QTY reserveQty
+		        ,R.RESERVE_RECEIVE_TIME reserveReceiveTime
+		        ,R.RESERVE_MEMO reserveMemo
+		        ,R.RESERVE_FLAG reserveFlag
+		        ,R.CUSTOMER_IDX customerIdx
+		        ,M.MEMBER_ID memberId
+		        ,M.MEMBER_NAME memberName
+		        ,M.MEMBER_TEL memberTel
+		        ,P.SEL_IDX selIdx
+		        ,pi.product_img_uuid productImgUuid
+		FROM TBL_RESERVE R , TBL_PRODUCT P , TBL_MEMBER M , TBL_CUSTOMER C , tbl_product_img pi
+		WHERE R.RESERVE_IDX = #{reserveIdx}
+		AND   C.CUSTOMER_IDX=R.CUSTOMER_IDX
+		AND   M.MEMBER_IDX = C.CUSTOMER_IDX
+		AND   R.PRODUCT_IDX = P.PRODUCT_IDX
+		and 	 p.product_idx = pi.product_idx
+	</select>
+	
+	<update id="confirm" parameterType="int" >
+		UPDATE TBL_RESERVE
+		SET RESERVE_FLAG = 1
+		WHERE RESERVE_IDX = #{reserveIdx}
+	</update>
+	
+	<update id="delete" parameterType="int" >
+		UPDATE TBL_RESERVE
+		SET RESERVE_FLAG = 2
+		WHERE RESERVE_IDX = #{reserveIdx}
+	</update>
+	
+	<select id="list" parameterType="map" resultType="org.shinyul.domain.ReserveVO">
+		SELECT
+		    rn, total,
+		    reserveIdx, reserveTime, 
+		    productIdx, productName, productInfo, productPrice,
+		    reserveQty, reserveReceiveTime, reserveMemo, reserveFlag,
+		    customerIdx, memberId, memberName, memberTel, 
+		    selIdx, marId, selStore  
+		FROM
+		   (
+		   SELECT      
+		 		ROWNUM rn,
+		        COUNT(reserveIdx) OVER() total,
+		        s.reserveIdx reserveIdx, 
+		        s.reserveTime reserveTime,
+		        s.productIdx productIdx,
+		        s.productName productName,
+		        s.productInfo productInfo,
+		        s.productPrice productPrice,
+		        s.reserveQty reserveQty,
+		        s.reserveReceiveTime reserveReceiveTime,
+		        s.reserveMemo reserveMemo,
+		    	s.reserveFlag reserveFlag,
+		    	s.customerIdx customerIdx,
+		        m.member_id memberId,
+		        m.member_name memberName,
+		        m.member_tel memberTel,
+		        s.selIdx selIdx,
+		        s.marId marId,
+		        s.selStore selStore
+		   FROM 
+		   		tbl_member m, tbl_customer c,      
+		        (
+		        SELECT 
+		          	r.reserve_idx reserveIdx,
+		            TO_CHAR(r.reserve_time, 'YYYY-MM-DD') reserveTime,
+		            p.product_idx productIdx,
+		            p.product_name productName,
+		            p.product_info productInfo,
+		            p.product_price productPrice,
+		            r.reserve_qty reserveQty,
+		            r.reserve_receive_time reserveReceiveTime,
+		            r.reserve_memo reserveMemo,
+		            r.reserve_flag reserveFlag,
+		            r.customer_idx customerIdx,
+		            se.sel_idx selIdx,
+		            ma.mar_id marId, 
+		            se.sel_store selStore
+		        FROM tbl_seller se, tbl_market ma , tbl_reserve r, tbl_product p 
+		        WHERE se.guname_marid = ma.guname_marid 
+           	<if test="vo.memberLev eq 1">
+    			AND r.customer_idx = #{vo.customerIdx}
+   			</if>
+   			<if test="vo.memberLev eq 2">
+    			AND se.sel_idx = #{vo.selIdx}
+			</if>
+		        AND r.product_idx = p.product_idx
+		        AND p.sel_idx = se.sel_idx
+		        ORDER BY r.reserve_idx DESC
+		        ) s 
+		   WHERE s.customerIdx = c.customer_idx
+		   AND c.member_idx = m.member_idx
+		<if test="cri.type eq 'title'">
+			AND s.productName like '%'||#{cri.keyword}||'%'
+			AND s.productInfo like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'reserveDate'">
+			AND s.reserveTime like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'reserveReceiveTime'">
+			AND s.reserveReceiveTime like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'id'">
+			AND m.member_id like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'name'">
+			AND m.member_name like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'market'">
+			AND s.marId like '%'||#{cri.keyword}||'%'
+		</if>
+		<if test="cri.type eq 'store'">
+			AND s.selStore like '%'||#{cri.keyword}||'%'
+		</if>
+		<![CDATA[   
+		   AND ROWNUM <= (CEIL(#{cri.page} / 10) * 100) + 1
+		   )
+		WHERE rn  > (#{cri.page} - 1) * 10
+		AND rn <= #{cri.page} * 10
+		]]> 
+	</select>
+	
+<!-- 	<select id="list" parameterType="map" resultType="org.shinyul.domain.ReserveVO"> -->
+<!-- 		SELECT -->
+<!-- 			rn, total, -->
+<!-- 		    reserveIdx, reserveTime,  -->
+<!-- 		    productIdx, productName, productInfo, productPrice, -->
+<!-- 		    reserveQty, reserveReceiveTime, reserveMemo, reserveFlag, -->
+<!-- 		    customerIdx, memberId, memberName, memberTel,  -->
+<!-- 		    selIdx, marId, selStore, -->
+<!-- 		    LAG(reserveIdx,1) OVER (ORDER BY rn) beforeBlock, LEAD(reserveIdx,1) OVER (ORDER BY rn) afterBlock -->
+<!-- 		    FROM -->
+<!-- 			( -->
+<!-- 		    SELECT -->
+<!--     		<if test="vo.memberLev eq 2"> -->
+<!-- 		        /*+ index_desc(r pk_reserve) */ -->
+<!--     		</if> -->
+<!-- 		        ROWNUM rn, -->
+<!-- 		     	COUNT(r.reserve_idx) OVER() total,	 -->
+<!-- 		        r.reserve_idx reserveIdx, -->
+<!-- 		        r.reserve_time reserveTime, -->
+<!-- 		        p.product_idx productIdx, -->
+<!-- 		        p.product_name productName, -->
+<!-- 		        p.product_info productInfo, -->
+<!-- 		        p.product_price productPrice, -->
+<!-- 		        r.reserve_qty reserveQty, -->
+<!-- 		        r.reserve_receive_time reserveReceiveTime, -->
+<!-- 		        r.reserve_memo reserveMemo, -->
+<!-- 		        r.reserve_flag reserveFlag, -->
+<!-- 		        r.customer_idx customerIdx, -->
+<!-- 		        m.member_id memberId, -->
+<!-- 		        m.member_name memberName, -->
+<!-- 		        m.member_tel memberTel, -->
+<!-- 		        p.sel_idx selIdx, -->
+<!-- 		        mar.mar_id marId, -->
+<!-- 		        s.sel_store selStore -->
+<!-- 		    FROM  -->
+<!-- 		        tbl_reserve r, tbl_product p, tbl_member m, tbl_customer c, tbl_seller s, tbl_market mar -->
+<!--     	<if test="vo.memberLev eq 1"> -->
+<!--     		WHERE r.customer_idx = #{vo.customerIdx} -->
+<!--     	</if> -->
+<!--     	<if test="vo.memberLev eq 2"> -->
+<!--     		WHERE s.sel_idx = #{vo.selIdx} -->
+<!--     	</if> -->
+<!-- 		    AND	p.product_idx = r.product_idx -->
+<!-- 		    AND c.customer_idx = r.customer_idx -->
+<!-- 		    AND m.member_idx = c.member_idx -->
+<!-- 		    AND s.sel_idx = p.sel_idx -->
+<!-- 		    AND mar.guname_marid = s.guname_marid -->
+<!-- 		<if test="cri.type eq 'title'"> -->
+<!-- 			AND p.product_name like '%'||#{cri.keyword}||'%' -->
+<!-- 			AND p.product_info like '%'||#{cri.keyword}||'%' -->
+<!-- 		</if> -->
+<!-- 		<if test="cri.type eq 'reserveDate'"> -->
+<!-- 			AND r.reserve_time like '%'||#{cri.keyword}||'%' -->
+<!-- 		</if> -->
+<!-- 		<if test="cri.type eq 'id'"> -->
+<!-- 			AND m.member_id like '%'||#{cri.keyword}||'%' -->
+<!-- 		</if> -->
+<!-- 		<if test="cri.type eq 'name'"> -->
+<!-- 			AND m.member_name like '%'||#{cri.keyword}||'%' -->
+<!-- 		</if>	 -->
+<!-- 		<![CDATA[ -->
+<!--  		    AND ROWNUM <= (CEIL(#{cri.page} / 10) * 100) + 1  -->
+<!-- 		    )  -->
+<!-- 		WHERE rn > (#{cri.page} - 1) * 10  -->
+<!-- 		AND rn <= #{cri.page} * 10  -->
+<!--  		]]>  -->
+<!-- 	</select> -->
+</mapper>
+

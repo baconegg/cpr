@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+  
+<mapper namespace="org.shinyul.mapper.RequestMapper">
+ 
+ 	<select id="marketList" resultType="org.shinyul.domain.MarketVO" >
+	 SELECT  MAR_ID as marId, COUNT(*) OVER() AS count
+        from tbl_market
+         GROUP BY MAR_ID
+        ORDER by MAR_ID
+ 	</select>
+ 	
+ 	<select id="guList" resultType="org.shinyul.domain.MarketVO" >
+	SELECT  GUNAME guname
+	from TBL_MARKET
+    GROUP BY GUNAME
+	ORDER by GUNAME 
+	</select>
+ 	
+ 	<select id="requestItem" resultType="org.shinyul.domain.RequestItemVO" >
+	SELECT  REQUEST_ITEM as requestItem
+	from tbl_REQUEST_ITEM
+	GROUP BY REQUEST_ITEM
+
+	</select>
+ 	
+ 	<insert id="create" parameterType="org.shinyul.domain.RequestVO">
+ 		INSERT INTO tbl_request
+           ( REQUEST_IDX
+            ,CUSTOMER_IDX
+            ,REQUEST_TITLE
+            ,REQUEST_ITEM
+            ,REQUEST_MEMO
+            ,REQUEST_RECEIVE_TIME
+            ,GUNAME_MARID
+            )
+       VALUES
+       		(
+            SEQ_REQUEST.NEXTVAL  
+            ,#{customerIdx}
+            ,#{title}
+            ,#{items}
+            ,#{memo}
+            ,#{receiveTime}
+            ,#{guName}||#{marketName}
+            )
+ 	
+ 	</insert>
+ 
+ 	<select id="read" parameterType="int" resultType="org.shinyul.domain.RequestVO"  >
+ 	<![CDATA[
+ 	select 	 REQUEST_IDX as idx
+			,CUSTOMER_IDX as customerIdx
+			,REQUEST_TITLE as title
+			,REQUEST_ITEM as items
+			,REQUEST_MEMO as memo
+			,REQUEST_RECEIVE_TIME as receiveTime
+			,REQUEST_TIME as time
+			,REQUEST_FLAG as flag
+			,GUNAME_MARID as gunameMarid
+ 	from tbl_request
+ 	where REQUEST_IDX = #{idx}
+ 	]]>
+ 	</select>
+ 	
+ 	<select id="productList" parameterType="String" resultType="org.shinyul.domain.ProductVO"  >
+ 	<![CDATA[
+ 	SELECT
+		a.product_Idx productIdx,
+        a.sel_Idx selIdx,
+        a.tag_Idx tagIdx,
+        a.product_Event productEvent,
+        a.product_Name productName,
+        a.product_Origin productOrigin,
+        a.product_Price productPrice,
+        a.product_Info productInfo,
+        a.product_Like productLike,
+        a.product_Package productPackage,
+      	b.product_Img productImg,
+        b.product_Img_UUID productImgUUID
+
+	FROM  TBL_PRODUCT a, tbl_product_img b
+
+	WHERE a.guname_marid = #{gunamemarid}
+	AND   a.PRODUCT_STATUS = 1 
+    AND   a.product_Idx = b.product_Idx
+    AND   rownum < 11   
+    ORDER BY a.PRODUCT_LIKE desc
+ 	]]>
+ 	</select>
+	 	
+ 	<update id="delete"  parameterType="int">
+ 	<![CDATA[
+ 		UPDATE  TBL_REQUEST
+		SET 	REQUEST_DELETE_FLAG = 0
+		WHERE 	REQUEST_IDX = #{idx}
+	]]>
+	</update>
+	
+ 
+ 	
+ 	
+ 	<update id="update"  parameterType="org.shinyul.domain.RequestVO">
+ 		update tbl_request
+        set    REQUEST_TITLE = #{title}
+	          ,REQUEST_ITEM = #{items}
+	          ,REQUEST_MEMO = #{memo}
+	          ,REQUEST_RECEIVE_TIME = #{receiveTime}
+	          ,GUNAME_MARID = #{guName}||#{marketName}
+       where   REQUEST_IDX = #{idx}
+ 	
+ 	
+ 	</update>
+  
+  
+  	<select id="replyRead" parameterType="int" resultType="org.shinyul.domain.RequestReplyVO"  >
+ 	<![CDATA[
+		 	
+		 SELECT  b.REQUEST_REPLY_IDX as replyIdx
+		        ,b.REQUEST_IDX as requestIdx
+		        ,b.SEL_IDX as selIdx
+		        ,b.REQUEST_REPLY_REPLY as replys
+		        ,b.REQUEST_REPLY_FLAG as replyFlag
+		        ,b.REQUEST_REPLY_TIME as replyTime
+		       	,a.SEL_STORE as selStore
+		        ,a.SEL_ADDRESS as selAddress
+		        ,a.SEL_INFO as selInfo
+		        ,a.SEL_LIKE as selLike
+		  		,a.GUNAME_MARID as guNameMarId
+		        ,c.SEL_IMG_UUID as selImgUUID
+		        
+		FROM TBL_SELLER a, TBL_REQUEST_REPLY b, TBL_SELLER_IMG c
+		WHERE 	b.REQUEST_IDX = #{idx}
+		AND    REQUEST_DELETE_REPLY_FLAG > 0
+		AND 	a.sel_idx = b.SEL_IDX
+		AND  	c.SEL_IDX = b.SEL_IDX
+		ORDER BY b.REQUEST_REPLY_IDX 
+ 	]]>
+ 	</select>
+ 	
+ 	 <insert id="replyCreate" parameterType="org.shinyul.domain.RequestReplyVO">
+ 		INSERT INTO 
+ 		TBL_REQUEST_REPLY ( REQUEST_REPLY_IDX
+						   ,REQUEST_IDX
+						   ,SEL_IDX
+						   ,REQUEST_REPLY_REPLY
+ 						  )
+		VALUES ( SEQ_TBL_REQUEST_REPLY.NEXTVAL
+		        ,#{requestIdx}
+		        ,#{selIdx}
+		        ,#{replys}
+		       )
+ 	</insert>
+ 	 
+ 	<update id="ReplyCntUP"  parameterType="int">
+ 		update tbl_request
+        set    REPLY_CNT =REPLY_CNT + 1
+       where   REQUEST_IDX = #{idx}
+ 	</update>
+ 	
+ 	<update id="ReplyCntDOWN"  parameterType="int">
+ 		update tbl_request
+        set    REPLY_CNT =REPLY_CNT - 1
+       where   REQUEST_IDX = #{idx}
+ 	</update>
+ 	
+ 	<update id="replyDelete"  parameterType="int">
+ 		update TBL_REQUEST_REPLY
+        set    REQUEST_DELETE_REPLY_FLAG = 0
+       where   REQUEST_REPLY_IDX = #{idx}
+ 	</update>
+ 
+ 	<update id="replyUpdate"  parameterType="org.shinyul.domain.RequestReplyVO">
+ 		
+		update TBL_REQUEST_REPLY
+        set    REQUEST_REPLY_REPLY = #{replys}
+       where   REQUEST_REPLY_IDX = #{replyIdx}
+       
+ 	</update>
+ 	<update id="replyTenderUpdate"  parameterType="org.shinyul.domain.RequestReplyVO">
+ 		
+		update TBL_REQUEST_REPLY
+        set    REQUEST_REPLY_FLAG = 2
+       where   REQUEST_REPLY_IDX = #{replyIdx}
+       
+ 	</update>
+ 	<update id="reqestTenderUpdate"  parameterType="org.shinyul.domain.RequestReplyVO">
+ 		
+		update TBL_REQUEST
+        set    REQUEST_FLAG = 2
+       where   REQUEST_IDX = #{reqestIdx}
+       
+ 	</update>
+ 
+ <!-- 
+  
+  	<select id="list" parameterType="" >
+ 	
+ 	</select>
+   -->
+  
+  
+  	
+	<select id="searchMarketName" parameterType="int" resultType="String">
+		
+		SELECT 
+					guname_marid gunameMarid
+		FROM 
+					TBL_MARKET 
+		WHERE 
+					mar_idx = #{marIdx}
+					
+	</select>
+
+
+	<select id="customerList" parameterType="org.shinyul.domain.Criteria"
+		resultType="org.shinyul.domain.RequestVO">
+		SELECT
+		rn, idx, title, items, memo, receiveTime, time, flag, gunameMarid,
+		customerIdx, deleteFlag, replyCnt, total, memberId,
+		lag(idx,1) OVER (ORDER BY rn) AFTER, lead(idx,1) OVER (ORDER BY rn) BEFORE
+		FROM (
+		SELECT
+		/*+ index_desc(tbl_request pk_request) */
+		ROWNUM rn,
+		REQUEST_IDX idx,
+		REQUEST_TITLE title,
+		REQUEST_ITEM items,
+		REQUEST_MEMO memo,
+		REQUEST_RECEIVE_TIME receiveTime,
+		REQUEST_TIME time,
+		REQUEST_FLAG flag,
+		GUNAME_MARID gunameMarid,
+		CUSTOMER_IDX customerIdx,
+		REQUEST_DELETE_FLAG deleteFlag,
+		REPLY_CNT replyCnt,
+		COUNT(request_idx) over() total,
+		MEMBER_ID memberId
+		FROM
+		TBL_REQUEST
+		WHERE
+		request_idx <![CDATA[ > ]]> 0 
+		AND REQUEST_DELETE_FLAG = 1
+
+		 
+			<if test="type eq 'title'">
+				AND REQUEST_TITLE like '%'||#{keyword}||'%'
+			</if>
+			<if test="type eq 'content'">
+				AND REQUEST_MEMO like '%'||#{keyword}||'%'
+			</if>
+			<if test="type eq 'guNameMarId'">
+				AND GUNAME_MARID like '%'||#{keyword}||'%'
+			</if>
+		 
+		
+		AND ROWNUM <![CDATA[ <= ]]>
+		(((ceil(#{page}/10)*100)+1)+1)
+
+		)
+		WHERE
+		rn <![CDATA[ >= ]]>
+		((#{page} * 10) - 10)
+		AND rn <![CDATA[ <= ]]>
+		((#{page} * 10)+1)
+		
+	</select>
+
+	<select id="sellerList" parameterType="org.shinyul.domain.Criteria"
+		resultType="org.shinyul.domain.RequestVO">
+		
+		SELECT
+		rn, idx, title, items, memo, receiveTime, time, flag, gunameMarid,
+		customerIdx, deleteFlag, replyCnt, total, memberId,
+		lag(idx,1) OVER (ORDER BY rn) AFTER, lead(idx,1) OVER (ORDER BY rn) BEFORE
+		FROM (
+		SELECT
+		/*+ index_desc(tbl_request pk_request) */
+		ROWNUM rn,
+		REQUEST_IDX idx,
+		REQUEST_TITLE title,
+		REQUEST_ITEM items,
+		REQUEST_MEMO memo,
+		REQUEST_RECEIVE_TIME receiveTime,
+		REQUEST_TIME time,
+		REQUEST_FLAG flag,
+		GUNAME_MARID gunameMarid,
+		CUSTOMER_IDX customerIdx,
+		REQUEST_DELETE_FLAG deleteFlag,
+		REPLY_CNT replyCnt,
+		COUNT(request_idx) over() total,
+		MEMBER_ID memberId
+		FROM
+		TBL_REQUEST
+		WHERE
+		request_idx <![CDATA[ > ]]> 0 
+		and GUNAME_MARID = #{gunameMarid}
+		AND REQUEST_DELETE_FLAG = 1
+		 
+			<if test="type eq 'title'">
+				AND REQUEST_TITLE like '%'||#{keyword}||'%'
+			</if>			
+			<if test="type eq 'writer'">
+				AND MEMBER_ID like '%'||#{keyword}||'%'
+			</if>			
+			<if test="type eq 'content'">
+				AND REQUEST_MEMO like '%'||#{keyword}||'%'
+			</if>
+			<if test="type eq 'guNameMarId'">
+				AND GUNAME_MARID like '%'||#{keyword}||'%'
+			</if>
+		 
+		
+		AND ROWNUM <![CDATA[ <= ]]>
+		(((Ceil(#{page}/10)*100)+1)+1)
+
+		)
+		WHERE
+		rn <![CDATA[ >= ]]>
+		((#{page} * 10) - 10)
+		AND rn <![CDATA[ <= ]]>
+		((#{page} * 10)+1)
+
+	</select>
+  
+  
+  
+  
+  
+</mapper>
