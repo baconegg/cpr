@@ -4,7 +4,7 @@
 <%
 	response.setContentType("image/jpg");
 	out.clear();
-	out = pageContext.pushBody();
+	out = pageContext.pushBody();    
 	
 	String fileName = request.getParameter("file");
 	InputStream in = new FileInputStream(fileName);
