@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.SchedulerMapper">
+
+	<insert id="createAPIMarket" parameterType="org.shinyul.domain.MarketVO">
+		INSERT INTO
+		tbl_market
+		(
+			mar_idx,
+			m_code,
+			guname,
+			mar_id,
+			m_addr,
+			m_tel,
+			lat,
+			lng,
+			guname_marid,
+			mar_loc
+		)
+		VALUES
+		(
+			#{marIdx},
+			#{mCode},
+			#{guname},
+			#{marId},
+			#{mAddr},
+			#{mTel},
+			#{lat},
+			#{lng},
+			#{guname}||','||#{marId},
+			sdo_geometry(
+				2001,
+				8307,
+				sdo_point_type(#{lng}, #{lat}, null),
+				NULL,
+				NULL
+			)
+		)
+
+	</insert>
+	
+
+	<insert id="createAPISuperstore" parameterType="org.shinyul.domain.SuperstoreVO">
+		INSERT INTO
+		tbl_price
+		(
+			p_seq
+			,m_seq
+			,m_name
+			,a_seq
+			,a_name
+			,a_unit
+			,a_price
+			,p_year_month
+			,add_col
+			,p_date
+			,m_type_code
+			,m_type_name
+			,m_gu_code
+			,m_gu_name	
+			,price_idx		
+		)
+		VALUES
+		(
+			 #{pSeq}
+			,#{mSeq}
+			,#{mName}
+			,#{aSeq}
+			,#{aName}
+			,#{aUnit}
+			,#{aPrice}
+			,#{pYearMonth}
+			,#{addCol}
+			,#{pDate}
+			,#{mTypeCode}
+			,#{mTypeName}
+			,#{mGuCode}
+			,#{mGuName}
+			,#{priceIdx}			
+		)
+	</insert>
+
+	<delete id="deleteAPIMarket">
+
+		DELETE FROM tbl_market
+
+	</delete>
+
+	<delete id="deleteAPISuperstore">
+
+		DELETE FROM tbl_price
+
+	</delete>
+
+</mapper>
+

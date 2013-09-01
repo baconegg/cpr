@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.SpatialMapper">
+
+	<select id="popMarket" resultType="org.shinyul.domain.SpatialVO">
+		SELECT
+		    m.mar_idx marIdx,
+		    m.mar_id marId,
+		    m.lat targetLat,
+		    m.lng targetLng
+		FROM
+		    tbl_market m
+		WHERE
+		  SDO_WITHIN_DISTANCE
+		  (m.mar_loc, sdo_geometry
+		     (
+		     2001,
+		     8307,
+		       SDO_POINT_TYPE(#{curLng}, #{curLat}, NULL),
+		       NULL,
+		       NULL
+		       ),
+		   'DISTANCE=4 UNIT=KM'
+		   )='TRUE'
+	</select>
+	
+	<select id="getMarketCoord" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+		<![CDATA[
+		 SELECT
+		    m.mar_idx marIdx,
+		    m.mar_id marId,		    
+		    m.mar_loc.sdo_point.y targetLat,
+		    m.mar_loc.sdo_point.x targetLng
+		 FROM
+		  	tbl_market m
+		 WHERE
+		    SDO_NN(m.mar_loc, sdo_geometry(
+		      2001,
+		      8307,
+		      sdo_point_type(#{curLng}, #{curLat}, NULL),
+		      NULL,
+		      NULL
+		    ))='TRUE'
+		 AND ROWNUM <= 1
+ 		]]>
+	</select>
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
+	<select id="loadShopSlideData" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+		<![CDATA[
+		SELECT
+			selIdx,
+		    memberIdx,
+		    selStore,
+		    marIdx,
+		    targetLat,
+		    targetLng,
+		    selImgUuid,
+		    p.product_idx productIdx,
+		    p.product_name productName,
+		    pi.product_img_uuid productImgUuid
+		FROM
+			(
+		     SELECT
+		        s.sel_idx selIdx,
+		        s.member_idx memberIdx,
+		        s.sel_store selStore,
+		        s.mar_idx marIdx,
+		        s.sel_seller_loc.sdo_point.y targetLat,
+		        s.sel_seller_loc.sdo_point.x targetLng,
+		        i.sel_img_uuid selImgUuid
+		     FROM 
+		        tbl_seller s, tbl_seller_img i
+		     WHERE 
+		         SDO_NN(s.sel_seller_loc, sdo_geometry(
+		         2001,
+		         8307,
+		         sdo_point_type(#{curLng}, #{curLat}, NULL),
+		         NULL,
+		         NULL
+		      ))='TRUE'
+		     AND ROWNUM <= 1
+		     AND s.sel_idx = i.sel_idx
+		    ) t, tbl_product p, tbl_product_img pi
+		WHERE
+		 	p.sel_idx = t.selIdx
+		AND p.product_idx = pi.product_idx
+		AND p.product_status > 0
+		]]>
+	</select>
+	
+	<!-- get seller info -->
+	<select id="loadSellerSlideData" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+	<![CDATA[
+	SELECT
+        s.sel_idx selIdx,
+        s.member_idx memberIdx,
+        s.sel_store selStore,
+        s.mar_idx marIdx,
+        s.sel_seller_loc.sdo_point.y targetLat,
+        s.sel_seller_loc.sdo_point.x targetLng,
+        i.sel_img_uuid selImgUuid
+     FROM 
+        tbl_seller s, tbl_seller_img i
+      WHERE 
+        SDO_NN(s.sel_seller_loc, sdo_geometry(
+        2001,
+        8307,
+        sdo_point_type(#{curLng}, #{curLat}, NULL),
+        NULL,
+        NULL
+     ))='TRUE'
+    AND ROWNUM <= 1   
+    AND s.sel_idx = i.sel_idx
+     ]]>
+	</select>
+	
+	<!-- get product info -->
+<!--           t.SEL_IDX selIdx, -->
+<!--           t.member_Idx memberIdx,                   -->
+
+	<select id="loadProductSlideData" parameterType="int" resultType="org.shinyul.domain.SpatialVO">
+	SELECT
+          p.product_idx productIdx,
+          p.product_name productName,
+          pi.product_img_uuid productImgUuid,
+          t.SEL_IDX selIdx, 
+          t.member_Idx memberIdx                  
+     FROM 
+        tbl_seller t, tbl_product p, tbl_product_img pi
+     WHERE
+          p.sel_idx = t.sel_Idx
+      and p.product_idx = pi.product_idx
+      AND t.SEL_IDX = #{selIdx}
+      AND p.product_status > 0
+	</select>	
+	
+	<!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  -->
+	 
+	 <select id="shopInfo" parameterType="int" resultType="org.shinyul.domain.SpatialVO">
+		SELECT
+		    s.member_idx memberIdx,
+		    s.sel_idx selIdx,
+		    s.sel_store selStore,
+		    s.mar_idx marIdx,
+		    s.sel_seller_loc.sdo_point.y targetLat,
+		    s.sel_seller_loc.sdo_point.x targetLng
+		 FROM 
+		    tbl_seller s
+		 WHERE 
+		  	s.mar_idx = #{marIdx}
+	 </select>
+	 
+	  <select id="distanceMap" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+		SELECT
+		    s.member_idx memberIdx,
+		    s.sel_idx selIdx,
+		    s.sel_store selStore,
+		    s.mar_idx marIdx,
+		    s.sel_seller_loc.sdo_point.y targetLat,
+		    s.sel_seller_loc.sdo_point.x targetLng
+		FROM
+		    tbl_seller s
+		WHERE
+		  SDO_WITHIN_DISTANCE
+		  (s.sel_seller_loc, sdo_geometry
+		     (
+		     2001,
+		     8307,
+		       SDO_POINT_TYPE(#{curLng}, #{curLat}, NULL),
+		       NULL,
+		       NULL
+		       ),
+		   'DISTANCE=0.5 UNIT=KM'
+		   )='TRUE'
+		 
+	 </select>
+	 
+	 
+ 	 <select id="isNearShop" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+	 	<![CDATA[
+		 SELECT
+		 	s.sel_idx selIdx,
+		 	s.sel_store selStore,
+		 	s.mar_idx marIdx
+		 FROM
+		 	tbl_seller s
+		 WHERE
+		 	SDO_WITHIN_DISTANCE
+		    (s.sel_seller_loc, sdo_geometry
+		    	(
+		      	2001,
+		      	8307,
+		      	SDO_POINT_TYPE(#{curLng}, #{curLat}, NULL),
+		      	NULL,
+		      	NULL
+		    	),
+		    'DISTANCE=0.1 UNIT=KM'
+		    )='TRUE'
+	  	  AND ROWNUM <= 1
+	  	  ]]>
+	 </select>
+	 
+	 <select id="nearestMarket" parameterType="org.shinyul.domain.SpatialVO" resultType="org.shinyul.domain.SpatialVO">
+		SELECT
+		  m.mar_idx marIdx,
+		  m.mar_id marId,
+		  m.mar_loc.sdo_point.y targetLat,
+		  m.mar_loc.sdo_point.x targetLng
+		FROM
+		  tbl_market m
+		WHERE
+		  SDO_WITHIN_DISTANCE
+		  (m.mar_loc, sdo_geometry
+		      (
+		      2001,
+		      8307,
+		      SDO_POINT_TYPE(#{curLng}, #{curLat}, NULL),
+		      NULL,
+		      NULL
+		      ),
+		  'DISTANCE=1 UNIT=KM'
+		  )='TRUE'
+	 </select>
+	 
+	 <select id="popSuperstore" resultType="org.shinyul.domain.PriceVO" parameterType="org.shinyul.domain.PriceVO">
+		SELECT
+			ss.m_seq mSeq,
+		    ss.m_name mName,
+		    ss.ss_loc.sdo_point.y targetLat,
+		    ss.ss_loc.sdo_point.x targetLng
+		FROM
+			tbl_superstore ss
+		WHERE
+		 	SDO_WITHIN_DISTANCE
+		 	(ss.ss_loc, sdo_geometry
+		    	(
+		    	2001,
+		    	8307,
+		      	SDO_POINT_TYPE(#{curLng}, #{curLat}, NULL),
+		      	NULL,
+		      	NULL
+		      	),
+		  	'DISTANCE=30 UNIT=KM'
+		  	)='TRUE'	
+	</select>
+	
+	<select id="loadPriceData" resultType="org.shinyul.domain.PriceVO" parameterType="org.shinyul.domain.PriceVO">
+		<![CDATA[
+		SELECT
+		  COUNT(*) OVER() totalCount,
+		  p.m_seq mSeq,
+		  p.m_name mName,
+		  p.a_name aName,
+		  p.a_unit aUnit,
+		  p.a_price aPrice,
+		  p.add_col addCol,
+		  p.p_date pDate
+		FROM TBL_PRICE p,
+		 (
+		    SELECT m_seq, max(p_date) maxDate
+		    FROM  TBL_PRICE
+		    WHERE m_seq =
+		          (
+		          SELECT
+		            ss.m_seq
+		          FROM
+		            tbl_superstore ss
+		          WHERE
+		            SDO_NN(ss.ss_loc, sdo_geometry(
+		              2001,
+		              8307,
+		              sdo_point_type(#{curLng}, #{curLat}, NULL),
+		              NULL,
+		              NULL
+		            ))='TRUE'
+		          AND ROWNUM <= 1
+		          )     
+		    GROUP BY m_seq
+		    ) b
+		WHERE p.m_seq = b.m_seq
+		AND p.p_date = b.maxDate
+		AND p.a_price > 0
+		]]>
+	</select>	 
+	 
+</mapper>
+
