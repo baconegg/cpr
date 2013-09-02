@@ -28,7 +28,7 @@ h2 {
 			margin-left: 25px;
 			clip: rect(0 0 0 0);			
 }
-
+/////////////////////////////
 }
 	
 @media only screen and (max-width: 1457px) and (min-width: 1100px)
@@ -78,7 +78,7 @@ h2 {
 }
 
 /* Tablet Portrait size to standard 960 (devices and browsers) */
-@media only screen and (min-width: 768px) and (max-width: 959px) {
+@media only screen and (min-width: 768px){
 .note .wpb_text_column {
     margin-left: 0;
     width: 100%;
@@ -184,7 +184,7 @@ h2 {
 
 }
 /* All Mobile Sizes (devices and browser) */
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) and (min-width: 482px){
 .page-template-page-designer-php #main {
     margin-top: 0;
 }
@@ -227,16 +227,17 @@ h2 {
 		position: static;
 		width: auto;
 		height: auto;
+/* 		height: 50px; */
 	}
 	
 	.site_nav .brand {
-/* 		margin: 30px 0 30px 0; */
-		margin: 0px 0 0px 0;		
+		margin: 30px 0 30px 0;
+/* 		margin: 0px 0 0px 0;		 */
 	}
 	
 	.site_nav .main-nav a {
 		font-size:10px;
-		margin:0 0px 0 0px;
+/* 		margin:0 0px 0 0px; */
 		margin-left: 3px;
 	}
 	#mobile_nav_toggle { display: none; }
@@ -245,7 +246,7 @@ h2 {
 		text-align: center;
 	}
 	#nav-second {
-		margin-top: 10px;
+/* 		margin-top: 10px; */
 	}
 	
 	.site_nav .sub-menu {
@@ -259,8 +260,8 @@ h2 {
 	.site_nav .second-nav > li {
 /* 		display: inline; */
 		display: inline-block;
-		margin-right: 10px;
-		margin-bottom: 5px;
+/* 		margin-right: 10px; */
+/* 		margin-bottom: 5px; */
 	}
 	.site_nav .main-nav a,
 	.site_nav .second-nav a { display: inline; }
@@ -316,7 +317,7 @@ h2 {
 		padding: 0 20px;
 	}
 	.wpb_sidebar_wrapper {
-		margin: 25px 0px 0 0px;
+/* 		margin: 25px 0px 0 0px; */
 	}
 	
 	
@@ -331,10 +332,6 @@ h2 {
 	
 	
 	/////////////////////////////////////////
-	#banner{
-		max-height: 200px; 
-	}
-
 	.log {
 		display: inline-block;
 	}
@@ -377,7 +374,7 @@ h2 {
 	.form_show{
 		position: absolute;
 		max-width: 175px;
-		z-index: 1;
+		z-index: 990;
 		top: 25px;
 		left: 13px;
 	}
@@ -386,9 +383,17 @@ h2 {
 }
 
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
-@media only screen and (min-width: 481px) and (max-width: 767px) {
+/* @media only screen and (min-width: 482px) and (max-width: 767px) { */
+@media only screen and (min-width: 482px) and (max-width: 627px) {
 
-/*아이폰 가로*/
+.site_nav {
+		position: static;
+		width: auto;
+/* 		height: auto; */
+		height: 70px;
+}
+	
+/*아이폰 가로 */
 .left-side1 img {
     margin-bottom: 1em;
     width:50% !important;
@@ -426,15 +431,78 @@ ul.wpb_thumbnails-fluid > li, .wpb_single_image {
 }
 .page-template-page-full-php #main { width: 101% !important; }
 #content {overflow:hidden};
+
+	/////////////////////////////////////////
+	#banner{
+/* 		max-height: 300px;  */
+	}
+
+	.log {
+		display: inline-block;
+	}
+	
+	.log img {
+			position: absolute;
+			top: 10px;
+			margin-left: 25px;
+			clip: rect(0 15px 30px 0);			
+	}
+
+	#headerBg{
+		position: absolute;
+/* 		top: 0px; */
+		top: -10px;
+		margin-left: 43px;		
+	}
+
+	#headerBg ul li a {
+		font-size: 9px;
+		font-weight: normal;
+	}
+	
+	.form_hide{
+		position: absolute;
+		top : -100px;
+		left: -500px;
+	}
+	.logHide{
+		position: absolute;
+		top : -100px;
+		left: -500px;
+	}
+	
+	.logShow{
+		position: absolute;
+		top : -100px;
+		left: -500px;
+	}
+	
+	.form_show{
+		position: absolute;
+		max-width: 175px;
+		z-index: 990;
+		top: 25px;
+		left: 13px;
+	}
+	/////////////////////////////////////////
 }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
-@media only screen and (max-width: 480px) {
+/* and (min-width: 456px) */
+/* and (min-width: 416px) */
+@media only screen  and (max-width: 481px) {
 	.wpb_text_column, .wpb_tabs, .wpb_tour, .wpb_call_to_action, .wpb_gmaps_widget, 
 .wpb_accordion, .wpb_gallery, .wpb_separator, .last_toggle_el_margin, .wpb_video_widget, 
 ul.wpb_thumbnails-fluid > li, .wpb_single_image {
 	margin-bottom:0.5em;
 
+}
+
+.site_nav {
+		position: static;
+		width: auto;
+/* 		height: auto; */
+		height: 100px;
 }
 
 .profile .row-fluid {
@@ -473,7 +541,7 @@ h3 {
 
 .wpb_navbar-inner #mobile_nav_toggle {
 		display:none;
-		/*display: block;*/
+		display: block;
 		margin: 15px auto 0 auto;
 		width: 100px;
 		padding: 10px 10px;
@@ -485,9 +553,10 @@ h3 {
 		display:block;
 	}
 	.site_nav .brand {
-		margin: 30px 30px 0 30px;
+		margin: -30px 0 0 0;
+/* 		margin-bottom: 0; */
 	}
-	/*모바일용 네비게이션 바 배경색 바꾸기 쉐수세쉐수수세ㅜ!!!*/
+	/*모바일용 네비게이션 바 배경색 바꾸기 쉐수세쉐수수세ㅜ!!! */
 	.site_nav .main-nav {
 /* 		background: #2f2f2f; */
 		background: #8dc63f;
@@ -512,7 +581,7 @@ h3 {
 		.site_nav .main-nav .sub-menu a {
 			font-size: 13px;
 		}
-	/*모바일네비 하단 마진*/
+	/*모바일네비 하단 마진 */
 	#nav-second {
 		margin-top: 0px;
 	}
@@ -586,13 +655,7 @@ h3 {
 .page-template-page-full-php #main { width: 101% !important; }
 #content {overflow:hidden};
 
-
-		
 	/////////////////////////////////////////
-	#banner{
-		max-height: 300px; 
-	}
-
 	.log {
 		display: inline-block;
 	}
@@ -606,7 +669,8 @@ h3 {
 
 	#headerBg{
 		position: absolute;
-		top: 0px;
+/* 		top: 0px; */
+		top: -10px;
 		margin-left: 43px;		
 	}
 
@@ -636,13 +700,240 @@ h3 {
 	.form_show{
 		position: absolute;
 		max-width: 175px;
-		z-index: 1;
+		z-index: 990;
 		top: 25px;
 		left: 13px;
 	}
 	/////////////////////////////////////////
-
 }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/* @media only screen  and (max-width: 415px) { */
+/* .site_nav{ */
+/* 	position: static;  */
+/* 	width: auto; */
+/* /* 		height: auto; */ */
+/* 	height: 140px; */
+/* } */
+/* } */
+/* @media only screen and (min-width: 350px) and (max-width: 455px) { */
+/* 	.wpb_text_column, .wpb_tabs, .wpb_tour, .wpb_call_to_action, .wpb_gmaps_widget,  */
+/* .wpb_accordion, .wpb_gallery, .wpb_separator, .last_toggle_el_margin, .wpb_video_widget,  */
+/* ul.wpb_thumbnails-fluid > li, .wpb_single_image { */
+/* 	margin-bottom:0.5em; */
+
+/* } */
+
+/* .site_nav { */
+/* 		position: static; */
+/* 		width: auto; */
+/* /* 		height: auto; */ */
+/* 		height: 140px; */
+/* } */
+
+/* .profile .row-fluid { */
+/* 	width:49%; */
+/* } */
+/* .left-side1 img { */
+/*     margin-bottom: 1em; */
+/*     width:50% !important; */
+/* } */
+
+/* .summary h3 { */
+/* 	font-size:0.8em; */
+/* } */
+/* .wpb_text_column { */
+/* 	margin-bottom:1em; */
+/* 	} */
+	
+/* .page-template-page-portfolio-php article header h1 { */
+/* 		font-size:1em; */
+/* } */
+/* h3 { */
+/* 	font-size:0.8em; */
+/* } */
+	
+/* .menu-aa-container { */
+/* 	border:0; */
+/* } */
+
+/* .s-text p { */
+/* 	display:none; */
+/* } */
+/* .vc_text_separator  { */
+
+/* 	padding-bottom:1em; */
+/* } */
+
+/* .wpb_navbar-inner #mobile_nav_toggle { */
+/* 		display:none; */
+/* 		display: block; */
+/* 		margin: 15px auto 0 auto; */
+/* 		width: 100px; */
+/* 		padding: 10px 10px; */
+/* 		text-align: center; */
+		
+/* 	} */
+/* 	#nav-main, */
+/* 	#nav-second { */
+/* 		display:block; */
+/* 	} */
+/* 	.site_nav .brand { */
+/* 		margin: -30px 0 0 0; */
+/* /* 		margin-bottom: 0; */ */
+/* 	} */
+/* 	/*모바일용 네비게이션 바 배경색 바꾸기 쉐수세쉐수수세ㅜ!!! */ */
+/* 	.site_nav .main-nav { */
+/* /* 		background: #2f2f2f; */ */
+/* 		background: #8dc63f; */
+/* /* 		border-bottom: 1px solid #444; */ */
+/* 		text-align: left; */
+/* /* 		margin-top: 15px; */ */
+/* 	} */
+	
+/* 	.site_nav .main-nav > li { */
+/* /* 		display: block; */ */
+/* 		margin-right: 0; */
+/* 		margin-bottom: 0; */
+/* 		border-bottom: 1px solid rgb(252,252,252); */
+/* 	} */
+/* 	.site_nav .main-nav a { */
+/* 		display: block; */
+/* 		padding: 8px 10px; */
+/* 	} */
+/* 	.site_nav .main-nav a { */
+/* 		font-size: 16px; */
+/* 	} */
+/* 		.site_nav .main-nav .sub-menu a { */
+/* 			font-size: 13px; */
+/* 		} */
+/* 	/*모바일네비 하단 마진 */ */
+/* 	#nav-second { */
+/* 		margin-top: 0px; */
+/* 	} */
+/* 	.site_nav .second-nav a { */
+/* 		font-size: 14px; */
+/* 	} */
+/* 		.site_nav .second-nav .sub-menu a { */
+/* 			font-size: 12px; */
+/* 		} */
+	
+/* 	.site_nav .sub-menu li:last-child { */
+/* 		border-bottom: none; */
+/* 	} */
+/* 	.site_nav .sub-menu { */
+/* 		display: block; */
+/* 		position: static; */
+/* 		max-width: none; */
+/* 		border-left: none; */
+/* 		margin: 0; */
+		
+/* /* 		border-top: 1px solid #DFDCD1; */ */
+/* 		border-bottom: 1px solid rgb(252,252,252); */
+		
+/* 		-webkit-box-shadow: none; */
+/* 		     -o-box-shadow: none; */
+/* 		   -moz-box-shadow: none; */
+/* 		        box-shadow: none; */
+/* 	} */
+/* 		.site_nav .sub-menu .sub-menu { margin: 0 0 0 0; } */
+/* 			.site_nav .sub-menu .sub-menu li { padding-left: 10px; } */
+	
+	
+/* 	.blog #main, .category #main, .archive #main, .single-post #main, */
+/* 	.blog aside#sidebar, .category aside#sidebar, .archive aside#sidebar, .single-post aside#sidebar, */
+/* .page-template-page-full-php #main, */
+/* 	aside#sidebar, */
+/* 	#main, #sidebar { */
+		
+/* 		width: 101%; */
+/* 		height:auto; */
+/* 	} */
+/* 		.wpb_sidebar_wrapper { */
+/* 			margin-left: 0; */
+/* 			margin-right: 0; */
+/* 		} */
+	
+/* 	.comment-author input, .comment-email input, .comment-url input { */
+/* 		width: 97%; */
+/* 	} */
+/* 	.comment-author, .comment-email, .comment-url, .comment-comment { */
+/* 		float: none; */
+/* 		width: 100%; */
+/* 		margin-right: 0; */
+/* 	} */
+
+	
+/* 	/* Visual Composer */ */
+/* 	.col_2, .col_3, .col_4, .col_5, .col_6 { */
+/* 		-webkit-column-count: 1; */
+/* 		-moz-column-count: 1; */
+/* 		column-count: 1; */
+/* 	} */
+	
+/* .wpb_navbar-inner .wrap a img { */
+/*     width: 20%; */
+/* } */
+
+/* .designers { */
+/* 	bottom:-1em;	 */
+/* } */
+/* .page-template-page-full-php #main { width: 101% !important; } */
+/* #content {overflow:hidden}; */
+
+/* 	///////////////////////////////////////// */
+/* 	.log { */
+/* 		display: inline-block; */
+/* 	} */
+	
+/* 	.log img { */
+/* 			position: absolute; */
+/* 			top: 10px; */
+/* 			margin-left: 25px; */
+/* 			clip: rect(0 15px 30px 0);			 */
+/* 	} */
+
+/* 	#headerBg{ */
+/* 		position: absolute; */
+/* /* 		top: 0px; */ */
+/* 		top: -10px; */
+/* 		margin-left: 43px;		 */
+/* 	} */
+
+/* 	#headerBg ul li a { */
+/* 		font-size: 9px; */
+/* 		font-weight: normal; */
+		
+/* 	} */
+	
+/* 	.form_hide{ */
+/* 		position: absolute; */
+/* 		top : -100px; */
+/* 		left: -500px; */
+/* 	} */
+/* 	.logHide{ */
+/* 		position: absolute; */
+/* 		top : -100px; */
+/* 		left: -500px; */
+/* 	} */
+	
+/* 	.logShow{ */
+/* 		position: absolute; */
+/* 		top : -100px; */
+/* 		left: -500px; */
+/* 	} */
+	
+/* 	.form_show{ */
+/* 		position: absolute; */
+/* 		max-width: 175px; */
+/* 		z-index: 990; */
+/* 		top: 25px; */
+/* 		left: 13px; */
+/* 	} */
+/* 	///////////////////////////////////////// */
+/* } */
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /* iPads (landscape) ----------- */
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
@@ -656,55 +947,15 @@ h3 {
 	
 		
 	/////////////////////////////////////////
-	#banner{
-		max-height: 300px; 
-	}
-
 	.log {
-		display: inline-block;
+			display: none;
 	}
 	
 	.log img {
-			position: absolute;
-			top: 10px;
-			margin-left: 25px;
-			clip: rect(0 15px 30px 0);			
-	}
-
-	#headerBg{
-		position: absolute;
-		top: 0px;
-		margin-left: 43px;		
-	}
-
-	#headerBg ul li a {
-		font-size: 9px;
-		font-weight: lighter;
-	}
-	
-	.form_hide{
-		position: absolute;
-		top : -100px;
-		left: -500px;
-	}
-	.logHide{
-		position: absolute;
-		top : -100px;
-		left: -500px;
-	}
-	
-	.logShow{
-		position: absolute;
-		top : -100px;
-		left: -500px;
-	}
-	
-	.form_show{
-			position: absolute;
-			max-width: 175px;
-			z-index: 1;
-			top: 20px;
-			left: 13px;
+				position: absolute;
+				top: 10px;
+				margin-left: 25px;
+				clip: rect(0 0 0 0);			
 	}
 	/////////////////////////////////////////
 }
