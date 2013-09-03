@@ -502,7 +502,8 @@ ul.wpb_thumbnails-fluid > li, .wpb_single_image {
 		position: static;
 		width: auto;
 /* 		height: auto; */
-		height: 100px;
+/* 		height: 100px; */
+		height: 152px;
 }
 
 .profile .row-fluid {
@@ -708,14 +709,14 @@ h3 {
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-/* @media only screen  and (max-width: 415px) { */
-/* .site_nav{ */
-/* 	position: static;  */
-/* 	width: auto; */
-/* /* 		height: auto; */ */
-/* 	height: 140px; */
-/* } */
-/* } */
+@media only screen  and (max-width: 415px) {
+.site_nav{
+	position: static; 
+	width: auto;
+/* 		height: auto; */
+	height: 140px;
+}
+}
 /* @media only screen and (min-width: 350px) and (max-width: 455px) { */
 /* 	.wpb_text_column, .wpb_tabs, .wpb_tour, .wpb_call_to_action, .wpb_gmaps_widget,  */
 /* .wpb_accordion, .wpb_gallery, .wpb_separator, .last_toggle_el_margin, .wpb_video_widget,  */

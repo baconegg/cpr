@@ -12,4 +12,6 @@ public interface ReserveMapper {
 	public void confirm(int reserveIdx)throws Exception;
 	public void delete(int reserveIdx)throws Exception;
 	public List<ReserveVO> list(@Param("vo")ReserveVO vo, @Param("cri")Criteria cri)throws Exception;
+	
+	public List<ReserveVO> widgetList(@Param("vo")ReserveVO vo, @Param("cri")Criteria cri)throws Exception;
 }
