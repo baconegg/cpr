@@ -27,26 +27,23 @@
 					<!-- 이 밑으로는 로그인... -->					
 					<c:choose>
 						<c:when test="${sessionScope.memberName == null }">
-							<div id="logindiv" class="logHide" style="width: 175px">
+							<div id="logindiv" class="logHide" style="width: 175px" align="center">
 								<form id="loginform" class="logHide" action="/cpr/member/login" method="post">
 									<input type="hidden" id="hrefPath" name="hpath" />
 									<input id="uid" class="logType" type="text" name="userId" title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
 									<input id="upw" class="logType" type="password" name="userPw" title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px"/><br />																
-									
-										<input id="loginBtn" class="logHide" type="submit" value="로그인 "  />
-																		
+									<input id="loginBtn" class="btn btn-large" type="submit" value="로그인 "  />
 								</form>
 							</div>							
 						</c:when>
 						<c:otherwise>							
-							<div id="logoutdiv" class="logShow">
-									<!-- <input id="getuserId" type="text" class="logShow" style="background-color: transparent" readonly="readonly"/> -->
-									<form id="logoutform" class="logShow" action="/cpr/member/logout" method="post">
-										<input type="hidden" id="hrefPath" name="hpath"/>								
-									<p id="getuserId" style="color: white">${sessionScope.memberName } 님 
-										<input id="logoutBtn" class="btn btn-large btn-block btn-success" type="submit" value="로그아웃"  />
+							<div id="logoutdiv" class="logShow" style="width: 175px" align="center">
+								<form id="logoutform" class="logShow" action="/cpr/member/logout" method="post" >
+									<input type="hidden" id="hrefPath" name="hpath"/>								
+									<p id="getuserId" style="color: white">${sessionScope.memberName } 님
+									<input id="logoutBtn" class="btn btn-large" type="submit" value="로그아웃" />
 									</p>							
-									</form>		
+								</form>		
 							</div>
 						</c:otherwise>
 					</c:choose>					
@@ -58,7 +55,7 @@
 <!-- 						<div class="menu-first-container"> -->
 							<ul id="menu-first" class="main-nav">
 								<li id="menu-item-1" class="btn btn-primary" style="display:inline-block">
-									<a style="padding-left: 10px;" href="/cpr/">처음으로</a>
+									<a href="/cpr/">처음으로</a>
 								</li>
 								<li id="menu-item-2" class="btn btn-primary" style="display:inline-block">
 									<a href="/cpr/mapByDistance">시장찾기</a>
@@ -95,26 +92,11 @@
 									<a href="/cpr/request/list?page=1">패키지매칭 </a>									
 								</li>								
 							</ul>
-						
-		                
-							
-							
-<!-- 					<nav id="nav-footer"> -->
-<!-- 						<ul> -->
-<!-- 							<li> -->
-<!-- 								<a href="http://hongikdmd.com/meme/teaser"><img src="http://hongikdmd.com/meme/wp-content/themes/theme_meme2/images/teaser.png" alt=""> -->
-<!-- 									<p>teaser	</p> -->
-<!-- 								</a> -->
-<!-- 							</li> -->
-<!-- 							<li> -->
-<!-- 								<a href="http://www.facebook.com/pages/2012-Hongik-Univ-DMD-Graduation-Exhibition-meme/458860957490472"><img src="http://hongikdmd.com/meme/wp-content/themes/theme_meme2/images/face.png" alt=""> -->
-<!-- 									<p>facebook</p> -->
-<!-- 								</a> -->
-<!-- 							</li> -->
-<!-- 						</ul> -->
-<!-- 					</nav> -->
 					</div>
 				</div>
+			</div>
+			<div id="log_btn" class="log" >
+				<img src="http://hongikdmd.com/meme/wp-content/themes/theme_meme2/images/teaser.png" alt="">
 			</div>
 		</header>
 		<!-- 왼쪽 사이드 끝-->	
@@ -165,7 +147,30 @@
 	}else{
 		$('#menu-item-5').attr("style","display:none");
 	}
-
+	
+	
+	//창 크기 768이하일시 메뉴 모양...
+	$('#log_btn').on('click', function(){
+		var sessionchk = '${sessionScope.memberName}';
+		if(sessionchk == ''){
+			if($('#logindiv').attr('class') == 'form_show'){
+				$('#logindiv').removeClass('form_show').addClass('logHide');;
+				$('#loginform').removeClass('form_show').addClass('logHide');
+			}else{
+				$('#logindiv').removeClass('logHide').addClass('form_show');
+				$('#loginform').removeClass('logHide').addClass('form_show');
+			}
+		}else{
+			if($('#logoutdiv').attr('class') == 'form_show'){
+				$('#logoutdiv').removeClass('form_show').addClass('logShow');			
+				$('#logoutform').removeClass('form_show').addClass('logShow');	
+			}else{
+				$('#logoutdiv').removeClass('logShow').addClass('form_show');			
+				$('#logoutform').removeClass('logShow').addClass('form_show');	
+			}						
+		}
+	});
+	
 	</script>
 	
 	<script type='text/javascript' src="/cpr/resources/js/lh.js"></script>

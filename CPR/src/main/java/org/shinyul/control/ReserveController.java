@@ -108,4 +108,25 @@ public class ReserveController {
 		return new ModelAndView("reserve/list", "list", list);
 	}
 	
+	
+	// ==================  수정중...======================================================
+		@RequestMapping(value="/widgetlist", method=RequestMethod.POST)
+		public @ResponseBody List<ReserveVO> widgetlist(Criteria cri, int selIdx){
+			
+			logger.info("widgetlist 들어옴");
+			logger.info("getPage : "+cri.getPage());
+			logger.info("selIdx : "+selIdx);
+			
+			ReserveVO vo = new ReserveVO();
+			
+			vo.setMemberLev(2);
+			vo.setSelIdx(selIdx);
+			
+			logger.info(rService.list(vo, cri).size());
+			logger.info(rService.list(vo, cri));
+			
+			
+			return rService.widgetList(vo, cri);
+		}
+	// =====================================================================================
 }

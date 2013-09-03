@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=1.0" />
 
 	<meta http-equiv="Page-Enter" content="revealTrans(Duration=2.0,Transition=10)">
@@ -36,11 +36,9 @@
 	<!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
 	<!-- naver map -->
-	<!-- port : 8089 -->
 	<!-- port : 8080  -->
-	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b6d44081e928091483fa5cd24b281171"></script>
-<!-- 		<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=71ad7ffe5e60c9cc4f0409c7f5262072"></script> -->
-<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=f45de31316bf6b7049f1e41c6e8826fc"></script> -->
+<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b6d44081e928091483fa5cd24b281171"></script> -->
+	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=8c4299a97f499e44691f10e044473b52"></script>
 	
 	<script type="text/javascript">
 		var block_rc = false;

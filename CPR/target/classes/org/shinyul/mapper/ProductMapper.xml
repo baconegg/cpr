@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.ProductMapper">
+
+	<!-- product detail view  -->
+	<select id="read" parameterType="int" resultType="org.shinyul.domain.ProductVO">
+		SELECT
+				   productidx,
+		           selidx,
+		           tagidx,
+		           productevent,
+		           productname,
+		           productorigin,
+		           productprice,
+		           productinfo,
+		           productlike,
+		           productregdate,
+		           productpackage,
+		           productstatus,
+		           productimg,
+		           productimguuid,
+		           tagName,
+		           memberIdx
+		FROM		
+		(
+		SELECT
+				   a.product_idx productidx,
+		           a.sel_idx selidx,
+		           a.tag_idx tagidx,
+		           a.product_event productevent,
+		           a.product_name productname,
+		           a.product_origin productorigin,
+		           a.product_price productprice,
+		           a.product_info productinfo,
+		           a.product_like productlike,
+		           TO_CHAR( a.product_regdate,'yyyy-mm-dd hh:mm:ss') productregdate,
+		           a.product_package productpackage,
+		           a.product_status productstatus,
+		           b.product_img productimg,
+		           b.product_img_uuid productimguuid,
+		           c.tag_name tagName,
+		           d.member_Idx memberIdx		           
+		FROM
+				   tbl_product a, tbl_product_img b, tbl_TAG c, tbl_seller d
+		WHERE 
+		 		   a.product_idx = b.product_idx and a.tag_Idx=c.tag_Idx and a.sel_idx = d.sel_idx
+		)		              
+		WHERE 
+				   productidx = #{productIdx}   
+	</select>
+
+	<!-- list  -->
+	<select id="list" parameterType="Int" resultType="org.shinyul.domain.ProductListVO">
+	<![CDATA[
+			SELECT 
+				a.product_Idx productIdx,
+				a.sel_Idx selIdx,
+				a.tag_Idx tagIdx,
+				a.product_Event productEvent,
+				a.product_Name productName,
+				a.product_Origin productOrigin,
+				a.product_Price productPrice,
+				a.product_Info productInfo,
+				a.product_Like productLike,
+				a.product_Package productPackage,				
+				c.tag_Name tagName,
+				b.product_Img productImg,
+				b.product_Img_UUID productImgUUID,
+				COUNT(*) OVER() totalCount
+			FROM 
+			(
+			SELECT * FROM 
+				tbl_product 
+			WHERE 
+				sel_Idx=#{selIdx}
+			) a	, tbl_product_img b, tbl_tag c 
+			WHERE 
+				a.product_Idx=b.product_Idx AND a.tag_idx = c.tag_idx AND a.product_Status=1
+			ORDER BY 
+				a.product_Idx desc	    
+	]]>
+	</select>
+
+	<!-- product regist  -->
+	<insert id="create"  parameterType="org.shinyul.domain.ProductVO">
+		INSERT ALL
+		INTO tbl_product
+		(
+		product_Idx
+		,sel_Idx
+		,tag_Idx
+		,product_Event
+		,product_Name
+		,product_Origin
+		,product_Price
+		,product_Info
+		,product_Like
+		,product_Package
+		,product_status
+		)
+		VALUES
+		(
+		SEQ_PRODUCT.NEXTVAL
+		,#{selIdx}
+		,#{tagIdx}
+		,#{productEvent}
+		,#{productName}
+		,#{productOrigin}
+		,#{productPrice}
+		,#{productInfo}
+		,#{productLike}
+		,#{productPackage}
+		,1
+		)
+		INTO tbl_product_img
+		(
+		product_Idx
+		,product_Img
+		,product_Img_UUID
+		)
+		VALUES
+		(
+		SEQ_PRODUCT.CURRVAL
+		,#{productImg}
+		,#{productImgUUID}
+		)
+		
+		SELECT * FROM DUAL
+		
+	</insert>	
+	
+	<!-- product update -->
+	<update id="updateProduct" parameterType="org.shinyul.domain.ProductVO">
+		UPDATE
+		      	    TBL_product     
+		SET 
+					tag_Idx = #{tagIdx},
+					product_Event = #{productEvent},
+					product_Name = #{productName},
+					product_Info = #{productInfo},
+					product_Origin = #{productOrigin},
+					product_Price = #{productPrice},
+					product_Package = #{productPackage}
+        WHERE 
+      				product_Idx = #{productIdx}
+	</update>	
+	<update id="updateProductImg" parameterType="org.shinyul.domain.ProductVO">
+		UPDATE
+					tbl_product_img
+		SET 
+					product_img = #{productImg},
+					product_img_uuid = #{productImgUUID}
+		WHERE
+					product_Idx = #{productIdx}
+	</update>	
+	<select id="selectTag" resultType="org.shinyul.domain.TagVO">
+		SELECT 
+					tag_idx tagIdx,
+					tag_name tagName
+		FROM 
+					TBL_TAG
+	</select>
+	<!-- 위에까지 업데이트용...  -->
+		
+	<!-- 상품삭제시 product_status를 1(기본) -> 0(삭제) -->
+	 <update id="deleteProduct" parameterType="int">
+	  UPDATE 
+	     TBL_PRODUCT
+	  SET 
+	     product_status = 0
+	  WHERE 
+	     PRODUCT_IDX = #{productIdx}  
+	 </update>
+	 
+	 <!-- 푸터쪽 (화면 오른쪽에 붙는 녀석) 에 대표상품 출력용 데이터 받아오는 쿼리 -->
+	 <select id="preList" parameterType="int" resultType="org.shinyul.domain.ProductVO">
+	 <![CDATA[
+	  SELECT
+	      a.product_Idx productIdx,
+	           a.sel_Idx selIdx,
+	           a.tag_Idx tagIdx,
+	           a.product_Event productEvent,
+	           a.product_Name productName,
+	           a.product_Origin productOrigin,
+	           a.product_Price productPrice,
+	           a.product_Info productInfo,
+	           a.product_Like productLike,
+	           a.product_Package productPackage,
+	           b.product_Img productImg,
+	           b.product_Img_UUID productImgUUID
+	
+	   FROM  
+	      TBL_PRODUCT a, tbl_product_img b
+	   WHERE 
+	      a.sel_Idx = #{selIdx} AND   
+	      a.PRODUCT_STATUS = 1  AND   
+	        a.product_Idx = b.product_Idx  AND  
+	       rownum  <  5     
+	     ORDER BY 
+	        a.PRODUCT_LIKE desc
+	   ]]>
+ 	</select>
+</mapper>

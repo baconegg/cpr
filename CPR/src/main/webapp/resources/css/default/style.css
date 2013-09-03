@@ -333,7 +333,8 @@ p {
 	}
 	.site_nav .brand {
 		overflow: hidden;
-		margin:80px 0;
+/* 		margin:80px 0; */
+		margin:0px 0;
 		display: block;
 		text-align: center;
 		float: none;
@@ -361,13 +362,14 @@ p {
 	margin:0 0 0 3em;
 	padding:5em 0 0 0;
 }
+
 #nav-second {
 	padding:0;
 }
 
 #wrap {
 	padding: 0;
-	margin-left: 260px;
+/* 	margin-left: 260px; */
 }
 
 .wpb_navbar-inner .wrap a img {width:60%;}
@@ -421,7 +423,7 @@ p {
 /*로고부분 탑마진*/
 .wpb_content_wrapper,
 .wpb_navbar-inner,footer#content-info {
-	padding: 0 40px;
+/* 	padding: 0 40px; */
 	top:-20px;
 }
 
@@ -2220,4 +2222,6 @@ width: 23.404255317%;
 .customContent{
 	max-width: 1500px;
 }
+
+///////////////////////////////////////////////	
 
