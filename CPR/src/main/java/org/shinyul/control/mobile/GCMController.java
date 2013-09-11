@@ -1,14 +1,14 @@
-package org.shinyul.control;
+package org.shinyul.control.mobile;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
-import org.shinyul.domain.GCMVO;
 import org.shinyul.domain.ReserveVO;
-import org.shinyul.service.GCMService;
-import org.shinyul.util.GCMUtil;
+import org.shinyul.domain.mobile.GCMVO;
+import org.shinyul.service.mobile.GCMService;
+import org.shinyul.util.mobile.GCMUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,10 +31,11 @@ public class GCMController {
 	// gcm regiId add
 	// /////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/addRegId", method = RequestMethod.POST)
-	public @ResponseBody int addregId(String regId, String phoneNumber) {
+	public @ResponseBody int addregId(String regId, String memberIdx, String phoneNumber) {
 
 		logger.info("addRegId");
 		logger.info("regId : " + regId);
+		logger.info("memberIdx : " + memberIdx);
 		
 		StringBuilder builder = new StringBuilder();
 		builder.append("0").append(phoneNumber.substring(3));
@@ -44,8 +45,8 @@ public class GCMController {
 		
 		GCMVO vo = new GCMVO();
 		vo.setRegId(regId);
+		vo.setMemberIdx(Integer.valueOf(memberIdx).intValue());
 		vo.setMemberTel(phoneNumber);
-		
 		return Integer.parseInt(gcm.control("addRegId", vo));
 	}
 

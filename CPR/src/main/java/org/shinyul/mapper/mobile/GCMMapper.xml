@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.mobile.GCMMapper">
+
+<!-- 	<update id="updateRegId" parameterType="org.shinyul.domain.mobile.GCMVO"> -->
+<!-- 		UPDATE  -->
+<!-- 		 TBL_MEMBER  -->
+<!-- 		set  -->
+<!-- 		 member_regId = #{regId} -->
+<!-- 		WHERE  -->
+<!-- 		 member_tel = #{memberTel} -->
+<!-- 	</update> -->
+
+	<update id="updateRegId" parameterType="org.shinyul.domain.mobile.GCMVO">
+		UPDATE 
+		 TBL_MEMBER 
+		set 
+		 member_regId = #{regId}
+		WHERE 
+		 member_Idx = #{memberIdx}
+	</update>
+	
+
+	<select id="selectByRegId" parameterType="org.shinyul.domain.mobile.GCMVO" resultType="String">
+		 SELECT 
+		  a.member_regId regId
+		 FROM
+		  tbl_member a, tbl_seller b
+		  WHERE 
+		  a.member_idx = b.member_idx
+		  AND 
+		  b.sel_idx =  #{selIdx} 
+	</select>
+
+</mapper>
+

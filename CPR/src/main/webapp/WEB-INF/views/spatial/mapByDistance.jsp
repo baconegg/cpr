@@ -7,7 +7,7 @@
 
 <!-- naver map -->	<!-- 나중에 지도 없애기 버튼을 위한 디스플레이 속성 -->
 <div id="map" style="border:1px solid #000;"></div>
-<input type="button" id="shop" value="shop" />
+<!-- <input type="button" id="shop" value="shop" /> -->
 
 <form name="selectLocation" >
 	<input name="latInput" type="hidden" id="latInput" value="" />
