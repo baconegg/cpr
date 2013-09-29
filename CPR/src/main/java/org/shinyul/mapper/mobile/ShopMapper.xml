@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.mobile.ShopMapper">
+
+	<!-- list  -->
+	<select id="list" parameterType="Int" resultType="org.shinyul.domain.mobile.ShopList">
+	<![CDATA[
+			SELECT 
+				a.product_Idx productIdx,
+				a.sel_Idx selIdx,
+				a.tag_Idx tagIdx,
+				a.product_Event productEvent,
+				a.product_Name productName,
+				a.product_Origin productOrigin,
+				a.product_Price productPrice,
+				a.product_Info productInfo,
+				a.product_Like productLike,
+				a.product_Package productPackage,				
+				c.tag_Name tagName,
+				b.product_Img productImg,
+				b.product_Img_UUID productImgUUID,
+				COUNT(*) OVER() totalCount
+			FROM 
+			(
+			SELECT * FROM 
+				tbl_product 
+			WHERE 
+				sel_Idx=#{selIdx}
+			) a	, tbl_product_img b, tbl_tag c 
+			WHERE 
+				a.product_Idx=b.product_Idx AND a.tag_idx = c.tag_idx AND a.product_Status=1
+			ORDER BY 
+				a.product_Idx desc	    
+	]]>
+	</select>
+	
+</mapper>
+

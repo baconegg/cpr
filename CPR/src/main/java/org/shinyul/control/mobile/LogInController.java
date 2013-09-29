@@ -1,6 +1,8 @@
 package org.shinyul.control.mobile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
 import org.apache.log4j.Logger;
@@ -25,7 +27,7 @@ public class LogInController {
 	//Login																			          //
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public @ResponseBody Map<String, String> login(String memberId,String memberPw){
+	public @ResponseBody List<Map<String, String>> login(String memberId,String memberPw){
 		logger.info("mobile 로그인 하러 들어왓슴미다 : " + memberId + " : " + memberPw);
 		
 		SessionUtil sUtil = new SessionUtil();
@@ -67,7 +69,8 @@ public class LogInController {
 				toMobile.put("chk", String.valueOf(2));
 			} //요까징 end inner if~ else			
 		}//end if~ else		
-		
-		return toMobile;
+		List<Map<String, String>> list = new ArrayList<Map<String,String>>();
+		list.add(toMobile);
+		return list;
 	}
 }
