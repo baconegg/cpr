@@ -24,16 +24,21 @@ public class ShopController {
 	///////////////////////////////////////////////////////////////////////////////////
 	//shop																			          //
 	//////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public @ResponseBody void shop(int selIdx){
-		logger.info("mobile shop : ");
+	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	public @ResponseBody List<ShopListVO> shop(int selIdx, int page){
+		logger.info("mobile shop~ selIdx: " + selIdx + " page : " + page);
 		
-		String folderPath = "D:\\images\\product\\thumb\\";
-		List<ShopListVO> list = shop.list(selIdx);
+		String folderPath = "http://14.63.226.20/cpr/resources/view.jsp?file=D:/images/product/thumb/";
+		List<ShopListVO> list = shop.list(selIdx, page);
+		
+		logger.info("mobile shop~ list size : " + list.size());
 		
 		for(int i = 0; i < list.size(); i++){
 			list.get(i).setMobileImage(folderPath + list.get(i).getProductImgUUID());
 		}
+
+		logger.info("mobile shop~ list toString : " + list.toString());
 		
+		return list;		
 	}
 }

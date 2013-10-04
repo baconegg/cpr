@@ -22,9 +22,9 @@ public class ShopService {
 
 	////////////////////////////////////////////////////////////////////////
 	// list
-	public List<ShopListVO> list(int shop) {
+	public List<ShopListVO> list(int shop, int page) {
 		try {
-			return mapper.list(shop);
+			return mapper.list(shop, page);
 		} catch (Exception e) {
 			logger.info("ShopService === List Error!!!");
 		}

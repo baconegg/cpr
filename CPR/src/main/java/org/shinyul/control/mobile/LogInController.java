@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.shinyul.domain.MemberCommonVO;
 import org.shinyul.service.MemberService;
@@ -27,7 +30,7 @@ public class LogInController {
 	//Login																			          //
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public @ResponseBody List<Map<String, String>> login(String memberId,String memberPw){
+	public @ResponseBody List<Map<String, String>> login(HttpSession session, String memberId,String memberPw){
 		logger.info("mobile 로그인 하러 들어왓슴미다 : " + memberId + " : " + memberPw);
 		
 		SessionUtil sUtil = new SessionUtil();
@@ -41,6 +44,7 @@ public class LogInController {
 		if(vo == null){
 			//아이디 없음
 			logger.info("이푸 vo가 널이라면!!! 아이디나 패스워드가 없는거임...혹은 암것도 안쓴거...");
+			session.setAttribute("idchk", 0);
 		}else{
 			//요기부터
 			//아이디가 있는 경우 비번 체크
@@ -53,20 +57,32 @@ public class LogInController {
 				toMobile.put("memberName", vo.getMemberName());
 				toMobile.put("memberLev", String.valueOf(vo.getMemberLev()));								
 				
+				
+				session.setAttribute("loginchk", 0);				
+				session.setAttribute("memberIdx", vo.getMemberIdx());			
+				session.setAttribute("memberId", vo.getMemberId());
+				session.setAttribute("memberName", vo.getMemberName());
+				session.setAttribute("memberLev", vo.getMemberLev());
+				
+				
 				if(vo.getMemberLev() == 2){
 					//selIdx 등록해야됨...
 					toMobile.put("selIdx", String.valueOf(member.getSelIdx(vo.getMemberIdx())));
+					session.setAttribute("selIdx", member.getSelIdx(vo.getMemberIdx()));
 				}else{
 					toMobile.put("customerIdx", String.valueOf(member.getCustomerIdx(vo.getMemberIdx())));
+					session.setAttribute("customerIdx",  member.getCustomerIdx(vo.getMemberIdx()));
 				}
 				
 				logger.info("비번이 맞으므로 세팅 끝~~~~~~~~~~~~~~~~~~!!!!");
 			}else if(chk==1) {	//비번이 틀렸을 경우
 				logger.info("if(chk==1)  비번이 틀렸을 경우..");
 				toMobile.put("chk", String.valueOf(1));
+				session.setAttribute("loginchk", 1);
 			}else {	//그외 알수없는 경우?
 				logger.info("if(chk==???)  그외 경우??");
 				toMobile.put("chk", String.valueOf(2));
+				session.setAttribute("loginchk", 2);
 			} //요까징 end inner if~ else			
 		}//end if~ else		
 		List<Map<String, String>> list = new ArrayList<Map<String,String>>();

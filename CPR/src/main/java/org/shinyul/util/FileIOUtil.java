@@ -17,7 +17,9 @@ public class FileIOUtil {
 	//	255 255
 	// 썸네일 저장용 변수와아이들...
 	private final static int width = 400;
+//	private final static int mWidth = 400;
 	private final static int height = 300;
+//	private final static int mHeight = 300;
 	private final static String type = "jpg";
 
 	public static void control(String cmd, MultipartFile ori_file,String fileName) {

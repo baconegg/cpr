@@ -6,34 +6,70 @@
 <mapper namespace="org.shinyul.mapper.mobile.ShopMapper">
 
 	<!-- list  -->
-	<select id="list" parameterType="Int" resultType="org.shinyul.domain.mobile.ShopList">
+	<select id="list" parameterType="Int" resultType="org.shinyul.domain.mobile.ShopListVO">
 	<![CDATA[
-			SELECT 
-				a.product_Idx productIdx,
-				a.sel_Idx selIdx,
-				a.tag_Idx tagIdx,
-				a.product_Event productEvent,
-				a.product_Name productName,
-				a.product_Origin productOrigin,
-				a.product_Price productPrice,
-				a.product_Info productInfo,
-				a.product_Like productLike,
-				a.product_Package productPackage,				
-				c.tag_Name tagName,
-				b.product_Img productImg,
-				b.product_Img_UUID productImgUUID,
-				COUNT(*) OVER() totalCount
-			FROM 
-			(
-			SELECT * FROM 
-				tbl_product 
-			WHERE 
-				sel_Idx=#{selIdx}
-			) a	, tbl_product_img b, tbl_tag c 
-			WHERE 
-				a.product_Idx=b.product_Idx AND a.tag_idx = c.tag_idx AND a.product_Status=1
-			ORDER BY 
-				a.product_Idx desc	    
+		SELECT
+			rn,
+			product_Idx productIdx,
+			sel_Idx selIdx,
+			tag_Idx tagIdx,
+			product_Event productEvent,
+			product_Name productName,
+			product_Origin productOrigin,
+			product_Price productPrice,
+			product_Info productInfo,
+			product_Like productLike,
+			product_Package productPackage,
+               product_Status productStatus,				
+			product_Img productImg,
+			product_Img_UUID productImgUUID,
+			tag_Name tagName,
+			COUNT(*) OVER() totalCount
+		FROM (
+		SELECT 
+			ROWNUM rn,
+			a.product_Idx,
+			a.sel_Idx,
+			a.tag_Idx,
+			a.product_Event,
+			a.product_Name,
+			a.product_Origin,
+			a.product_Price,
+			a.product_Info,
+			a.product_Like,
+			a.product_Package,	
+               a.product_Status,			
+			b.product_Img,
+			b.product_Img_UUID,
+			c.tag_Name
+		FROM (
+		SELECT 
+			product_Idx,
+			sel_Idx,
+			tag_Idx,
+			product_Event,
+			product_Name,
+			product_Origin,
+			product_Price,
+			product_Info,
+			product_Like,
+			product_Package,
+            product_Status	
+		FROM 
+			tbl_product 
+		WHERE 
+			sel_Idx=#{selIdx}
+		ORDER BY 
+			product_Idx desc	
+		) a	, tbl_product_img b, tbl_tag c 
+		WHERE 
+			a.product_Idx = b.product_Idx 
+			AND a.tag_idx = c.tag_idx 
+			AND a.product_Status=1
+			AND ROWNUM <= (CEIL(#{page} / 5) * 100) + 1
+		) 
+		WHERE rn > (#{page} - 1) * 5
+		AND rn <= (#{page} * 5)
 	]]>
 	</select>
 	
