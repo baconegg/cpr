@@ -211,7 +211,7 @@ public class RequestController {
 		System.out.println(vo);
 		List<RequestReplyVO> replyList = new ArrayList<RequestReplyVO>();
 		
-		String check = service.replyregister(vo);
+		String check = service.replyRegister(vo);
 		System.out.println(check);
 		
 		replyList = service.replyView(vo.getRequestIdx());

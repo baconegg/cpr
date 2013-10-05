@@ -1,6 +1,6 @@
-package org.shinyul.mapper;
+package org.shinyul.mapper.mobile;
 
-import org.shinyul.domain.GCMVO;
+import org.shinyul.domain.mobile.GCMVO;
 import org.springframework.stereotype.Repository;
 
 @Repository

@@ -95,7 +95,7 @@
 																</h1><br/>														
 																<h1>
 																요청 사항<br/>
-																<input type="text" id="reserveMemo" name="reserveMemo" maxlength="100" placeholder="추가하거나 빼고 싶은 물품, 하고싶은 말 등을 써주세요. ">	
+																<input type="text" id="reserveMemo" name="reserveMemo" maxlength="100" placeholder="추가하거나 빼고 싶은 물품, 하고싶은 말 등을 써주세요." value="">	
 																</h1><br/>
 																
 																<div id="totalPrice">	

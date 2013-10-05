@@ -30,8 +30,8 @@
 							<div id="logindiv" class="logHide" style="width: 175px" align="center">
 								<form id="loginform" class="logHide" action="/cpr/member/login" method="post">
 									<input type="hidden" id="hrefPath" name="hpath" />
-									<input id="uid" class="logType" type="text" name="userId" title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
-									<input id="upw" class="logType" type="password" name="userPw" title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px"/><br />																
+									<input id="uid" class="logType" type="text" name="memberId" title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
+									<input id="upw" class="logType" type="password" name="memberPw" title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px"/><br />																
 									<input id="loginBtn" class="btn btn-large" type="submit" value="로그인 "  />
 								</form>
 							</div>							
