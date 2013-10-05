@@ -1,10 +1,10 @@
-package org.shinyul.service;
+package org.shinyul.service.mobile;
 
 import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
-import org.shinyul.domain.GCMVO;
-import org.shinyul.mapper.GCMMapper;
+import org.shinyul.domain.mobile.GCMVO;
+import org.shinyul.mapper.mobile.GCMMapper;
 import org.springframework.stereotype.Service;
 
 @Service

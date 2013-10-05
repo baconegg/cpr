@@ -46,7 +46,7 @@ public class MemberController {
 	//Login																			          //
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(String hpath,String userId,String userPw, HttpSession session,HttpServletResponse response){
+	public void login(String hpath,String memberId,String memberPw, HttpSession session,HttpServletResponse response){
 		logger.info("로그인 하러 들어왓슴미다");
 		logger.info(hpath);
 		//hpath ="redirect:"+hpath;
@@ -55,7 +55,7 @@ public class MemberController {
 		MemberCommonVO vo = null;
 		int chk = 0;
 		//아이디만 체크해서 값을 가져옴
-		vo = member.loginchk(userId);
+		vo = member.loginchk(memberId);
 		logger.info(vo);
 		if(vo == null){
 			//아이디 없음
@@ -64,7 +64,7 @@ public class MemberController {
 		}else{
 			//요기부터
 			//아이디가 있는 경우 비번 체크
-			chk = sUtil.pwChk(userPw, vo);
+			chk = sUtil.pwChk(memberPw, vo);
 			if(chk==0){	//비번이 맞을경우 세션을 한번 비우고 셋팅
 				logger.info("if(chk==0)");
 				session.setAttribute("loginchk", 0);				

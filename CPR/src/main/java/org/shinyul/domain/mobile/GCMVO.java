@@ -1,17 +1,10 @@
-package org.shinyul.domain;
+package org.shinyul.domain.mobile;
+
+import org.shinyul.domain.MemberSellerVO;
 
 public class GCMVO extends MemberSellerVO {
 	
 	private String regId;
-	
-//	public GCMVO() {
-//		this("", "");
-//	}
-//	
-//	public GCMVO(String regId, String memberTel) {
-//		this.regId = regId;
-//		this.memberTel = memberTel;
-//	}
 
 	public String getRegId() {
 		return regId;
@@ -20,12 +13,11 @@ public class GCMVO extends MemberSellerVO {
 	public void setRegId(String regId) {
 		this.regId = regId;
 	}
-	
 
 	@Override
 	public String toString() {
 		return "GCMVO [regId=" + regId + ", memberIdx=" + memberIdx
-				+ ", memberTel=" + memberTel + ", getSelIdx()=" + getSelIdx()
+				+ ", memberTel=" + memberTel + ", getMemberIdx()=" + getMemberIdx()
 				+ "]";
 	}	
 }
