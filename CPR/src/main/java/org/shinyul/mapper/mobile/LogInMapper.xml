@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.shinyul.mapper.mobile.LogInMapper">
+
+	<!-- 로그인 처리 -->
+	<select id="loginchk"  parameterType="String" resultType="org.shinyul.domain.MemberCommonVO">
+		SELECT
+			member_idx memberIdx,
+			member_id memberId,
+			member_pw memberPw,
+			member_lev memberLev,
+			member_name memberName
+		FROM
+			tbl_member
+		WHERE
+			member_id = #{memberId}
+	</select>
+	<select id="getSelIdx" parameterType="int" resultType="int">
+		SELECT
+			sel_idx selIdx
+		FROM 
+			tbl_seller
+		WHERE
+			member_idx = #{memberIdx}
+	</select>
+	<select id="getCustomerIdx" parameterType="int" resultType="int">
+		SELECT
+			customer_Idx customerIdx
+		FROM 
+			tbl_customer
+		WHERE
+			member_idx = #{memberIdx}
+	</select>
+
+</mapper>
+

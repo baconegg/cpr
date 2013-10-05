@@ -2,11 +2,8 @@ package org.shinyul.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.inject.Inject;
-
 import org.apache.log4j.Logger;
-import org.shinyul.domain.PriceVO;
 import org.shinyul.domain.ProductListVO;
 import org.shinyul.domain.ProductVO;
 import org.shinyul.domain.TagVO;

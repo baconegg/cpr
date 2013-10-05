@@ -104,7 +104,7 @@ public class RequestService {
 		return list;
 	}
 
-		public String remove (int idx){
+	public String remove (int idx){
 		String check = "1";
 		try {
 			mapper.delete(idx);
@@ -125,7 +125,7 @@ public class RequestService {
 	}
 	
 	@Transactional
-	public String replyregister (RequestReplyVO vo){
+	public String replyRegister (RequestReplyVO vo){
 		String check="1";
 		
 			System.out.println(vo.getRequestIdx());

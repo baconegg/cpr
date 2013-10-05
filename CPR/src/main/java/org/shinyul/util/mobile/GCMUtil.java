@@ -1,4 +1,4 @@
-package org.shinyul.util;
+package org.shinyul.util.mobile;
 
 import org.springframework.stereotype.Component;
 
