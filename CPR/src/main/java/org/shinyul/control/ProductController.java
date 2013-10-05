@@ -34,7 +34,7 @@ public class ProductController {
 	// 손님용 상세뷰 																									 //
 	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/view/customer", method = RequestMethod.GET)
-	public ModelAndView viewCustomer(int productIdx, HttpSession session) {
+	public ModelAndView viewCustomer(@RequestParam(value = "productIdx", required = true) int productIdx, HttpSession session) {
 		
 		ModelAndView model = new ModelAndView();
 		ProductVO pVo = pService.view(productIdx);
@@ -62,12 +62,14 @@ public class ProductController {
 	@RequestMapping(value = "/view/seller", method = RequestMethod.GET)
 	public ModelAndView viewSeller(int productIdx, HttpSession session) {
 
-		logger.info("ProductController - viewSeller : 들어왔음");
+		logger.info("ProductController - viewSeller : 들어왔음 " + productIdx);
 
 		ModelAndView model = new ModelAndView();
 		ProductVO vo = pService.view(productIdx);
 		model.addObject("pVo", vo);
 
+		logger.info("ProductController - viewSeller : 들어왔음 " + vo.toString());
+		
 		if (vo.getProductStatus() == 1) {
 			model.addObject("msVo", mService.viewSeller(vo.getMemberIdx()));
 			model.addObject("preList", pService.preList(vo.getSelIdx()));

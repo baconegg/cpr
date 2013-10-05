@@ -76,6 +76,7 @@ public class MemberController {
 				if(vo.getMemberLev() == 2){
 					//selIdx 등록해야됨...
 					session.setAttribute("selIdx", member.getSelIdx(vo.getMemberIdx()));
+					session.setAttribute("marIdx",  member.getMarIdx(vo.getMemberIdx()));
 				}else{
 					session.setAttribute("customerIdx",  member.getCustomerIdx(vo.getMemberIdx()));
 				}

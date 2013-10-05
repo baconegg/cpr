@@ -160,6 +160,14 @@ public class MemberService {
 		}
 		return 0;
 	}
+	public int getMarIdx(int memberIdx){
+		try {			
+		 return	member.getMarIdx(memberIdx);			
+		} catch (Exception e) {
+			logger.error("MemberService - getMarIdx error~!@");
+		}
+		return 0;
+	}
 	public int getCustomerIdx(int memberIdx){
 		try {			
 		 return	member.getCustomerIdx(memberIdx);			

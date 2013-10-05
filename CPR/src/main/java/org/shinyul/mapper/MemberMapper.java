@@ -43,5 +43,6 @@ public interface MemberMapper {
 	//LOGINCHK 임시이므로 네이밍 맞춰줄것...
 	public MemberCommonVO loginchk(String memberId) throws Exception;
 	public int getSelIdx(int memberIdx) throws Exception;
+	public int getMarIdx(int memberIdx) throws Exception;
 	public int getCustomerIdx(int memberIdx) throws Exception;
 }
