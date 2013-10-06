@@ -9,15 +9,7 @@ window.onload = function lh(){
 //		console.log("loc :");
 //		console.log(path);
 		$('#hrefPath').val(path);
+//		alert(path);
 		$.post('/cpr/member/sessionSet',{"path":path});
 		
-		// $("#menu-item-1").addClass("btn btn-primary");  
-		// $("#menu-item-2").addClass("btn btn-primary");  
-		// $("#menu-item-3").addClass("btn btn-primary");  
-		// $("#menu-item-4").addClass("btn btn-primary");  
-		// $("#menu-item-5").addClass("btn btn-primary"); 
-		// $("#menu-item-6").addClass("btn btn-primary");  
-		// $("#menu-item-7").addClass("btn btn-primary");  
-		// $("#menu-item-8").addClass("btn btn-primary");  
-		// $("#menu-item-9").addClass("btn btn-primary");  
 };

@@ -36,7 +36,7 @@ public class WebViewController {
 	//goto list after login																	//
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/login/{memberId}/{memberPw}/{selIdx}", method = RequestMethod.GET)
-	public ModelAndView login(@PathVariable("memberId") String memberId,@PathVariable("memberPw") String memberPw, @PathVariable("selIdx") int selIdx, HttpSession session){
+	public void login(@PathVariable("memberId") String memberId,@PathVariable("memberPw") String memberPw, @PathVariable("selIdx") int selIdx, HttpServletResponse response, HttpSession session){
 		logger.info("webview 로그인 하러 들어왓슴미다");
 		
 		SessionUtil sUtil = new SessionUtil();
@@ -83,7 +83,11 @@ public class WebViewController {
 				session.setAttribute("loginchk", 2);
 			} //요까징 end inner if~ else			
 		}//end if~ else		
-				
-		return new ModelAndView("product/list", "list", pService.list(selIdx));
+		
+		try {
+			response.sendRedirect("/cpr/product/list/" + selIdx);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
