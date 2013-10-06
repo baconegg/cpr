@@ -1,6 +1,12 @@
 package org.shinyul.control;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Enumeration;
+
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -31,22 +37,34 @@ public class ProductController {
 	private MemberService mService;
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// 손님용 상세뷰 																									 //
+	//  상세뷰 																									 //
 	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/view/customer", method = RequestMethod.GET)
-	public ModelAndView viewCustomer(int productIdx, HttpSession session) {
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
+	public ModelAndView viewCustomer(@RequestParam(value = "productIdx", required = true) String productIdx, HttpServletRequest req) {
+		
+		logger.info("ProductController - view : 들어왔음  " + productIdx);
+		
+		//test - head chek///////////////////////////////////////////////////
+		Enumeration<String> keys = req.getHeaderNames();
+		while(keys.hasMoreElements()){
+			String key = keys.nextElement();
+			logger.info("key : " + key + " ,value : " + req.getHeader(key));
+		}
+		/////////////////////////////////////////////////////////////////////
 		
 		ModelAndView model = new ModelAndView();
-		ProductVO pVo = pService.view(productIdx);
+		
+		//exception 처리해야되는되ㅠㅠ...
+		ProductVO pVo = pService.view(Integer.valueOf(productIdx).intValue());
 
+		logger.info("ProductController - vo : " + pVo.toString());
+		
 		model.addObject("pVo", pVo);
 
-		if (pVo.getProductStatus() == 1) {
-
+		if (pVo.getProductStatus() == 1) {	//혹시모를 예외처리..
 			model.addObject("msVo", mService.viewSeller(pVo.getMemberIdx()));
 			model.addObject("preList", pService.preList(pVo.getSelIdx()));
 			model.setViewName("product/view");
-
 		} else {
 			model.setViewName("product/error");
 		}
@@ -59,25 +77,27 @@ public class ProductController {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 판매자 상세뷰 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/view/seller", method = RequestMethod.GET)
-	public ModelAndView viewSeller(int productIdx, HttpSession session) {
-
-		logger.info("ProductController - viewSeller : 들어왔음");
-
-		ModelAndView model = new ModelAndView();
-		ProductVO vo = pService.view(productIdx);
-		model.addObject("pVo", vo);
-
-		if (vo.getProductStatus() == 1) {
-			model.addObject("msVo", mService.viewSeller(vo.getMemberIdx()));
-			model.addObject("preList", pService.preList(vo.getSelIdx()));
-			model.setViewName("product/view");
-		} else {
-			model.setViewName("product/viewError");
-		}
-
-		return model;
-	}
+//	@RequestMapping(value = "/view/seller", method = RequestMethod.GET)
+//	public ModelAndView viewSeller(@RequestParam(value = "productIdx", required = true) int productIdx, HttpSession session) {
+//
+//		logger.info("ProductController - viewSeller : 들어왔음 " + productIdx);
+//
+//		ModelAndView model = new ModelAndView();
+//		ProductVO vo = pService.view(productIdx);
+//		model.addObject("pVo", vo);
+//
+//		logger.info("ProductController - viewSeller : 들어왔음 " + vo.toString());
+//		
+//		if (vo.getProductStatus() == 1) {
+//			model.addObject("msVo", mService.viewSeller(vo.getMemberIdx()));
+//			model.addObject("preList", pService.preList(vo.getSelIdx()));
+//			model.setViewName("product/view");
+//		} else {
+//			model.setViewName("product/viewError");
+//		}
+//
+//		return model;
+//	}
 
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 상품 등록 //

@@ -329,6 +329,14 @@
 		WHERE
 			member_idx = #{memberIdx}
 	</select>
+	<select id="getMarIdx" parameterType="int" resultType="int">
+		SELECT
+			mar_idx marIdx
+		FROM 
+			tbl_seller
+		WHERE
+			member_idx = #{memberIdx}
+	</select>
 	<select id="getCustomerIdx" parameterType="int" resultType="int">
 		SELECT
 			customer_Idx customerIdx

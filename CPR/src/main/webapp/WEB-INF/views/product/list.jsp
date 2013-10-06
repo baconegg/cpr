@@ -18,15 +18,15 @@
 								<c:forEach var="list" items="${list}">
 									<article id="post-132" class="post-132 portfolio type-portfolio status-publish hentry portfolio_thumb span4">
 										<!-- ${list.productOrigin} 타이틀에 넣을려다가 지저분해 지길래 빼버림... -->
-										<c:choose>
-											<c:when test="${sessionScope.memberLev == 2}">
-												<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title="">
-											</c:when>
-											<c:otherwise>
-												<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title="">
-											</c:otherwise>
-										</c:choose>
-											
+<%-- 										<c:choose> --%>
+<%-- 											<c:when test="${sessionScope.memberLev == 2}"> --%>
+<%-- 												<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title=""> --%>
+<%-- 											</c:when> --%>
+<%-- 											<c:otherwise> --%>
+<%-- 												<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title=""> --%>
+<%-- 											</c:otherwise> --%>
+<%-- 										</c:choose> --%>
+											<a href="/cpr/product/view?productIdx=${list.productIdx }" title="">
 											<div class="post-thumb">
 												<div class="cover"></div>
 												<img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${list.productImgUUID}" class="attachment-portfolio-thumb wp-post-image" alt="scents_thumb" />
@@ -54,14 +54,15 @@
 													<tbody>
 														<tr>
 															<td valign="top" style="padding:20px;padding-bottom:5px" align="center" >
-																<c:choose>
-																	<c:when test="${sessionScope.memberLev == 2}">
-																		<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title="">
-																	</c:when>
-																	<c:otherwise>
-																		<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title="">
-																	</c:otherwise>
-																</c:choose>
+<%-- 																<c:choose> --%>
+<%-- 																	<c:when test="${sessionScope.memberLev == 2}"> --%>
+<%-- 																		<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title=""> --%>
+<%-- 																	</c:when> --%>
+<%-- 																	<c:otherwise> --%>
+<%-- 																		<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title=""> --%>
+<%-- 																	</c:otherwise> --%>
+<%-- 																</c:choose> --%>
+																	<a href="/cpr/product/view?productIdx=${list.productIdx }" title="">
 																
 																	<img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${list.productImgUUID}" class="attachment-portfolio-thumb wp-post-image" alt="scents_thumb" />
 																	</a>
@@ -95,7 +96,6 @@
 		<!-- /#wrap -->
 		
 		<script type="text/javascript">
-		
 		//팝업 작업 ~!
 		if ( special_getCookie( "special" ) != "done" ){
 // 				document.getElementById('popup').style.display = "inline-block";

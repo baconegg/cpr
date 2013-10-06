@@ -46,7 +46,7 @@ public class MemberController {
 	//Login																			          //
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(String hpath,String memberId,String memberPw, HttpSession session,HttpServletResponse response){
+	public void login(String hpath, String memberId,String memberPw, HttpSession session,HttpServletResponse response){
 		logger.info("로그인 하러 들어왓슴미다");
 		logger.info(hpath);
 		//hpath ="redirect:"+hpath;
@@ -76,6 +76,7 @@ public class MemberController {
 				if(vo.getMemberLev() == 2){
 					//selIdx 등록해야됨...
 					session.setAttribute("selIdx", member.getSelIdx(vo.getMemberIdx()));
+					session.setAttribute("marIdx",  member.getMarIdx(vo.getMemberIdx()));
 				}else{
 					session.setAttribute("customerIdx",  member.getCustomerIdx(vo.getMemberIdx()));
 				}
@@ -141,7 +142,7 @@ public class MemberController {
 	
 	@RequestMapping(value="/sessionSet", method = RequestMethod.POST)
 	public @ResponseBody void sessionSet(HttpSession session,String path){
-		logger.info(path);
+		logger.info("path : " + path);
 		session.removeAttribute("hpath");
 		session.setAttribute("hpath", path);
 	}
