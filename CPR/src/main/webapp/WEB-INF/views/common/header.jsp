@@ -170,10 +170,10 @@
 			}						
 		}
 	});
-	
+
 	</script>
 	
-	<script type='text/javascript' src="/cpr/resources/js/lh.js"></script>
+	
 		
 </body>
 </html>
