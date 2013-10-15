@@ -294,7 +294,7 @@
 		success: function() {
 	    	alert("상품 수정이 완료되었습니다.");
 	    	var productIdx = $("#productIdx").val();
-	    	location.href = "view/seller?productIdx=" + productIdx;
+	    	location.href = "view?productIdx=" + productIdx;
 	    }
 	});
 	
@@ -315,7 +315,7 @@
 	$("#btnCancel").on('click', function(){		
 		
 		var productIdx = $("#productIdx").val();
-		location.href = "view/seller?productIdx=" + productIdx;		
+		location.href = "view?productIdx=" + productIdx;		
 	});
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
