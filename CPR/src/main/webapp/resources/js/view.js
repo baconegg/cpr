@@ -107,7 +107,7 @@ $("#btnToModify").on('click', function(){
 
 	var productIdx = $('#productIdx').val();
 
-	location.href = "../modify?productIdx=" + productIdx;
+	location.href = "/cpr/product/modify?productIdx=" + productIdx;
 
 });
 
