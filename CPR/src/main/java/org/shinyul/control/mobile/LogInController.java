@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.shinyul.domain.MemberCommonVO;
-import org.shinyul.service.MemberService;
+import org.shinyul.service.mobile.LogInService;
 import org.shinyul.util.SessionUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +24,7 @@ public class LogInController {
 	private static final Logger logger = Logger.getLogger(LogInController.class);
 	
 	@Inject
-	private MemberService member;
+	private LogInService member;
 	
 	///////////////////////////////////////////////////////////////////////////////////
 	//Login																			          //
