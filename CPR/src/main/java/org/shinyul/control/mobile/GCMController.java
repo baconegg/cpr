@@ -42,7 +42,6 @@ public class GCMController {
 		phoneNumber = builder.toString();
 		
 		logger.info("phoneNumber : " + phoneNumber);
-		logger.info("memberIdx : " + memberIdx);
 		
 		GCMVO vo = new GCMVO();
 		vo.setRegId(regId);
