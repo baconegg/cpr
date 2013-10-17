@@ -1,5 +1,7 @@
 package org.shinyul.control;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,23 +25,17 @@ public class LoginChkInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request,HttpServletResponse response, Object handler) throws Exception {
 		
 		logger.info("로그인을 체크해야됭디... 후레쳌");		
-		logger.info(handler.toString());		
+		logger.info("handler : " + handler.toString());				
 		HttpSession session = request.getSession();
 		String hpath =(String) session.getAttribute("hpath");				
-			
-		logger.info(session.getAttribute("memberId"));
-		
-		if(session.getAttribute("memberId") == null){
-			logger.info("세션에 멤버 아이디가 없슴미다...");
-			logger.info(session.getAttribute("memberId"));
-			logger.info(hpath);
-			/*postpath = "";*/	
-			response.sendRedirect(hpath);
-			return false;
-		}else{
-			logger.info("세션에 들어 있는 멤버 아이디는 : " + session.getAttribute("memberId"));
+		logger.info("hpath : " + hpath);
+//		logger.info(session.getAttribute("memberId"));
+					
+		if(hpath == null || hpath.trim().equals("")){
+			hpath = "/cpr";
 		}
-		return true;
+		
+		return checkSession(hpath, session, request, response);
 	}
 	
 	@Override
@@ -53,6 +49,40 @@ public class LoginChkInterceptor extends HandlerInterceptorAdapter {
 		logger.info("로그인을 체크해야됭디... 에푸터콤");
 		super.afterCompletion(request, response, handler, ex);
 	}
+	
+	
+	///////////////////////////////////////////////////////////////
+	public boolean checkSession(String hpath, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{	
+		
+		if(session.getAttribute("memberId") == null){
+			logger.info("세션에 멤버 아이디가 없슴미다...");
+			logger.info(session.getAttribute("memberId"));
+			/*postpath = "";*/	
+			response.sendRedirect(hpath);
+			return false;
+		}else{
+			logger.info("세션에 들어 있는 멤버 아이디는 : " + session.getAttribute("memberId"));
+		
+			String curPath = request.getRequestURL().toString();
+			
+			//로그인 처리를 거치는 페이지 세션 예외처리 구간..
+			if(curPath.contains("/request/list")){	//패키지 매칭 - 리스트
+				if(session.getAttribute("marIdx") == null){
+					logger.info("session에 marIdx 없음");
+					session.setAttribute("requestList", "시장을 선택해 주세요.");
+//					response.sendRedirect(hpath);
+					response.sendRedirect("/cpr");
+					return false;
+				}
+			}
+			
+		}
+		
+		return true;			
+	}
+	///////////////////////////////////////////////////////////////
+
+	
 	
 //	메소드 명	return 값	설명
 //	preHandle	boolean		1. 클라이언트의 요청을 컨트롤러에 전달 하기 전에 호출

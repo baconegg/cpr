@@ -1,6 +1,7 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
 <link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/flat-ui.css" />
 <link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/bootstrap.css" />
 <link rel="stylesheet" type="text/css" href="/cpr/resources/css/flat/css" />
@@ -171,6 +172,20 @@
 		}
 	});
 
+
+	//패키지 매칭 서비스 marId가 없을시 띄우는 알림창
+	var requestList = '${sessionScope.requestList}';
+<%-- 	var requestList = <%=request.getAttribute("requestList")%>; --%>
+	if(requestList == null || requestList == ''){
+		
+	}else{
+// 		console.log(requestList);
+		alert(requestList);
+		
+		//ajax로 밑의 세션값 지우는 컨트롤러 갔다오게 해도 될듯.. 우선 편하게 그냥 씀..
+		<%	session.removeAttribute("requestList");	%>
+	}
+	
 	</script>
 	
 	

@@ -1,6 +1,7 @@
 package org.shinyul.control;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -299,6 +300,13 @@ public class RequestController {
 		// 로그인시 세션에 상인정보 포함. -- 테스트용
 //		session.setAttribute("memberLev", 1);
 //		session.setAttribute("marIdx", 290);
+				
+		///////////////////////////////////////////
+		if(session.getAttribute("marIdx") == null || ((String) session.getAttribute("marIdx")).trim().equals("") ){
+			return "/cpr/";
+		}
+		///////////////////////////////////////////
+		
 		
 		List<RequestVO> list = new ArrayList<RequestVO>();
 		Criteria cri = new Criteria(page, type, keyword);

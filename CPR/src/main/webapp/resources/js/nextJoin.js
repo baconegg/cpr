@@ -105,14 +105,16 @@ $('#agreeBtn_cu').on('click',function() {
 								$('<p>' + html[i].defaultMessage + '</p><br/>').insertAfter($("#Member_ID"));
 								$("#Member_ID").replaceWith(replace);*/
 
-								console.log($message_id.val());
+//								console.log($message_id.val());
 
 								$message_id.attr('value', function() {
 									for ( var i = 0; i < data.length; i++) {
-										console.log('error message : ' + data[i].defaultMessage);
-										if (data[i].defaultMessage == '아이디') {
-											console.log('!!!');
-										}
+//										console.log('error message : ' + data[i].defaultMessage);
+										alert('error message : ' + data[i].defaultMessage);
+//										if (data[i].defaultMessage == '아이디') {
+//											console.log(data[i].defaultMessage);
+//											alert(data[i].defaultMessage);
+//										}
 
 										return data[i].defaultMessage;
 									}
