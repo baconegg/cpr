@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -109,18 +110,18 @@
 																<br/>
 																<p>
 																	아이디   <p id="messege_id"/>  </br> 
-																	<input id="Member_ID" type="text" name="memberId" />
+																	<input id="Member_ID" type="text" name=<%=Constant.Session.MEMBER_ID %> />
 																</p>
 																<p>
 																	비밀번호 <p id="messege_pw"></p> </br>
-																	<input id="Member_PW" type="password" name="memberPw" />
+																	<input id="Member_PW" type="password" name=<%=Constant.Session.MEMBER_PW %> />
 																	</p>
 																<p>
 																	비밀번호 확인</br>
-																	<input type="password" id="Member_PW_chk"></p>
+																	<input type="password" id="Member_PW_chk" /></p>
 																<p>
 																	이름을 입력해주세요</br>
-																	<input type="text" id="Member_NAME" name="memberName">
+																	<input type="text" id="Member_NAME" name=<%=Constant.Session.MEMBER_NAME %> />
 																</p>
 																<p>																	
 															  		전화번호  <p id="messege_col" /></br>
@@ -128,14 +129,14 @@
 																</p>
 																<p>
 																	<!-- 주소 입력(지도에서 집 위치를 선택해 주세요)</br> -->
-																	주소<input type="text" id="userAddress" name="customerAddress" readonly="readonly" value="" >
+																	주소<input type="text" id="userAddress" name="customerAddress" readonly="readonly" value="" />
 																</p><br/>
 																<!--  -->
 																<p>		
-																<!-- 위도 --> <input type="hidden" id="curstomerLAT" name="memberLAT" value="" >
-																<!-- 경도 --> <input type="hidden" id="customerLNG" name="memberLNG" value="" >									
+																<!-- 위도 --> <input type="hidden" id="curstomerLAT" name="memberLAT" value="" />
+																<!-- 경도 --> <input type="hidden" id="customerLNG" name="memberLNG" value="" />									
 																	<div class="span3" align="center">
-																		<input id="agreeBtn_cu" class="btn btn-large btn-block btn-success" type="button" value="다음">
+																		<input id="agreeBtn_cu" class="btn btn-large btn-block btn-success" type="button" value="다음" />
 																	</div>
 																</p>
 															</fieldset>
@@ -163,17 +164,17 @@
 <!-- 															<p>상세정보입력..</p> -->
 															<br/>
 															<p>
-																아이디<br /> <input id="member_ID" type="text" name="memberId" />
+																아이디<br /> <input id="member_ID" type="text" name=<%=Constant.Session.MEMBER_ID %> />
 															</p><br />
 															<p>
-																비밀번호<br /> <input id="member_PW" type="password" name="memberPw" />
+																비밀번호<br /> <input id="member_PW" type="password" name=<%=Constant.Session.MEMBER_PW %> />
 															</p><br />
 															<p>
 																비밀번호 확인<br /> <input id="Sel_Member_PW_chk" type="password" />
 															</p><br />
 															<p>
 																	이름을 입력해주세요</br>
-																	<input type="text" id="member_NAME" name="memberName"></p><br/>															
+																	<input type="text" id="member_NAME" name=<%=Constant.Session.MEMBER_NAME %> /></p><br/>															
 															
 															<!-- SELECT ... TBL_MARKET -->
 															<p>
@@ -247,18 +248,18 @@
 															</p><br />
 															<!-- TBL_SELLER_IMG -->
 															<p>
-																이미지<br/> <input id="sel_Img" type="file" name="selImg" />
+																이미지<br/> <input id="sel_Img" type="file" name=<%=Constant.Session.SEL_IMG %> />
 															</p><br />	
 																														
 															<!-- button!!! -->
 															<p>
-																<input type="hidden" id="mar_IDX" name="marIdx">																															
-																<input type="hidden" id="guname_MARID" name="guNameMarId">
-												<!-- 위도 --> <input type="hidden" id="selLAT" name="memberLAT" value="" >
-												<!-- 경도 --> <input type="hidden" id="selLNG" name="memberLNG" value="" >
+																<input type="hidden" id="mar_IDX" name=<%=Constant.Session.MAR_IDX %> />																															
+																<input type="hidden" id="guname_MARID" name="guNameMarId" />
+												<!-- 위도 --> <input type="hidden" id="selLAT" name="memberLAT" value="" />
+												<!-- 경도 --> <input type="hidden" id="selLNG" name="memberLNG" value="" />
 															
 																<div class="span3" align="center">
-																		<input id="agreeBtn_se" class="btn btn-large btn-block btn-success" type="button" value="다음">
+																		<input id="agreeBtn_se" class="btn btn-large btn-block btn-success" type="button" value="다음" />
 																	</div>
 															</p>
 															<br />

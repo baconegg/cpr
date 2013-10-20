@@ -10,6 +10,9 @@ window.onload = function lh(){
 //		console.log(path);
 		$('#hrefPath').val(path);
 //		alert(path);
-		$.post('/cpr/member/sessionSet',{"path":path});
+		
+		var lhPath = $('#lhPath').val();
+//		console.log('lhPath : ' + lhPath);
+		$.post(lhPath,{"path":path});
 		
 };

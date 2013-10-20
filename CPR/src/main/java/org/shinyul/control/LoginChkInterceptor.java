@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.shinyul.util.Constant;
+import org.shinyul.util.Constant.ControllerName;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -27,12 +29,12 @@ public class LoginChkInterceptor extends HandlerInterceptorAdapter {
 		logger.info("로그인을 체크해야됭디... 후레쳌");		
 		logger.info("handler : " + handler.toString());				
 		HttpSession session = request.getSession();
-		String hpath =(String) session.getAttribute("hpath");				
+		String hpath =(String) session.getAttribute(Constant.Session.HPATH);				
 		logger.info("hpath : " + hpath);
-//		logger.info(session.getAttribute("memberId"));
+//		logger.info(session.getAttribute(Constant.Session.MEMBER_ID));
 					
 		if(hpath == null || hpath.trim().equals("")){
-			hpath = "/cpr";
+			hpath = Constant.ControllerName.CPR;
 		}
 		
 		return checkSession(hpath, session, request, response);
@@ -54,24 +56,31 @@ public class LoginChkInterceptor extends HandlerInterceptorAdapter {
 	///////////////////////////////////////////////////////////////
 	public boolean checkSession(String hpath, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws IOException{	
 		
-		if(session.getAttribute("memberId") == null){
+		if(session.getAttribute(Constant.Session.MEMBER_ID) == null){
 			logger.info("세션에 멤버 아이디가 없슴미다...");
-			logger.info(session.getAttribute("memberId"));
+			logger.info(session.getAttribute(Constant.Session.MEMBER_ID));
 			/*postpath = "";*/	
 			response.sendRedirect(hpath);
 			return false;
 		}else{
-			logger.info("세션에 들어 있는 멤버 아이디는 : " + session.getAttribute("memberId"));
+			logger.info("세션에 들어 있는 멤버 아이디는 : " + session.getAttribute(Constant.Session.MEMBER_ID));
 		
 			String curPath = request.getRequestURL().toString();
 			
 			//로그인 처리를 거치는 페이지 세션 예외처리 구간..
-			if(curPath.contains("/request/list")){	//패키지 매칭 - 리스트
-				if(session.getAttribute("marIdx") == null){
+
+			if(curPath.contains(Constant.ControllerName.DEFALT + Constant.ControllerName.PRODUCT + Constant.ControllerAction.MODIFY)){ //수정하기 액션(버튼)..
+				if((int)session.getAttribute(Constant.Member.LEV) == Constant.Member.CUSTOMER){
+					return false;
+				}
+			}else if(curPath.contains(Constant.ControllerName.DEFALT + Constant.ControllerName.REQUEST + Constant.ControllerForm.LIST)){	//패키지 매칭 - 리스트
+				
+				if(session.getAttribute(Constant.Session.MAR_IDX) == null  ){
+//					|| ((String) session.getAttribute(Constant.Session.MAR_IDX)).trim().equals("")
 					logger.info("session에 marIdx 없음");
-					session.setAttribute("requestList", "시장을 선택해 주세요.");
+					session.setAttribute(Constant.Session.REQUEST_LIST, Constant.Session.REQUEST_LIST_VAL);
 //					response.sendRedirect(hpath);
-					response.sendRedirect("/cpr");
+					response.sendRedirect(Constant.ControllerName.CPR);
 					return false;
 				}
 			}

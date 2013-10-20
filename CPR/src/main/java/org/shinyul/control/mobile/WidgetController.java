@@ -6,13 +6,14 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.Criteria;
 import org.shinyul.domain.ReserveVO;
 import org.shinyul.service.mobile.WidgetService;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/widget")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.WIDGET)
 public class WidgetController {
 	
 	private static final Logger logger = Logger.getLogger(WidgetController.class);
@@ -21,7 +22,7 @@ public class WidgetController {
 	WidgetService wService;
 	
 	// ==================widget용======================================================
-	@RequestMapping(value="/list", method=RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerForm.LIST, method=RequestMethod.POST)
 	public @ResponseBody List<ReserveVO> widgetlist(Criteria cri, int selIdx){
 		
 		logger.info("widgetlist 들어옴");
@@ -30,7 +31,7 @@ public class WidgetController {
 		
 		ReserveVO vo = new ReserveVO();
 		
-		vo.setMemberLev(2);
+		vo.setMemberLev(Constant.Member.SELLER);
 		vo.setSelIdx(selIdx);
 		
 //		logger.info(wService.widgetList(vo, cri).size());

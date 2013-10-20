@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <body style="margin-left: 1px">
@@ -98,10 +99,10 @@
 																		
 																<p>
 																	상품이미지 등록<br/> 
-																	 <input type="file" name="files" /> 
+																	 <input type="file" name=<%=Constant.Session.FILES %> /> 
 																</p><br/>
-																<input type="hidden" name="selIdx" value="${sessionScope.selIdx}" />
-																<input type="hidden" id="hrefPath" name="hpath"/>
+																<input type="hidden" name=<%=Constant.Session.SEL_IDX %> value="${sessionScope.selIdx}" />
+																<input type="hidden" id="hrefPath" name=Constant.Session.HPATH/>
 																
 <!-- 																<div class="span3" align="center"> -->
 <!-- 														          <a href="" class="btn btn-large btn-block btn-success" id="registerBtn"><strong>상품 등록</strong></a> -->

@@ -82,7 +82,7 @@ $('#agreeBtn_cu').on('click',function() {
 				alert("비번확인 null...");
 			} else {
 				if (chk1 == chk2) {
-					console.log("오예 같다~!!");
+					//console.log("오예 같다~!!");
 					var jsonObj = JSON.parse(JSON.stringify($('#join_customer_form').serializeObject()));
 					
 					/*console.log(jsonObj);*/

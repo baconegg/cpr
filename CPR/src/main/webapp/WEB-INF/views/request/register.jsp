@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html> 
@@ -45,8 +46,8 @@
 																<br/><h2>제목</h2><br/>
 																<input placeholder="제목을 입력해 주세요." type="text" name="title" id="title" value="" />
 						<!-- ======================================================세션에서 멤버 idx 받아라 그래야 게시글에 아이디 넣지요=============================================================================== -->
-																<input type="hidden" name="customerIdx" id="customerIdx" value="${sessionScope.customerIdx}"/>
-																<input type="hidden" name="memberId" id="memberId" value="${sessionScope.memberId}"/>
+																<input type="hidden" name=<%=Constant.Session.CUSTOMER_IDX %> id="customerIdx" value="${sessionScope.customerIdx}"/>
+																<input type="hidden" name=<%=Constant.Session.MEMBER_ID %> id="memberId" value="${sessionScope.memberId}"/>
 						<!-- ===================================================================================================================================================== -->
 															</p><br/><br/>
 															<p>

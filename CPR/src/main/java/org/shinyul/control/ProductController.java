@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.ProductVO;
 import org.shinyul.service.MemberService;
 import org.shinyul.service.ProductService;
+import org.shinyul.util.Constant;
 import org.shinyul.util.FileIOUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/product")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.PRODUCT)
 public class ProductController {
 
 	private static final Logger logger = Logger
@@ -39,8 +40,8 @@ public class ProductController {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//  상세뷰 																									 //
 	// ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/view", method = RequestMethod.GET)
-	public ModelAndView viewCustomer(@RequestParam(value = "productIdx", required = true) String productIdx, HttpServletRequest req) {
+	@RequestMapping(value = Constant.ControllerForm.VIEW, method = RequestMethod.GET)
+	public ModelAndView view(@RequestParam(value = Constant.Session.PRODUCT_IDX, required = true) String productIdx, HttpServletRequest req) {
 		
 		logger.info("ProductController - view : 들어왔음  " + productIdx);
 		
@@ -59,14 +60,14 @@ public class ProductController {
 
 		logger.info("ProductController - vo : " + pVo.toString());
 		
-		model.addObject("pVo", pVo);
+		model.addObject(Constant.Model.PRODUCT_VO, pVo);
 
 		if (pVo.getProductStatus() == 1) {	//혹시모를 예외처리..
-			model.addObject("msVo", mService.viewSeller(pVo.getMemberIdx()));
-			model.addObject("preList", pService.preList(pVo.getSelIdx()));
-			model.setViewName("product/view");
+			model.addObject(Constant.Model.MEMBER_SELLER_VO, mService.viewSeller(pVo.getMemberIdx()));
+			model.addObject(Constant.Model.PRE_LIST, pService.preList(pVo.getSelIdx()));
+			model.setViewName(Constant.ControllerName.PRODUCT + Constant.ControllerForm.VIEW);
 		} else {
-			model.setViewName("product/error");
+			model.setViewName(Constant.ControllerName.PRODUCT + Constant.ControllerForm.ERROR);
 		}
 
 		return model;
@@ -78,19 +79,19 @@ public class ProductController {
 	// 판매자 상세뷰 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //	@RequestMapping(value = "/view/seller", method = RequestMethod.GET)
-//	public ModelAndView viewSeller(@RequestParam(value = "productIdx", required = true) int productIdx, HttpSession session) {
+//	public ModelAndView viewSeller(@RequestParam(value = Constant.Session.PRODUCT_IDX, required = true) int productIdx, HttpSession session) {
 //
 //		logger.info("ProductController - viewSeller : 들어왔음 " + productIdx);
 //
 //		ModelAndView model = new ModelAndView();
 //		ProductVO vo = pService.view(productIdx);
-//		model.addObject("pVo", vo);
+//		model.addObject(Constant.Model.PRODUCT_VO, vo);
 //
 //		logger.info("ProductController - viewSeller : 들어왔음 " + vo.toString());
 //		
 //		if (vo.getProductStatus() == 1) {
-//			model.addObject("msVo", mService.viewSeller(vo.getMemberIdx()));
-//			model.addObject("preList", pService.preList(vo.getSelIdx()));
+//			model.addObject(Constant.Model.MEMBER_SELLER_VO, mService.viewSeller(vo.getMemberIdx()));
+//			model.addObject(Constant.Model.PRE_LIST, pService.preList(vo.getSelIdx()));
 //			model.setViewName("product/view");
 //		} else {
 //			model.setViewName("product/viewError");
@@ -103,14 +104,14 @@ public class ProductController {
 	// 상품 등록 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 등록 페이지 가기
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@RequestMapping(value = Constant.ControllerForm.REGISTER, method = RequestMethod.GET)
 	public ModelAndView register(HttpSession session) {
 		logger.info(".../register/...");
-		return new ModelAndView("product/register");
+		return new ModelAndView(Constant.ControllerName.PRODUCT + Constant.ControllerForm.REGISTER);
 	}
 
-	@RequestMapping(value = "/registerAction", method = RequestMethod.POST)
-	public @ResponseBody int registerAction(ProductVO vo, @RequestParam("files") MultipartFile fileData) {
+	@RequestMapping(value = Constant.ControllerAction.REGISTER, method = RequestMethod.POST)
+	public @ResponseBody int registerAction(ProductVO vo, @RequestParam(Constant.Session.FILES) MultipartFile fileData) {
 		logger.info("registerAction~~~~~~~~~~~~~~~!!!");
 		logger.info(vo.toString());
 		System.out.println(vo.toString());
@@ -135,7 +136,7 @@ public class ProductController {
 		// check가 1이면 성공 2면 실패 입니다~!
 		int check = pService.register(vo);
 		if(check==1){
-			FileIOUtil.control("product", fileData, uuid);
+			FileIOUtil.control(Constant.File.PRODUCT, fileData, uuid);
 		}		
 		return check;
 	}
@@ -143,26 +144,27 @@ public class ProductController {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 판매자 수정 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	@RequestMapping(value = Constant.ControllerForm.MODIFY, method = RequestMethod.GET)
 	public String modify(int productIdx, Model model, HttpSession session) {
 		logger.info("ProductController - modify : 들어왔음.");
 
 		ProductVO pVo = pService.view(productIdx);
-		model.addAttribute("pVo", pVo);
+		model.addAttribute(Constant.Model.PRODUCT_VO, pVo);
 		if (pVo.getProductStatus() == 1) {			
-			model.addAttribute("msVo", mService.viewSeller(pVo.getSelIdx()));
-			model.addAttribute("preList", pService.preList(pVo.getSelIdx()));
-			model.addAttribute("tagList", pService.selectTag());
+			model.addAttribute(Constant.Model.MEMBER_SELLER_VO, mService.viewSeller(pVo.getSelIdx()));
+			model.addAttribute(Constant.Model.PRE_LIST, pService.preList(pVo.getSelIdx()));
+			model.addAttribute(Constant.Model.TAG_LIST, pService.selectTag());
 		} else {
-			return "product/error";
+			return Constant.ControllerName.PRODUCT + Constant.ControllerForm.ERROR;
 		}
 
-		return "product/modify";
+		return Constant.ControllerName.PRODUCT + Constant.ControllerForm.MODIFY;
 	}
 
 	// 수정 완료 <-- ajax..
-	@RequestMapping(value = "/modifyAction", method = RequestMethod.POST)
-	public @ResponseBody void modifyAction(ProductVO vo, @RequestParam("file") MultipartFile file) {
+	// Constant.Command.MODIFY_ACTION = "/modifyAction"
+	@RequestMapping(value = Constant.ControllerAction.MODIFY, method = RequestMethod.POST)
+	public @ResponseBody void modifyAction(ProductVO vo, @RequestParam(Constant.Session.FILE) MultipartFile file) {
 
 		logger.info("ProductController - modifyAction : 들어왔음.");
 		logger.info(vo);
@@ -179,7 +181,7 @@ public class ProductController {
 			logger.info("file is empty...");
 		}		
 		if(pService.modify(vo) == 1){
-			FileIOUtil.control("product", file, uuid);
+			FileIOUtil.control(Constant.File.PRODUCT, file, uuid);
 		}		
 	}
 
@@ -187,7 +189,7 @@ public class ProductController {
 	// 판매자 상품 삭제 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	@ResponseBody
-	@RequestMapping(value = "/remove", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerForm.REMOVE, method = RequestMethod.POST)
 	public void remove(int productIdx) {
 
 		logger.info("ProductController - remove : 들어왔음.");
@@ -201,10 +203,10 @@ public class ProductController {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// 리스트 - 손님 판매자 공용...메뉴만 세션에 따라 다름 //
 	// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/list/{selIdx}", method = RequestMethod.GET)
-	public ModelAndView list(HttpSession session, @PathVariable("selIdx") int selIdx) {
+	@RequestMapping(value = Constant.ControllerForm.LIST + "/{" + Constant.Session.SEL_IDX + "}", method = RequestMethod.GET)
+	public ModelAndView list(HttpSession session, @PathVariable(Constant.Session.SEL_IDX) int selIdx) {
 		logger.info(".../list/... " + selIdx);
-		return new ModelAndView("product/list", "list", pService.list(selIdx));
+		return new ModelAndView(Constant.ControllerName.PRODUCT + Constant.ControllerForm.LIST, Constant.Model.LIST, pService.list(selIdx));
 	}	
 	
 }

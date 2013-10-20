@@ -1,4 +1,5 @@
-﻿<%@page import="org.shinyul.domain.Criteria"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@page import="org.shinyul.domain.Criteria"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html> 
@@ -86,8 +87,8 @@
 						    		<option value="content">내용</option>
 						    		<option value="guNameMarId">시장명</option>
 						    	</select>
-						    	<input type="hidden" id="page" name="page" value="${sessionScope.cri.page }">
-						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword}">
+						    	<input type="hidden" id="page" name=<%=Constant.Session.PAGE %> value="${sessionScope.cri.page }">
+						    	<input type="text" id="keyword" name=<%=Constant.Session.KEYWORD %> value="${sessionScope.cri.keyword}">
 						    	<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a>
 								
 						    	 <!-- 글쓰기 버튼 -->

@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <link rel="stylesheet" href="/cpr/resources/css/nivo/nivo-slider.css" type="text/css" media="screen" />
@@ -127,7 +128,7 @@
 	// a.1. 상점 정보 불러와서 지도에 찍기 
 	function fnShopInfo(marIdx, targetLat, targetLng){
 		
-		$.post('/cpr/shopInfo', {"marIdx" : marIdx}).done(function(data2){
+		$.post('/cpr/shopInfo', {marIdx : marIdx}).done(function(data2){
 
 			oMap.setLevel(14);
 // 			drawCircle(100);

@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <html>
 <body style="margin-left: 1px">
@@ -60,17 +61,17 @@
 													<br />
 													<p>
 														<br />회원 아이디(수정불가)</br>
-														<input type="text" id="member_ID" name="memberId" class="" value="${vo.memberId}" readonly="readonly" style="background-color: transparent;">
+														<input type="text" id="member_ID" name=<%=Constant.Session.MEMBER_ID %> class="" value="${vo.memberId}" readonly="readonly" style="background-color: transparent;">
 													</p>
 													<br />
 													<p>
 														<br />회원 비밀번호</br>
-														<input type="password" id="member_PW" name="memberPw" class="change" value="${vo.memberPw }" readonly="readonly">
+														<input type="password" id="member_PW" name=<%=Constant.Session.MEMBER_PW %> class="change" value="${vo.memberPw }" readonly="readonly">
 													</p>
 													<br />
 													<p>
 														</br>회원 이름(수정불가)</br>
-														<input type="text" id="member_NAME" name="memberName" class="" value="${vo.memberName }" readonly="readonly" style="background-color: transparent;">
+														<input type="text" id="member_NAME" name=<%=Constant.Session.MEMBER_NAME %> class="" value="${vo.memberName }" readonly="readonly" style="background-color: transparent;">
 													</p>
 													<br />
 													<p>
@@ -83,7 +84,7 @@
 														<input type="text" id="member_REG" name="memberReg" class="" value="${vo.memberReg }" readonly="readonly" style="background-color: transparent;">
 													</p>																									
 													<br />
-													<input type="hidden" id="member_IDX" name="memberIdx" value="${vo.memberIdx }">
+													<input type="hidden" id="member_IDX" name=<%=Constant.Session.MEMBER_IDX %> value="${vo.memberIdx }">
 												
 													<p>
 														</br>업종(셀렉트로 처리 해야됨...)</br> <input type="text" id="work_TYPE" name="workType" class="hides" value="${vo.workType }" readonly="readonly">
@@ -137,7 +138,7 @@
 															<option id="m_CODE_opt_23" value="23">종로구</option>
 															<option id="m_CODE_opt_24" value="24">중구</option>
 															<option id="m_CODE_opt_25" value="25">중랑구</option>
-														</select> <select id="mar_IDX" name="marIdx" class="shows"
+														</select> <select id="mar_IDX" name=<%=Constant.Session.MAR_IDX %> class="shows"
 															hidden="hidden">
 														</select>
 													</p>
@@ -163,15 +164,15 @@
 													<div id="preview">
 														<img alt="상점 이미지" src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/${vo.selImgUUID}" id="productImg">
 													</div>
-													<input type="file" id="file" name="file" onchange="previewImage(this, 'preview')" style="display: none">
+													<input type="file" id="file" name=<%=Constant.Session.FILE %> onchange="previewImage(this, 'preview')" style="display: none">
 													</p>
 													<br />
-													<input type="hidden" id="member_IDX" name="memberIdx" value="${vo.memberIdx }">
+													<input type="hidden" id="member_IDX" name=<%=Constant.Session.MEMBER_IDX %> value="${vo.memberIdx }">
 													<input type="hidden" id="guName_MarId" name="guNameMarId" value="${vo.guNameMarId }">
 													<input type="hidden" id="sel_Img_ORI" name="selImgOri" value="${vo.selImgOri }">
 													<input type="hidden" id="sel_Img_UUID" name="selImgUUID" value="${vo.selImgUUID }">
 													<!-- 버튼 -->
-													<input type="hidden" id="sel_IDX" name="selIdx" value="${vo.selIdx}">
+													<input type="hidden" id="sel_IDX" name=<%=Constant.Session.SEL_IDX %> value="${vo.selIdx}">
 													<input type="button" id="sellerBtn" class="hides" value="수정하기">
 													<input type="hidden" id="modifySeller" class="shows" value="수정 제출">
 													<input type="button" id="removeSeller" class="remove" value="탈퇴!!!">

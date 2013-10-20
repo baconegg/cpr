@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <link rel="stylesheet" href="/cpr/resources/css/nivo/nivo-slider.css" type="text/css" media="screen" />
@@ -135,7 +136,7 @@
 		//test
 		marIdx = 290;
 
-		$.post('/cpr/shopInfo', {"marIdx": marIdx}).done(function(data2){
+		$.post('/cpr/shopInfo', {marIdx: marIdx}).done(function(data2){
 
 			oMap.clearOverlay();
 

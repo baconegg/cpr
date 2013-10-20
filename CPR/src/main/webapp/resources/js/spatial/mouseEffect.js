@@ -18,12 +18,12 @@ function fnNivo(){
 		// 마커 위에 마우스 올라간거면
 		if (oTarget instanceof nhn.api.map.Marker) {
 
-			console.log(oTarget);
+//			console.log(oTarget);
 
 			var hoverLat = oTarget._oPoint.y ;
 			var hoverLng = oTarget._oPoint.x ;
-			console.log(hoverLat);
-			console.log(hoverLng);
+//			console.log(hoverLat);
+//			console.log(hoverLng);
 
 			$.post('/cpr/loadShopSlideData',{curLat:hoverLat, curLng:hoverLng}).done(function(data3){
 		
@@ -36,7 +36,7 @@ function fnNivo(){
 				slider += '<a href="/cpr/product/list/' + data3[0].selIdx + '"><img src="/cpr/resources/view.jsp?file=D:/images/seller/thumb/' + data3[0].selImgUuid + '" title="' + data3[0].selStore +'" /></a>';			
 				
 				for(var i = 1; i < data3.length; i++){
-					slider += '<a href="/cpr/product/view/seller?productIdx=' + data3[i].productIdx + '"><img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/' + data3[i].productImgUuid + '" title="' + data3[i].productName +'" /></a>';
+					slider += '<a href="/cpr/product/view?productIdx=' + data3[i].productIdx + '"><img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/' + data3[i].productImgUuid + '" title="' + data3[i].productName +'" /></a>';
 				
 				}
 			
@@ -61,7 +61,7 @@ function fnNivo(){
 //						arr[i] = ran;
 //						var n = arr[i];
 //					 // console.log(n);
-//						slider += '<a href="/cpr/product/view/seller?productIdx=' + data3[n].productIdx + '"> <img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/' + data3[n].productImgUuid + '" title="' + data3[n].productName +'" /> </a>';				
+//						slider += '<a href="/cpr/product/view?productIdx=' + data3[n].productIdx + '"> <img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/' + data3[n].productImgUuid + '" title="' + data3[n].productName +'" /> </a>';				
 //					}
 //			}
 		    	slider += '</div> </div>';

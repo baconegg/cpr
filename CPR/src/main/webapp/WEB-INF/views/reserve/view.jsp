@@ -1,12 +1,6 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>  
  
-<%-- 
-// 	session.setAttribute("customer", 5);
-// 	session.setAttribute("seller", 2);
-// 	session.setAttribute("Lev", "seller");
---%>
-
 <html>
 
 
@@ -55,9 +49,9 @@
 															<p>
 																<br/>	
 																<form id="reserve" method="post">
-																<input type="hidden" value="${ReserveVO.reserveIdx}" name="reserveIdx" id="reserveIdx">																
-																<input type="hidden" value="${ReserveVO.productIdx}" id="productIdx" name="productIdx">														
-																<input type="hidden" value="${ReserveVO.customerIdx}" id="customerIdx" name="customerIdx">														
+																<input type="hidden" value="${ReserveVO.reserveIdx}" name="reserveIdx" id="reserveIdx" />																
+																<input type="hidden" value="${ReserveVO.productIdx}" id="productIdx" name="productIdx" />														
+																<input type="hidden" value="${ReserveVO.customerIdx}" id="customerIdx" name="customerIdx" />														
 <!-- 																<h1>상품</h1><br/>	 -->
 																 <div id="itemAdd">
 																 <img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${ReserveVO.productImgUuid}" />
@@ -130,7 +124,7 @@
 																		<c:if test="${sessionScope.selIdx != null}">
 																			<br/>
 																			<form id="replyRegister" method="post">
-																			<input  type="hidden" id="selIdx"  name="selIdx" value="${sessionScope.selIdx }"  />
+																			<input  type="hidden" id="selIdx"  name=<%=Constant.Session.SEL_IDX %> value="${sessionScope.selIdx }"  />
 																			<input  type="hidden" id="requestIdx"  name="requestIdx" value="${RequestVO.idx}"  />
 																			<input style="width:87%" type="text" id="replys"  name="replys"   />&nbsp;&nbsp;
 																			<input type="button" value="경매 등록" id="replyBtn" />&nbsp;&nbsp;

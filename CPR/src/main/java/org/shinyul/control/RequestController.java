@@ -1,5 +1,6 @@
 package org.shinyul.control;
 
+import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import org.shinyul.domain.RequestItemVO;
 import org.shinyul.domain.RequestReplyVO;
 import org.shinyul.domain.RequestVO;
 import org.shinyul.service.RequestService;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/request")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.REQUEST)
 public class RequestController {
 
 	private Logger logger = Logger.getLogger(RequestController.class);
@@ -30,7 +32,7 @@ public class RequestController {
 	@Inject
 	RequestService service;
 	
-	@RequestMapping(value="/register", method=RequestMethod.GET)	
+	@RequestMapping(value= Constant.ControllerForm.REGISTER, method=RequestMethod.GET)	
 	public ModelAndView register(Model model){
 	
 		System.out.println("register들어옴");
@@ -60,14 +62,14 @@ public class RequestController {
 		
 
 		
-		model.addAttribute("guname", guname);
-		model.addAttribute("requestItemList", itemList);
+		model.addAttribute(Constant.Model.GUNAME, guname);
+		model.addAttribute(Constant.Model.REQUEST_ITEMLIST, itemList);
 		
-		return new ModelAndView("request/regist", "marketname", marketname);
+		return new ModelAndView(Constant.ControllerName.REQUEST + Constant.ControllerForm.REGISTER, Constant.Model.MARKET_NAME, marketname);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/registerAction", method=RequestMethod.POST)	
+	@RequestMapping(value= Constant.ControllerAction.REGISTER, method=RequestMethod.POST)	
 	public String registerAction(RequestVO vo){
 		System.out.println("registerAction 들어옴");
 		System.out.println(vo);
@@ -80,7 +82,7 @@ public class RequestController {
 	
 	}
 	
-	@RequestMapping(value="/view", method=RequestMethod.GET)	
+	@RequestMapping(value= Constant.ControllerForm.VIEW, method=RequestMethod.GET)	
 	public ModelAndView view(int idx,String gunamemarid,Model model){
 		RequestVO reqestVO = new RequestVO();
 		
@@ -107,12 +109,12 @@ public class RequestController {
 		
 		list = service.productlist(gunamemarid);
 		
-		model.addAttribute("list", list);
-		model.addAttribute("replyList", replyList);
+		model.addAttribute(Constant.Model.LIST, list);
+		model.addAttribute(Constant.Model.REPLY_LIST, replyList);
 		System.out.println(list);
 		System.out.println(replyList.size());
 		
-		return new ModelAndView("request/view", "RequestVO" , reqestVO);
+		return new ModelAndView(Constant.ControllerName.REQUEST + Constant.ControllerForm.VIEW, Constant.Model.REQUEST_VO , reqestVO);
 		
 		
 	}
@@ -120,7 +122,7 @@ public class RequestController {
 	
 
 	@ResponseBody
-	@RequestMapping(value="/remove", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerForm.REMOVE, method=RequestMethod.POST)	
 	public String remove(int idx){
 		System.out.println(idx);
 		System.out.println("remove 들어옴");
@@ -133,7 +135,7 @@ public class RequestController {
 	
 	}
 	
-	@RequestMapping(value="/modify", method=RequestMethod.GET)	
+	@RequestMapping(value=Constant.ControllerForm.MODIFY, method=RequestMethod.GET)	
 	public ModelAndView modify (int idx,String gunamemarid,Model model){
 		
 		System.out.println("modify 들어옴");
@@ -178,19 +180,19 @@ public class RequestController {
 		
 		list = service.productlist(gunamemarid);
 		
-		model.addAttribute("list", list);
+		model.addAttribute(Constant.Model.LIST, list);
 		
 		System.out.println(list);
 		
-		model.addAttribute("guname", guname);
-		model.addAttribute("requestItemList", itemList);
-		model.addAttribute("marketname", mList);
+		model.addAttribute(Constant.Model.GUNAME, guname);
+		model.addAttribute(Constant.Model.REQUEST_ITEMLIST, itemList);
+		model.addAttribute(Constant.Model.MARKET_NAME, mList);
 		
-		return new ModelAndView("request/modify", "RequestVO" , vo);
+		return new ModelAndView(Constant.ControllerName.REQUEST + Constant.ControllerForm.MODIFY, Constant.Model.REQUEST_VO , vo);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/modifyAction", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerAction.MODIFY, method=RequestMethod.POST)	
 	public String modifyAction(RequestVO vo){
 		
 		System.out.println("list 들어옴");
@@ -205,7 +207,7 @@ public class RequestController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/replyRegisterAction", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerAction.REPLY_REGISTER, method=RequestMethod.POST)	
 	public List<RequestReplyVO> replyRegisterAction(RequestReplyVO vo){
 	
 		System.out.println("replyRegisterAction 들어옴");
@@ -223,7 +225,7 @@ public class RequestController {
 	}
 
 	@ResponseBody
-	@RequestMapping(value="/replyRemove", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerAction.REPLY_REMOVE, method=RequestMethod.POST)	
 	public List<RequestReplyVO> replyRemove (RequestReplyVO vo){
 		System.out.println("replyRemove 들어옴");
 		System.out.println(vo.getReplyIdx());
@@ -242,7 +244,7 @@ public class RequestController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/replyModify", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerAction.REPLY_MODIFY, method=RequestMethod.POST)	
 	public List<RequestReplyVO> replyModify (RequestReplyVO vo){
 		
 		
@@ -273,7 +275,7 @@ public class RequestController {
 	
 	
 	@ResponseBody
-	@RequestMapping(value="/replyTender", method=RequestMethod.POST)	
+	@RequestMapping(value=Constant.ControllerAction.REPLY_TENDER, method=RequestMethod.POST)	
 	public List<RequestReplyVO> replyTender (RequestReplyVO vo){
 		System.out.println("replyTender 들어옴");
 		System.out.println(vo.getReplyIdx());
@@ -293,42 +295,42 @@ public class RequestController {
 	
 	
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)	
+	@RequestMapping(value=Constant.ControllerForm.LIST, method=RequestMethod.GET)	
 	public String list(Integer page, String type, String keyword, Model model,HttpSession session){
 		
 		System.out.println("list 들어옴");
 		// 로그인시 세션에 상인정보 포함. -- 테스트용
-//		session.setAttribute("memberLev", 1);
-//		session.setAttribute("marIdx", 290);
+//		session.setAttribute(Constant.Member.LEV, 1);
+//		session.setAttribute(Constant.Session.MAR_IDX, 290);
 				
-		///////////////////////////////////////////
-		if(session.getAttribute("marIdx") == null || ((String) session.getAttribute("marIdx")).trim().equals("") ){
-			return "/cpr/";
-		}
-		///////////////////////////////////////////
+//		///////////////////////////////////////////
+//		if(session.getAttribute(Constant.Session.MAR_IDX) == null || ((String) session.getAttribute(Constant.Session.MAR_IDX)).trim().equals("") ){
+//			return Constant.ControllerName.CPR;
+//		}
+//		///////////////////////////////////////////
 		
 		
 		List<RequestVO> list = new ArrayList<RequestVO>();
 		Criteria cri = new Criteria(page, type, keyword);
 		
-		int marIdx = (int)session.getAttribute("marIdx");
+		int marIdx = (int)session.getAttribute(Constant.Session.MAR_IDX);
 		String gunameMarid = service.searchMarketName(marIdx);
 	
 		cri.setGunameMarid(gunameMarid);
 		
 		
 		
-//		if(2 == (int)session.getAttribute("memberLev")){
+//		if(2 == (int)session.getAttribute(Constant.Member.LEV)){
 //			logger.info("in session");
 //		}
 		
 		// 로그인 안했을때...or 커스터머(소비자)일때 같은화면...
-		logger.info("memberLev : " + session.getAttribute("memberLev"));
+		logger.info("memberLev : " + session.getAttribute(Constant.Member.LEV));
 		
-		/*if("1".equals(session.getAttribute("memberLev"))){		
+		/*if("1".equals(session.getAttribute(Constant.Member.LEV))){		
 			list = service.customerList(cri);
 			logger.info("in session customer");
-		}else if("2".equals(session.getAttribute("memberLev"))) {
+		}else if("2".equals(session.getAttribute(Constant.Member.LEV))) {
 			list = service.sellerList(cri);
 			logger.info("in session seller");
 		}else {
@@ -336,10 +338,10 @@ public class RequestController {
 			list = null;
 		}*/
 		
-		if(1==(int)(session.getAttribute("memberLev"))){		
+		if(Constant.Member.CUSTOMER==(int)(session.getAttribute(Constant.Member.LEV))){		
 			list = service.customerList(cri);
 			logger.info("in session customer");
-		}else if(2==(int)(session.getAttribute("memberLev"))) {
+		}else if(2==(int)(session.getAttribute(Constant.Member.LEV))) {
 			list = service.sellerList(cri);
 			logger.info("in session seller");
 		}else {
@@ -360,11 +362,11 @@ public class RequestController {
 			list.remove(list.size() - list.size());
 		}
 		
-		model.addAttribute("list", list);	
-		/*model.addAttribute("cri", cri);	*/
-		session.setAttribute("cri", cri);
+		model.addAttribute(Constant.Model.LIST, list);	
+		/*model.addAttribute(Constant.Model.CRITERIA, cri);	*/
+		session.setAttribute(Constant.Session.CRITERIA, cri);
 		
-		return "request/list";
+		return Constant.ControllerName.REQUEST + Constant.ControllerForm.LIST;
 	
 	}
 	

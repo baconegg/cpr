@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <html> 
 <body style="margin-left: 1px">
@@ -52,7 +53,7 @@
 																<form id="reserve" method="post">
 																<input type="hidden" value="${RequestVO.idx}" name="requestIdx" id="requestIdx">																
 															
-																<input type="hidden" value="3" id="customerIdx" name="customerIdx">														
+																<input type="hidden" value="3" id="customerIdx" name=<%=Constant.Session.CUSTOMER_IDX %>>														
 																<h1>상품</h1><br/>	
 																<input type="hidden" id="items" name="items"  value="${RequestVO.items}" />	
 															
@@ -102,7 +103,7 @@
 																			<c:if test="${RequestVO.flag < 2 }">
 																				<br/>
 																				<form id="replyRegister" method="post">
-																					<input  type="hidden" id="selIdx"  name="selIdx" value="${sessionScope.selIdx }"  />
+																					<input  type="hidden" id="selIdx"  name=<%=Constant.Session.SEL_IDX %> value="${sessionScope.selIdx }"  />
 																					<input  type="hidden" id="requestIdx"  name="requestIdx" value="${RequestVO.idx}"  />
 																					
 																					<input placeholder="경매 참여시 글을 입력해 주세요." style="width:95%" type="text" id="replys"  name="replys" />&nbsp;&nbsp;

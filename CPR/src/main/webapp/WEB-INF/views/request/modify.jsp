@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
  
 <%-- <% --%>
@@ -76,7 +77,7 @@
 																	<br/><h2>시장</h2><br/>
 																  	<input type="text" placeholder="지역구를 입력해 주세요." style="width: 200px" id="tags" name="guName" value="" />
 																   <input type="text" placeholder="시장을 입력해 주세요." style="width: 200px" id="market" name="marketName" value="" />
-																   <input type="hidden" style="width: 200px" id="customerIdx" name="customerIdx" value="${RequestVO.customerIdx }" />
+																   <input type="hidden" style="width: 200px" id="customerIdx" name=<%=Constant.Session.CUSTOMER_IDX %> value="${RequestVO.customerIdx }" />
 															</p><br/><br/>
 															<p>
 															<br /><h2>상품 내역</h2></br>

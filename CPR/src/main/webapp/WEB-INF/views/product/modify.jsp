@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <html>
@@ -52,7 +53,7 @@
 																	<img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${pVo.productImgUUID}" id="productImg"> 
 																</div>
 																
-															    <input type="file" id="file" onchange="previewImage(this, 'preview')" name="file">
+															    <input type="file" id="file" onchange="previewImage(this, 'preview')" name=<%=Constant.Session.FILE %> />
 															   
 															</div> 
 														</div> 
@@ -319,19 +320,19 @@
 	});
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////
-	
+<%-- 	var listPath = <%=Constant.ControllerName.CPR + Constant.ControllerName.PRODUCT + Constant.ControllerForm.LIST + "/" %>; --%>
 	// 이프 엘스로 나누어 줘야 됨...
-	var inhtml = '';
-	var memLev = '${sessionScope.memberLev}';	
+// 	var inhtml = '';
+// 	var memLev = '${sessionScope.memberLev}';	
 	//console.log(memLev);	
 	//if(memLev == 2){
 	//	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(셀러)</a>';
 	//}else{
 	//	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기(커스터머)</a>';
 	//}
-	inhtml = '<a href="/cpr/product/list/'+${msVo.selIdx}+'">상점가기</a>';
+// 	inhtml = '<a href="' + listPath + ${msVo.selIdx} + '">상점가기</a>';
+
 	$('#menu-item-5').html(inhtml);
-	
 	$('#menu-item-5').attr('class', 'change btn btn-primary');
 	</script>
 </body></html>

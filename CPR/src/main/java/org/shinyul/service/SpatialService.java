@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.PriceVO;
 import org.shinyul.domain.SpatialVO;
 import org.shinyul.mapper.SpatialMapper;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -68,8 +69,8 @@ public class SpatialService {
 			//list = mapper.loadShopSlideData(vo);
 			List<SpatialVO> sellerData = mapper.loadSellerSlideData(vo);
 			List<SpatialVO> productData = mapper.loadProductSlideData(sellerData.get(0).getSelIdx());
-			map.put("sellerData", sellerData);
-			map.put("productData", productData);			
+			map.put(Constant.Session.SELLER_DATA, sellerData);
+			map.put(Constant.Session.PRODUCT_DATA, productData);			
 		} catch (Exception e) {
 			logger.error("Service ------- loadShopSlideData Error~!!!!");
 		}

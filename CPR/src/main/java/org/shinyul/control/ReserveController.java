@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.Criteria;
 import org.shinyul.domain.ReserveVO;
 import org.shinyul.service.ReserveService;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
-@RequestMapping("/reserve")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.RESERVE)
 public class ReserveController {
 
 	private static final Logger logger = Logger.getLogger(ReserveController.class);
@@ -25,7 +26,7 @@ public class ReserveController {
 	@Inject
 	ReserveService rService;
 	
-	@RequestMapping(value="/register", method=RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerForm.REGISTER, method=RequestMethod.POST)
 	public @ResponseBody int register(ReserveVO vo, HttpSession session){		
 		logger.info("ResreveController - register : 들어옴");
 		logger.info(vo);
@@ -37,7 +38,7 @@ public class ReserveController {
 		return rService.register(vo);
 	}
 	
-	@RequestMapping(value="/view", method=RequestMethod.GET)
+	@RequestMapping(value=Constant.ControllerForm.VIEW, method=RequestMethod.GET)
 	public ModelAndView view(int reserveIdx){		
 		ReserveVO vo = new ReserveVO();
 		logger.info("ResreveController - view : 들어옴");
@@ -45,10 +46,10 @@ public class ReserveController {
 		
 		vo = rService.view(reserveIdx);
 		
-		return new ModelAndView("reserve/view", "ReserveVO", vo);
+		return new ModelAndView(Constant.ControllerName.RESERVE + Constant.ControllerForm.VIEW, Constant.Model.RESERVE_VO, vo);
 	}
 
-	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	@RequestMapping(value=Constant.ControllerForm.MODIFY, method=RequestMethod.GET)
 	public ModelAndView modify(int reserveIdx){		
 		ReserveVO vo = new ReserveVO();
 		logger.info("ResreveController - modify : 들어옴");
@@ -56,11 +57,11 @@ public class ReserveController {
 		
 		vo = rService.view(reserveIdx);
 		
-		return new ModelAndView("reserve/modify", "ReserveVO", vo);
+		return new ModelAndView(Constant.ControllerName.RESERVE + Constant.ControllerForm.MODIFY, Constant.Model.RESERVE_VO, vo);
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/reserveConfirm", method=RequestMethod.POST)
+	@RequestMapping(value= Constant.ControllerAction.RESERVE_CONFIRM, method=RequestMethod.POST)
 	public int reserveConfirm(int reserveIdx){		
 		
 		logger.info("ResreveController - reserveConfirm : 들어옴");
@@ -73,7 +74,7 @@ public class ReserveController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/reserveCancel", method=RequestMethod.POST)
+	@RequestMapping(value= Constant.ControllerAction.RESERVE_CANCEL, method=RequestMethod.POST)
 	public int reserveCancel(int reserveIdx){		
 		
 		logger.info("ResreveController - reserveConfirm : 들어옴");
@@ -85,26 +86,26 @@ public class ReserveController {
 		return check ;
 	}
 	
-	@RequestMapping(value="/list", method=RequestMethod.GET)
+	@RequestMapping(value= Constant.ControllerForm.LIST, method=RequestMethod.GET)
 	public ModelAndView list(Criteria cri, HttpSession session){
 		
 		logger.info("list!!! ");
 		
 		ReserveVO vo = new ReserveVO();
 		
-		vo.setMemberLev((int)session.getAttribute("memberLev"));
+		vo.setMemberLev((int)session.getAttribute(Constant.Member.LEV));
 
-		if((int)session.getAttribute("memberLev") == 1){
-			vo.setCustomerIdx((int)session.getAttribute("customerIdx"));
+		if((int)session.getAttribute(Constant.Member.LEV) == Constant.Member.CUSTOMER){
+			vo.setCustomerIdx((int)session.getAttribute(Constant.Session.CUSTOMER_IDX));
 		} else{
-			vo.setSelIdx((int)session.getAttribute("selIdx"));
+			vo.setSelIdx((int)session.getAttribute(Constant.Session.SEL_IDX));
 		}
 		
 		logger.info(cri.toString());
-		session.setAttribute("cri", cri);
+		session.setAttribute(Constant.Session.CRITERIA, cri);
 		
 		List<ReserveVO> list = rService.list(vo, cri);
 		logger.info("list" + list);
-		return new ModelAndView("reserve/list", "list", list);
+		return new ModelAndView(Constant.ControllerName.RESERVE + Constant.ControllerForm.LIST, Constant.Model.LIST, list);
 	}
 }

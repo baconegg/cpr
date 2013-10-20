@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.ReserveVO;
 import org.shinyul.domain.mobile.GCMVO;
 import org.shinyul.service.mobile.GCMService;
+import org.shinyul.util.Constant;
 import org.shinyul.util.mobile.GCMUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +20,7 @@ import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
 @Controller
-@RequestMapping("/gcm")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.GCM)
 public class GCMController {
 
 	private static final Logger logger = Logger.getLogger(GCMController.class);
@@ -30,7 +31,7 @@ public class GCMController {
 	// ////////////////////////////////////////////////////////////////////////////////////
 	// gcm regiId add
 	// /////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/addRegId", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerAction.ADD_REG_ID, method = RequestMethod.POST)
 	public @ResponseBody int addregId(String regId, String memberIdx, String phoneNumber) {
 
 		logger.info("addRegId");
@@ -47,7 +48,7 @@ public class GCMController {
 		vo.setRegId(regId);
 		vo.setMemberIdx(Integer.valueOf(memberIdx).intValue());
 		vo.setMemberTel(phoneNumber);
-		return Integer.parseInt(gcm.control("addRegId", vo));
+		return Integer.parseInt(gcm.control(Constant.GCM.ADD_REG_ID, vo));
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +69,7 @@ public class GCMController {
 		
 		GCMVO deviceNo = new GCMVO();
 		deviceNo.setSelIdx(vo.getSelIdx());
-		String device = gcm.control("alertReserve", deviceNo);
+		String device = gcm.control(Constant.GCM.ALERT_RESERVE, deviceNo);
 //		if(device.equls("100")){	};
 		Result result = null;
 		try {
@@ -77,15 +78,15 @@ public class GCMController {
 					.collapseKey("1")
 					.timeToLive(3)
 					.delayWhileIdle(true)
-					.addData("protocol", GCMUtil.CONFIRM_RESERVE)
-					.addData("content", "주문이 도착했습니다.")
-					.addData("memberName", vo.getMemberName())
-					.addData("productName", vo.getProductName())
-					.addData("reserveQty", String.valueOf(reserveQty))
-					.addData("reserveReceiveTime", vo.getReserveReceiveTime())
-					.addData("reserveMemo", vo.getReserveMemo())
-					.addData("totalPrice", String.valueOf(totalPrice))
-					.addData("productInfo", vo.getProductInfo())
+					.addData(Constant.GCM.PROTOCOL, GCMUtil.CONFIRM_RESERVE)
+					.addData(Constant.GCM.CONTENT, Constant.GCM.CONTENT_VAL)
+					.addData(Constant.GCM.MEBER_NAME, vo.getMemberName())
+					.addData(Constant.GCM.PRODUCT_NAME, vo.getProductName())
+					.addData(Constant.GCM.RESERVE_QTY, String.valueOf(reserveQty))
+					.addData(Constant.GCM.RECEIVE_TIME, vo.getReserveReceiveTime())
+					.addData(Constant.GCM.RECEIVE_MEMO, vo.getReserveMemo())
+					.addData(Constant.GCM.TOTAL_PRICE, String.valueOf(totalPrice))
+					.addData(Constant.GCM.PRODUCT_INFO, vo.getProductInfo())
 					.build();
 			 //String regId= "APA91bGfhIzotixtQqyB_IvEWmCdIjORP5ZNnGXj2l-EFMNoGT863KenWkbemIc0jLnO9IMPB95XiffjM9az4pDjfw2K1NSIhjAWBRJRfm77fRfMtW48GtQwKMS9ZpNaC-3mpqHf9ff_2ZzFacfi5xLz3Y4dYIJiqQ";
 			 //			String regId = "APA91bEi_bdbAeLqQ24BNm_CDHdXwIgXgD0Hkw5aOYqD_2e2gi-zg5uiKe46QDU14zKixr19bg3tZagwammXvC9YTZqWF8V3e5z921Z4cVonQw_NXfv18kEBFzQd3rOaNxHh2A6lM3lGXuWSpcIhWiquQ8Qf08gjJw";

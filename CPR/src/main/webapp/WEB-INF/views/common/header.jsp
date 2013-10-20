@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.shinyul.util.Constant"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 
@@ -11,11 +12,12 @@
 		<header id="banner" class="site_nav navbarR navbar-fixed-topP" role="banner">
 			<div class="wpb_navbar-inner">
 				<div class="wrap">
-					<a class="brand" href="/cpr/">
+					<a class="brand" href=<%=Constant.ControllerName.CPR %>>
 <!-- 						<img src="https://si0.twimg.com/images/themes/theme1/bg.png" />												 -->
 					</a>
 					
 					<input type="hidden" id='sel' value=''>
+					<input type="hidden" id='lhPath' value=<%=Constant.ControllerName.CPR + Constant.ControllerName.DEFALT + Constant.ControllerName.MEMBER + Constant.ControllerAction.SESSION_SET%> />
 					
 					<!-- 세션값 찍어보는곳... -->
 					<%-- <div>					
@@ -30,17 +32,17 @@
 						<c:when test="${sessionScope.memberName == null }">
 							<div id="logindiv" class="logHide" style="width: 175px" align="center">
 								<form id="loginform" class="logHide" action="/cpr/member/login" method="post">
-									<input type="hidden" id="hrefPath" name="hpath" />
-									<input id="uid" class="logType" type="text" name="memberId" title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
-									<input id="upw" class="logType" type="password" name="memberPw" title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px"/><br />																
-									<input id="loginBtn" class="btn btn-large" type="submit" value="로그인 "  />
+									<input type="hidden" id="hrefPath" name=<%=Constant.Session.HPATH %> />
+									<input id="uid" class="logType" type="text" name=<%=Constant.Session.MEMBER_ID %> title="아이디를 입력하세요" placeholder="ID" style="max-width:165px" />
+									<input id="upw" class="logType" type="password" name=<%=Constant.Session.MEMBER_PW %> title="비밀번호를 입력하세요" placeholder="Password" style="max-width:165px" /><br/>																
+									<input id="loginBtn" class="btn btn-large" type="submit" value="로그인 " />
 								</form>
 							</div>							
 						</c:when>
 						<c:otherwise>							
 							<div id="logoutdiv" class="logShow" style="width: 175px" align="center">
 								<form id="logoutform" class="logShow" action="/cpr/member/logout" method="post" >
-									<input type="hidden" id="hrefPath" name="hpath"/>								
+									<input type="hidden" id="hrefPath" name=Constant.Session.HPATH/>								
 									<p id="getuserId" style="color: white">${sessionScope.memberName } 님
 									<input id="logoutBtn" class="btn btn-large" type="submit" value="로그아웃" />
 									</p>							
@@ -141,8 +143,8 @@
 	var inhtml = '';
 	var memLev = '${sessionScope.memberLev}';
 
-	if(memLev == 2){
-		inhtml += '<a href="/cpr/product/list/'+ selIdx +'">상점으로</a>';
+	if(memLev == <%=Constant.Member.SELLER %>){
+		inhtml += '<a href="/cpr/product/list/'+ selIdx +'">상점가기</a>';
 		$('#menu-item-5').attr("style","display:inline-block");
 		$('#menu-item-5').html(inhtml);
 	}else{
@@ -183,7 +185,7 @@
 		alert(requestList);
 		
 		//ajax로 밑의 세션값 지우는 컨트롤러 갔다오게 해도 될듯.. 우선 편하게 그냥 씀..
-		<%	session.removeAttribute("requestList");	%>
+		<%	session.removeAttribute(Constant.Session.REQUEST_LIST);	%>
 	}
 	
 	</script>
