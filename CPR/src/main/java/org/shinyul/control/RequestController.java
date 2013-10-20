@@ -70,13 +70,16 @@ public class RequestController {
 	
 	@ResponseBody
 	@RequestMapping(value= Constant.ControllerAction.REGISTER, method=RequestMethod.POST)	
-	public String registerAction(RequestVO vo){
-		System.out.println("registerAction 들어옴");
-		System.out.println(vo);
+	public int registerAction(RequestVO vo){
+		logger.info("registerAction 들어옴");
+				
+		vo.setGunameMarid(vo.getGuName() + "," + vo.getMarketName());
 	
-		String check = service.register(vo);
+		System.out.println(vo);
 		
-		System.out.println(check);
+		int check = service.register(vo);
+		
+		logger.info(check);
 		
 		return check;
 	
@@ -198,6 +201,7 @@ public class RequestController {
 		System.out.println("list 들어옴");
 		System.out.println(vo);
 		
+		vo.setGunameMarid(vo.getGuName() + "," + vo.getMarketName());
 		
 		String  check = service.modify(vo);
 		System.out.println(check);
@@ -298,7 +302,8 @@ public class RequestController {
 	@RequestMapping(value=Constant.ControllerForm.LIST, method=RequestMethod.GET)	
 	public String list(Integer page, String type, String keyword, Model model,HttpSession session){
 		
-		System.out.println("list 들어옴");
+		logger.info("request list 들어옴");
+		logger.info("page : " + page);
 		// 로그인시 세션에 상인정보 포함. -- 테스트용
 //		session.setAttribute(Constant.Member.LEV, 1);
 //		session.setAttribute(Constant.Session.MAR_IDX, 290);
@@ -308,14 +313,17 @@ public class RequestController {
 //			return Constant.ControllerName.CPR;
 //		}
 //		///////////////////////////////////////////
-		
+		if(page == null){
+			page = 1;
+		}
 		
 		List<RequestVO> list = new ArrayList<RequestVO>();
 		Criteria cri = new Criteria(page, type, keyword);
 		
 		int marIdx = (int)session.getAttribute(Constant.Session.MAR_IDX);
+		logger.info("marIdx : " + marIdx);
 		String gunameMarid = service.searchMarketName(marIdx);
-	
+		logger.info("gunameMarid : " + gunameMarid);
 		cri.setGunameMarid(gunameMarid);
 		
 		
@@ -340,10 +348,10 @@ public class RequestController {
 		
 		if(Constant.Member.CUSTOMER==(int)(session.getAttribute(Constant.Member.LEV))){		
 			list = service.customerList(cri);
-			logger.info("in session customer");
+			logger.info("in session customer : " + list);
 		}else if(2==(int)(session.getAttribute(Constant.Member.LEV))) {
 			list = service.sellerList(cri);
-			logger.info("in session seller");
+			logger.info("in session seller : " + list);
 		}else {
 			logger.info("/list ... 알수 없는 오류");
 			list = null;

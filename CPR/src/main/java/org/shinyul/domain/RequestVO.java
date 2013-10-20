@@ -17,43 +17,17 @@ public class RequestVO {
 	int replyCnt;
 	int total;
 	String memberId;
-	
-	
-	public int getDeleteFlag() {
-		return deleteFlag;
+	public int getIdx() {
+		return idx;
 	}
-	public void setDeleteFlag(int deleteFlag) {
-		this.deleteFlag = deleteFlag;
-	}
-	public int getReplyCnt() {
-		return replyCnt;
-	}
-	public void setReplyCnt(int replyCnt) {
-		this.replyCnt = replyCnt;
-	}
-	public int getTotal() {
-		return total;
-	}
-	public void setTotal(int total) {
-		this.total = total;
-	}
-	public String getMemberId() {
-		return memberId;
-	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setIdx(int idx) {
+		this.idx = idx;
 	}
 	public int getCustomerIdx() {
 		return customerIdx;
 	}
 	public void setCustomerIdx(int customerIdx) {
 		this.customerIdx = customerIdx;
-	}
-	public int getIdx() {
-		return idx;
-	}
-	public void setIdx(int idx) {
-		this.idx = idx;
 	}
 	public String getTitle() {
 		return title;
@@ -115,6 +89,30 @@ public class RequestVO {
 	public void setGunameMarid(String gunameMarid) {
 		this.gunameMarid = gunameMarid;
 	}
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
+	public int getReplyCnt() {
+		return replyCnt;
+	}
+	public void setReplyCnt(int replyCnt) {
+		this.replyCnt = replyCnt;
+	}
+	public int getTotal() {
+		return total;
+	}
+	public void setTotal(int total) {
+		this.total = total;
+	}
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
 	@Override
 	public String toString() {
 		return "RequestVO [idx=" + idx + ", customerIdx=" + customerIdx
@@ -125,6 +123,4 @@ public class RequestVO {
 				+ ", deleteFlag=" + deleteFlag + ", replyCnt=" + replyCnt
 				+ ", total=" + total + ", memberId=" + memberId + "]";
 	}
-	
-		
 }

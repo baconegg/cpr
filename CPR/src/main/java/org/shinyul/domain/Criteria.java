@@ -13,6 +13,10 @@ public class Criteria {
 
 	public Criteria(Integer page, String type, String keyword) {
 		
+		if(page == null){
+			page = 1;
+		}
+		
 		this.page = page;
 		this.type = type;
 		this.keyword = keyword;

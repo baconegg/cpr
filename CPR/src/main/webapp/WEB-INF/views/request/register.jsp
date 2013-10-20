@@ -283,7 +283,7 @@
 						var json = JSON.parse(JSON.stringify(obj.serializeObject()));
 // 						console.log(json);
 						 
-						$.post('registerAction',json).done(function(data){
+						$.post('/cpr/request/registerAction',json).done(function(data){
 							if(data == 1){
 								alert("등록 성공");
 								location.href="/cpr/request/list?page=1"; 
