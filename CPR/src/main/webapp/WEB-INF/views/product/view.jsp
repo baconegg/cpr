@@ -238,15 +238,15 @@
 								  <c:forEach var="list" items="${preList}">
 							          <article id="post-72" class="post-72 portfolio type-portfolio status-publish hentry portfolio_thumb span2">
 							          
-							          	  <c:choose>							          	  
-							          	  		<c:when test="${sessionScope.memberIdx == msVo.memberIdx}">
-							          	  			<a href="/cpr/product/view/seller?productIdx=${list.productIdx }">	
-							          	  		</c:when>
+<%-- 							          	  <c:choose>							          	   --%>
+<%-- 							          	  		<c:when test="${sessionScope.memberIdx == msVo.memberIdx}"> --%>
+							          	  			<a href="/cpr/product/view?productIdx=${list.productIdx }">	
+<%-- 							          	  		</c:when> --%>
 							          	  		
-							          	  		<c:otherwise>
-							          	  			<a href="/cpr/product/view/customer?productIdx=${list.productIdx }">
-							          	  		</c:otherwise>
-							          	  </c:choose>
+<%-- 							          	  		<c:otherwise> --%>
+<%-- 							          	  			<a href="/cpr/product/view?productIdx=${list.productIdx }"> --%>
+<%-- 							          	  		</c:otherwise> --%>
+<%-- 							          	  </c:choose> --%>
 							          								          
 								             <div class="post-thumb" style="top: 0px; z-index: 0;" >
 								           		<div class="cover"></div>								            

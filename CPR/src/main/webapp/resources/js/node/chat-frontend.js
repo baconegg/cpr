@@ -6,8 +6,8 @@ function webSocket() {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////    
     //메세지 붙이는 부분...
-    function addMessage(message) {    	
-    	var msg = JSON.parse(message);   
+    function addMessage(msg) {    	
+    	//var msg = JSON.parse(message);   
     	
     	var sel = $('#sel').val();
     	
@@ -73,16 +73,17 @@ function webSocket() {
 	    //메세지 받았을떄??? 자기한테도 찍을때???  view페이지에선 필요없을듯?? 상인이 확인할때 메세지를 받아야 하므로 그때 필요할듯..
 	    connection.onmessage = function (message) {
 		        try {
-		            var json = JSON.parse(message.data);
+		            var json = JSON.parse(message);
 		        } catch (e) {
-		            console.log('This doesn\'t look like a valid JSON: ', message.data);
+		            console.log('This doesn\'t look like a valid JSON: ' + message.data);
 		            return;
 		        }
 	
 		        if (json.type === 'message') { // it's a single message
-		            addMessage(json.data);
+		        	var message = JSON.parse(json.data.text);
+		            addMessage(message);
 		        } else {
-		            console.log('Hmm..., I\'ve never seen JSON like this: ', json);
+		            console.log('Hmm..., I\'ve never seen JSON like this: ' + json);
 		        }
 	    };       
 	    

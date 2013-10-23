@@ -242,10 +242,10 @@ public class MemberController {
 		
 	//회원 상세 정보... 탈퇴(판매자)!!!
 	@RequestMapping(value=Constant.ControllerForm.REMOVE + Constant.ControllerForm.SELLER, method = RequestMethod.POST)
-	public @ResponseBody void removeSeller(HttpSession session, MemberSellerVO vo) {
+	public @ResponseBody int removeSeller(HttpSession session, MemberSellerVO vo) {
 		logger.info("/remove/seller/!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
 		logger.info(vo);
-		member.removeSeller(vo);		
+		return member.removeSeller(vo);		
 	}
 		
 	///////////////////////////////////////////////////////////////////////////////////
@@ -260,10 +260,10 @@ public class MemberController {
 		
 	//회원 상세 정보... 탈퇴(소비자)!!!
 	@RequestMapping(value=Constant.ControllerForm.REMOVE + Constant.ControllerForm.CUSTOMER, method = RequestMethod.POST)
-	public @ResponseBody void removeCustomer(HttpSession session, MemberCustomerVO vo) {
+	public @ResponseBody int removeCustomer(HttpSession session, MemberCustomerVO vo) {
 		logger.info("/remove/customer/!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ");
 		logger.info(vo);			
-		member.removeCustomer(vo);
+		return member.removeCustomer(vo);
 	}
 
 	/////소비자//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

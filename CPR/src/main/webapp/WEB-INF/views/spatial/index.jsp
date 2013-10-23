@@ -25,8 +25,8 @@
 
 	function showMap(latitude, longitude){
 		
-	  	//currentPoint = new nhn.api.map.LatLng(latitude, longitude);
- 		currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
+	  	currentPoint = new nhn.api.map.LatLng(latitude, longitude);
+//  		currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 테스트를 위해 현재 위치 신원시장 입구로 강제설정
 		//currentPoint = new nhn.api.map.LatLng(37.487427, 126.927525); // 현재 위치 신원시장 입구로 강제설정
 		
 		// 맵 초기 환경 설정 (줌 레벨 10)
@@ -59,11 +59,11 @@
 				} else{
 				
 					//test
-					//var clickLat = oCustomEvent.point.y;
-					//var clickLng = oCustomEvent.point.x;
+// 					var clickLat = 37.4823;
+// 					var clickLng = 126.9271;
 					
-					var clickLat = 37.4823;
-					var clickLng = 126.9271;
+					var clickLat = oCustomEvent.point.y;
+					var clickLng = oCustomEvent.point.x;
 					
 					// 클릭한 시장의 상점 정보 로드
 					fnGetMarketCoord(clickLat, clickLng);
@@ -133,8 +133,8 @@
 	// 1. 상점 정보 불러와서 지도에 찍기
 	function fnShopInfo(marIdx, targetLat, targetLng){
 		
-		//test
-		marIdx = 290;
+		//test - 강제로 신원시장으로 함...
+// 		marIdx = 290;
 
 		$.post('/cpr/shopInfo', {marIdx: marIdx}).done(function(data2){
 

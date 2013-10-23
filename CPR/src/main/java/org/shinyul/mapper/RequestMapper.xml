@@ -45,8 +45,8 @@
             ,#{title}
             ,#{items}
             ,#{memo}
-            ,#{receiveTime}
-			,#{gunameMarid} <!--             ,#{guName}||#{marketName} -->
+            ,#{reserveReceiveTime}	<!--             ,#{receiveTime} -->
+			,#{gunameMarid} 	<!--             ,#{guName}||#{marketName} -->
             ,#{memberId}
             )
  	

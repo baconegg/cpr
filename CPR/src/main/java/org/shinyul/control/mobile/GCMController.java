@@ -54,12 +54,12 @@ public class GCMController {
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// gcm alert
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/alert", method = RequestMethod.POST)
-	public @ResponseBody void alertReserve(ReserveVO vo) {
+	@RequestMapping(value = Constant.ControllerAction.ALERT, method = RequestMethod.POST)
+	public @ResponseBody String alertReserve(ReserveVO vo) {
 
 		logger.info("into the alertReserve");
 		logger.info(vo);
-		System.out.println("into the alertReserve");
+//		System.out.println("into the alertReserve");
 				
 		int totalPrice = (vo.getProductPrice() * vo.getReserveQty());
 		int reserveQty = vo.getReserveQty();
@@ -99,14 +99,17 @@ public class GCMController {
 			e.printStackTrace();
 		}
 
+		String check = null;
 		// 결과 처리
 		if (result.getMessageId() != null) {
 			// 푸시 전송 성공
+			check = result.getMessageId();
 			logger.info("성공");
 		} else {
 			String error = result.getErrorCodeName(); // 에러 내용 받기
 			logger.info("실패");
 			logger.info(error);
+			check = "실패";
 			// 에러 처리
 			// if(Constants.ERROR_INTERNAL_SERVER_ERROR.equlas(error)) {
 			// //구글 푸시 서버 에러
@@ -115,6 +118,7 @@ public class GCMController {
 			//
 			// };
 		}
-
+		
+		return check;
 	}
 }

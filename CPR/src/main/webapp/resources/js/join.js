@@ -54,12 +54,13 @@ function successCallback(position) {
     var latitude = position.coords.latitude;
     var longitude = position.coords.longitude;
 //     $('body').append("<p>Your location is: " + latitude + "," + longitude+" </p><p>Accuracy="+position.coords.accuracy+"m"); 
-// 	    $('#traceLat').val(latitude);
-// 	    $('#traceLng').val(longitude);
 
     // 		현재위치 신원시장 입구로 강제설정 -- 나중에 값 받아와서 세팅...
-	$('#traceLat').val(37.4815787);
-	$('#traceLng').val(126.9284316);
+//	$('#traceLat').val(37.4815787);
+//	$('#traceLng').val(126.9284316);
+
+    $('#traceLat').val(latitude);
+ 	$('#traceLng').val(longitude);
     
     showMap(latitude, longitude);
 }

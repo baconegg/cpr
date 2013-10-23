@@ -28,7 +28,7 @@ public class SchedulerUtil {
 	private SchedulerSevice service;	
 	
 
-	//@Scheduled(fixedRate = 10000000)
+//	@Scheduled(fixedRate = 10000000)
 	@Scheduled(cron="0 0 3 ? * SAT")
 	public void apiDown()  {
 		  

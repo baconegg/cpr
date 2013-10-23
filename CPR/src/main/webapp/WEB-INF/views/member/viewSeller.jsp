@@ -293,8 +293,14 @@
 			if (confirm('탈퇴하시겠습니까?') == true) {
 				var jsonObj = JSON.parse(JSON.stringify($('#info').serializeObject()));
 				$.post('/cpr/member/remove/seller', jsonObj).done(function(data) {
-					alert("탈퇴되셨습니다.");
-					location.href = "/cpr/member/join";
+					if(data == 1){
+						alert("탈퇴되셨습니다.");
+						$.post('/cpr/member/logout', jsonObj).done(function(data){
+							location.href = "/cpr/member/join";
+						});
+					}else{
+						alert("탈퇴에 실패했습니다.");
+					}
 				});
 			} else {
 // 				alert('탈퇴 취소');

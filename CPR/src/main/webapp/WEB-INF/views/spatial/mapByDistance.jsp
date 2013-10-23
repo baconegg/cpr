@@ -28,8 +28,8 @@
 	function showMap(latitude, longitude){
 		
 		
-      //currentPoint = new nhn.api.map.LatLng(latitude, longitude);
-	   currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 현재 위치 신원시장 입구로 강제설정 
+      currentPoint = new nhn.api.map.LatLng(latitude, longitude);
+// 	   currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 현재 위치 신원시장 입구로 강제설정 
 //currentPoint = new nhn.api.map.LatLng(37.4833, 126.9371); // 현재 위치 신원시장 입구로 강제설정 
 	 	
 		// 맵 초기 환경 설정 

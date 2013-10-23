@@ -85,6 +85,7 @@ public class Constant {
 		//mobile
 		//gcm
 		public static final String ADD_REG_ID = "/addRegId";
+		public static final String ALERT = "/alert";
 		
 	}
 	

@@ -28,11 +28,11 @@ public class FileIOUtil {
 		String thpath = null;
 		// 0:상품 1:사람(상인)
 		switch (cmd) {
-		case Constant.File.SELLER:
+		case Constant.File.PRODUCT:
 			path = "D:\\images\\product\\original\\";
 			thpath = "D:\\images\\product\\thumb\\";
 			break;
-		case Constant.File.PRODUCT:
+		case Constant.File.SELLER:
 			path = "D:\\images\\seller\\original\\";
 			thpath = "D:\\images\\seller\\thumb\\";
 			break;

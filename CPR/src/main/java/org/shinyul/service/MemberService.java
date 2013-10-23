@@ -64,15 +64,19 @@ public class MemberService {
 	
 	//판매자 탈퇴
 	@Transactional
-	public void removeSeller(MemberSellerVO vo){
+	public int removeSeller(MemberSellerVO vo){
+		int check = 0;
 		try {
 			member.deleteSeller(vo);
 			member.deleteSellerTwo(vo);
 			member.deleteSellerThree(vo);
+			check = 1;
 		} catch (Exception e) {
 			logger.error("MemberService - removeSeller error~!@");
+			check = 0;
 			e.printStackTrace();
 		}
+		return check;
 	}
 	
 	//////////////////////////////////////////////////////////////////////
@@ -116,14 +120,18 @@ public class MemberService {
 	
 	//소비자 탈퇴
 	@Transactional
-	public void removeCustomer(MemberCustomerVO vo){
+	public int removeCustomer(MemberCustomerVO vo){
+		int check = 0;
 		try {
 			member.deleteCustomer(vo);
 			member.deleteCustomerTwo(vo);
+			check = 1;
 		} catch (Exception e) {
 			logger.error("MemberService - removeCustomer error~!@");
+			check = 0;
 			e.printStackTrace();
 		}
+		return check;
 	}
 	
 	/////소비자 판매자 같이 쓰는 부분//////////////////////////////////////////////////////////////////////////

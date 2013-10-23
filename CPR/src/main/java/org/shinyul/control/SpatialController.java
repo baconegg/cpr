@@ -44,7 +44,7 @@ public class SpatialController {
 		return new ModelAndView(Constant.ControllerName.SPATIAL + Constant.ControllerForm.INDEX);
 	}
 	
-//	// index -> shopInfo 이동
+	// index -> shopInfo 이동
 //	@RequestMapping(value = "/shopInfo", method = RequestMethod.GET)
 //	public ModelAndView moveToShopInfo(SpatialVO vo) {		
 //		logger.info("shopInfo popMap!!! ");
