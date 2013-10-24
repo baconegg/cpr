@@ -12,7 +12,7 @@ public class Constant {
 		public static final String RESERVE = "reserve";
 		
 		//mobile
-		public static final String LOGIN = "login";
+		public static final String LOGIN = "logIn";
 		public static final String WEBVIEW = "webView";
 		public static final String GCM = "gcm";
 		public static final String SHOP = "shop";
