@@ -29,9 +29,9 @@ public class ReserveController {
 	@RequestMapping(value=Constant.ControllerForm.REGISTER, method=RequestMethod.POST)
 	public @ResponseBody int register(ReserveVO vo, HttpSession session){		
 		logger.info("ResreveController - register : 들어옴");
-		logger.info(vo);
+		logger.info("register : " + vo);
 		
-		System.out.println(vo);
+//		System.out.println(vo);
 		
 		// 인서트가 제대로 됫는지 말앗는지 파악해서 리턴한다!!!
 		// chk (0이 실패 1이 성공 2는 빈값... 로그인 하세용)		
@@ -89,7 +89,8 @@ public class ReserveController {
 	@RequestMapping(value= Constant.ControllerForm.LIST, method=RequestMethod.GET)
 	public ModelAndView list(Criteria cri, HttpSession session){
 		
-		logger.info("list!!! ");
+		logger.info("reserve list!!! ");
+		logger.info("cri : " + cri);
 		
 		ReserveVO vo = new ReserveVO();
 		

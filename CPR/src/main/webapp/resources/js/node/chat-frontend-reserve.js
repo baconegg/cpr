@@ -24,8 +24,9 @@ btnReg.click(function(){
 });
 
 connection.onmessage = function (message) {
-    try {
-        var json = JSON.parse(message);
+	var json;
+	try {
+        json = JSON.parse(message.data);
         console.log("onmessage json : " + json);
     } catch (e) {
         console.log('This doesn\'t look like a valid JSON: ', message.data);
@@ -65,8 +66,8 @@ connection.onmessage = function (message) {
 		}		 
     } else {
         console.log('Hmm..., I\'ve never seen JSON like this: ' + json);
-        var msg2 = JSON.parse(json.data.text);
-        console.log('Hmm..., msg2: ' + msg2);
+//        var msg2 = JSON.parse(json.data.text);
+//        console.log('Hmm..., msg2: ' + msg2);
     }
 };    
 

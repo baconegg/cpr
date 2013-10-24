@@ -84,7 +84,6 @@
 														<input type="text" id="member_REG" name="memberReg" class="" value="${vo.memberReg }" readonly="readonly" style="background-color: transparent;">
 													</p>																									
 													<br />
-													<input type="hidden" id="member_IDX" name=<%=Constant.Session.MEMBER_IDX %> value="${vo.memberIdx }">
 												
 													<p>
 														</br>업종(셀렉트로 처리 해야됨...)</br> <input type="text" id="work_TYPE" name="workType" class="hides" value="${vo.workType }" readonly="readonly">

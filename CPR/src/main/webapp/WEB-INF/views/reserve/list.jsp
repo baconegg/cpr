@@ -112,9 +112,10 @@
 							    		</c:otherwise>
 						    		</c:choose>
 						    	</select>
-						    	<input type="hidden" id="page" name=<%=Constant.Session.PAGE %> value="1">
-						    	<input type="text" id="keyword" name=<%=Constant.Session.KEYWORD %> value="${sessionScope.cri.keyword}">
-								<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a>
+						    	<input type="hidden" id="page" name="page" value="${sessionScope.cri.page }">
+						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword }">
+<!-- 								<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a> -->
+								<input type="submit" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch" value="검색">
 								
 					    	</form>
 					    </div>    

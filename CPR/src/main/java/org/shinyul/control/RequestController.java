@@ -326,7 +326,7 @@ public class RequestController {
 		logger.info("gunameMarid : " + gunameMarid);
 		cri.setGunameMarid(gunameMarid);
 		
-		
+		logger.info("cri : " + cri);
 		
 //		if(2 == (int)session.getAttribute(Constant.Member.LEV)){
 //			logger.info("in session");
@@ -371,7 +371,7 @@ public class RequestController {
 		}
 		
 		model.addAttribute(Constant.Model.LIST, list);	
-		/*model.addAttribute(Constant.Model.CRITERIA, cri);	*/
+		model.addAttribute(Constant.Model.CRITERIA, cri);
 		session.setAttribute(Constant.Session.CRITERIA, cri);
 		
 		return Constant.ControllerName.REQUEST + Constant.ControllerForm.LIST;
