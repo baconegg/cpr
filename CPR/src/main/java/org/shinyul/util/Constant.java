@@ -181,6 +181,7 @@ public class Constant {
 		public static final String RECEIVE_MEMO = "reserveMemo";
 		public static final String TOTAL_PRICE = "totalPrice";
 		public static final String PRODUCT_INFO = "productInfo";
+		public static final String SEL_IDX = "selIdx";
 		
 	}
 }

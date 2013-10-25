@@ -19,6 +19,20 @@ btnReg.click(function(){
 	  	var jdata = JSON.stringify($('#reserve').serializeObject());    	
 		//console.log(jdata);
 		connection.send(jdata);
+		
+		// -- gcm
+//		var fdata = new FormData($("#reserve")[0]);
+		var data = JSON.parse(jdata);
+		$.post('/cpr/gcm/alert', data).done(function(data){
+//			alert(data);
+			if(data == "실패"){
+				alert("예약실패");
+			}else{
+				alert("예약되셨습니다.");
+				var selIdx = $('input[name=selIdx]').val();		
+				location.href= '/cpr/product/list/' + selIdx;
+			}
+		});
 	
 	}    	
 });
@@ -42,20 +56,6 @@ connection.onmessage = function (message) {
 		if(msg.chunk == 1){
 			var customerIdx = $('#customerIdx').val();
 			if(customerIdx == msg.customerIdx){
-				
-				// -- gcm
-//				var fdata = new FormData($("#reserve")[0]);
-				var data = JSON.parse(jdata);
-				$.post('/cpr/gcm/alert', data).done(function(data){
-//					alert(data);
-					if(data == "실패"){
-						alert("예약실패");
-					}else{
-						alert("예약되셨습니다.");
-						var selIdx = $('input[name=selIdx]').val();		
-						location.href= '/cpr/product/list/' + selIdx;
-					}
-				});
 				
 				
 //					alert("예약되셨습니다.");

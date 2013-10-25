@@ -81,9 +81,10 @@ $("#btnRegist").on('click', function(){
 			if(data == 0){
 				alert('알수 없는 오류 입니다');
 			}else if(data == 1){
-				var selIdx = $('#customerIdx').val();		
-				alert("예약이 완료되었습니다.");		
-				location.href="/cpr/product/list/" + selIdx;
+//				var selIdx = $('#customerIdx').val();		
+//				var selIdx = $('#selIdx').val();		
+//				alert("예약이 완료되었습니다.");		
+//				location.href="/cpr/product/list/" + selIdx;
 			}else {			
 				alert('로그인해 주세요');			
 			}		

@@ -47,40 +47,41 @@
 										
 										</a>
 									</article>
-									<c:if test="${list.productEvent == 1}">
-										<div id="popup" style="z-index: 10000; position: absolute; width: 230px; left: 90px; top: 210px; display: block;">
-											<form name="form" style="padding:0pt;margin:0pt">
-												<table width="100%" height="100%" cellspacing="0" border="5" bgcolor="#f2f2f2">
-													<tbody>
-														<tr>
-															<td valign="top" style="padding:20px;padding-bottom:5px" align="center" >
-<%-- 																<c:choose> --%>
-<%-- 																	<c:when test="${sessionScope.memberLev == 2}"> --%>
-<%-- 																		<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title=""> --%>
-<%-- 																	</c:when> --%>
-<%-- 																	<c:otherwise> --%>
-<%-- 																		<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title=""> --%>
-<%-- 																	</c:otherwise> --%>
-<%-- 																</c:choose> --%>
-																	<a href="/cpr/product/view?productIdx=${list.productIdx }" title="">
+									
+<%-- 									<c:if test="${list.productEvent == 1}"> --%>
+<!-- 										<div id="popup" style="z-index: 10000; position: absolute; width: 230px; left: 90px; top: 210px; display: block;"> -->
+<!-- 											<form name="form" style="padding:0pt;margin:0pt"> -->
+<!-- 												<table width="100%" height="100%" cellspacing="0" border="5" bgcolor="#f2f2f2"> -->
+<!-- 													<tbody> -->
+<!-- 														<tr> -->
+<!-- 															<td valign="top" style="padding:20px;padding-bottom:5px" align="center" > -->
+<%-- <%-- 																<c:choose> --%> --%>
+<%-- <%-- 																	<c:when test="${sessionScope.memberLev == 2}"> --%> --%>
+<%-- <%-- 																		<a href="/cpr/product/view/seller?productIdx=${list.productIdx }" title=""> --%> --%>
+<%-- <%-- 																	</c:when> --%> --%>
+<%-- <%-- 																	<c:otherwise> --%> --%>
+<%-- <%-- 																		<a href="/cpr/product/view/customer?productIdx=${list.productIdx }" title=""> --%> --%>
+<%-- <%-- 																	</c:otherwise> --%> --%>
+<%-- <%-- 																</c:choose> --%> --%>
+<%-- 																	<a href="/cpr/product/view?productIdx=${list.productIdx }" title=""> --%>
 																
-																	<img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${list.productImgUUID}" class="attachment-portfolio-thumb wp-post-image" alt="scents_thumb" />
-																	</a>
-																<br>
-																 [ 특가 상품 ]&nbsp;&nbsp;${list.productName}				
-															</td>
-														</tr>
-														<tr>
-															<td height="30" bgcolor="#717171" align="right" width="100%" style="padding-right:10px;">
-															<input name="special" type="checkbox" id="special" value="checkbox" align="absmiddle">&nbsp;<font color="#ffffff">오늘 하루동안 이 창을 열지 않음</font>
-															<a href="#" onclick="special_closeWin()" class="font4">[닫기]</a>
-															</td>
-														</tr>
-													</tbody>
-												</table>
-											</form>
-										</div>
-									</c:if>
+<%-- 																	<img src="/cpr/resources/view.jsp?file=D:/images/product/thumb/${list.productImgUUID}" class="attachment-portfolio-thumb wp-post-image" alt="scents_thumb" /> --%>
+<!-- 																	</a> -->
+<!-- 																<br> -->
+<%-- 																 [ 특가 상품 ]&nbsp;&nbsp;${list.productName}				 --%>
+<!-- 															</td> -->
+<!-- 														</tr> -->
+<!-- 														<tr> -->
+<!-- 															<td height="30" bgcolor="#717171" align="right" width="100%" style="padding-right:10px;"> -->
+<!-- 															<input name="special" type="checkbox" id="special" value="checkbox" align="absmiddle">&nbsp;<font color="#ffffff">오늘 하루동안 이 창을 열지 않음</font> -->
+<!-- 															<a href="#" onclick="special_closeWin()" class="font4">[닫기]</a> -->
+<!-- 															</td> -->
+<!-- 														</tr> -->
+<!-- 													</tbody> -->
+<!-- 												</table> -->
+<!-- 											</form> -->
+<!-- 										</div> -->
+<%-- 									</c:if> --%>
 									
 								</c:forEach>
 							</li>

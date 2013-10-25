@@ -87,6 +87,7 @@ public class GCMController {
 					.addData(Constant.GCM.RECEIVE_MEMO, vo.getReserveMemo())
 					.addData(Constant.GCM.TOTAL_PRICE, String.valueOf(totalPrice))
 					.addData(Constant.GCM.PRODUCT_INFO, vo.getProductInfo())
+					.addData(Constant.GCM.SEL_IDX, String.valueOf(vo.getSelIdx()))
 					.build();
 			 //String regId= "APA91bGfhIzotixtQqyB_IvEWmCdIjORP5ZNnGXj2l-EFMNoGT863KenWkbemIc0jLnO9IMPB95XiffjM9az4pDjfw2K1NSIhjAWBRJRfm77fRfMtW48GtQwKMS9ZpNaC-3mpqHf9ff_2ZzFacfi5xLz3Y4dYIJiqQ";
 			 //			String regId = "APA91bEi_bdbAeLqQ24BNm_CDHdXwIgXgD0Hkw5aOYqD_2e2gi-zg5uiKe46QDU14zKixr19bg3tZagwammXvC9YTZqWF8V3e5z921Z4cVonQw_NXfv18kEBFzQd3rOaNxHh2A6lM3lGXuWSpcIhWiquQ8Qf08gjJw";
