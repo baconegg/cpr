@@ -82,7 +82,7 @@ $('#agreeBtn_cu').on('click',function() {
 				alert("비번확인 null...");
 			} else {
 				if (chk1 == chk2) {
-					console.log("오예 같다~!!");
+					//console.log("오예 같다~!!");
 					var jsonObj = JSON.parse(JSON.stringify($('#join_customer_form').serializeObject()));
 					
 					/*console.log(jsonObj);*/
@@ -105,14 +105,16 @@ $('#agreeBtn_cu').on('click',function() {
 								$('<p>' + html[i].defaultMessage + '</p><br/>').insertAfter($("#Member_ID"));
 								$("#Member_ID").replaceWith(replace);*/
 
-								console.log($message_id.val());
+//								console.log($message_id.val());
 
 								$message_id.attr('value', function() {
 									for ( var i = 0; i < data.length; i++) {
-										console.log('error message : ' + data[i].defaultMessage);
-										if (data[i].defaultMessage == '아이디') {
-											console.log('!!!');
-										}
+//										console.log('error message : ' + data[i].defaultMessage);
+										alert('error message : ' + data[i].defaultMessage);
+//										if (data[i].defaultMessage == '아이디') {
+//											console.log(data[i].defaultMessage);
+//											alert(data[i].defaultMessage);
+//										}
 
 										return data[i].defaultMessage;
 									}

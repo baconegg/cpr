@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.shinyul.domain.Criteria"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -111,9 +112,10 @@
 							    		</c:otherwise>
 						    		</c:choose>
 						    	</select>
-						    	<input type="hidden" id="page" name="page" value="1">
-						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword}">
-								<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a>
+						    	<input type="hidden" id="page" name="page" value="${sessionScope.cri.page }">
+						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword }">
+<!-- 								<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a> -->
+								<input type="submit" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch" value="검색">
 								
 					    	</form>
 					    </div>    

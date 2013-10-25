@@ -37,9 +37,9 @@
 
 	<!-- naver map -->
 	<!-- port : 80   -->
-	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b6d44081e928091483fa5cd24b281171"></script>
+<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=b6d44081e928091483fa5cd24b281171"></script> -->
 	<!-- port : 8080  -->
-<!-- 	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=8c4299a97f499e44691f10e044473b52"></script> -->
+	<script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=f0294918989bbd157914fc6562830d1f"></script>
 	
 	<script type="text/javascript">
 		var block_rc = false;

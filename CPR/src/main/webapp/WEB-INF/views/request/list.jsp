@@ -1,4 +1,5 @@
-﻿<%@page import="org.shinyul.domain.Criteria"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@page import="org.shinyul.domain.Criteria"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html> 
@@ -88,10 +89,12 @@
 						    	</select>
 						    	<input type="hidden" id="page" name="page" value="${sessionScope.cri.page }">
 						    	<input type="text" id="keyword" name="keyword" value="${sessionScope.cri.keyword}">
-						    	<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a>
+<!-- 						    	<a href="" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="btnSearch">검 색</a> -->
+						    	<input type="submit" class="btn btn-large btn-block btn-success" style="font-weight:bold;" id="btnSearch" value="검색">
 								
 						    	 <!-- 글쓰기 버튼 -->
-						    	 <a href="/cpr/request/register" class="btn btn-large btn-block btn-success" style="font-weight:bold" id="register">경매 등록</a>
+<!-- 						    	 <a href="/cpr/request/register" class="btn btn-large btn-block btn-success" style="font-weight:bold;" id="register">경매 등록</a> -->
+						    	 <input type="button" class="btn btn-large btn-block btn-success" style="font-weight:bold;" id="register" value="경매 등록"/>
 								
 <!-- 					    		<input type="button" id="register" value="경매등록" > -->
 					    	</form>
@@ -119,59 +122,79 @@
 // 		location.href = '/cpr/request/register';
 // 	});
 	
-	// 페이징 처리
-	var total = $("#total").val();
-// 	console.log(total);
-	var pageSize = 10;
-	var end = (Math.ceil(total/pageSize));
-// 	console.log(end);
+// 	// 페이징 처리
+// 	var total = $("#total").val();
+// // 	console.log(total);
+// 	var pageSize = 10;
+// 	var end = (Math.ceil(total/pageSize));
+// // 	console.log(end);
 	
-	if(end <=11){	
-		var start = 1;
-	}else{		
-		var start = parseInt(end/pageSize)*10 +1;
+// 	if(end <=11){	
+// 		var start = 1;
+// 	}else{		
+// 		var start = parseInt(end/pageSize)*10 +1;
+// 	}
+	
+	
+	
+	////////////////////////////////////////
+	var registBtn = $('#register');
+	registBtn.on('click',function(){
+		location.href="/cpr/request/register";
+	});
+	
+	
+	/////////////////////
+	
+		
+	var total = $("#total").val();
+	console.log('total : ' + total);
+
+	var startPage =(Math.floor(total / 100) - 1) * 10 + 1;
+	var endPage = total / 10;
+	if(total % 100 != 1){
+		startPage = startPage + 10;
+		endPage = endPage + 1;
 	}
+	if(startPage <= 1){
+		startPage = 1;
+	}
+
+	console.log('startPage : ' + startPage);
+	console.log('endPage : ' + endPage);
 	
 	var innerHTML = "";
 	
 	function paging(){
 		
-		if(start > 1){
-			innerHTML += "["+"<a id='page' style='font-weight:bold;' > "+"이전"+" </a>"+"]";
+		if(startPage > 1){
+			innerHTML += "["+"<a id='page' style='font-weight:bold;'> "+"이전"+" </a>"+"]";
 			
 		};
 		
-		for(var i= start; i <=end; i++){
-			
-			if(i == end){
-				
-				if(total%100 == 2){
-					innerHTML += "["+"<a id='page' style='font-weight:bold;'> "+"다음"+" </a>"+"]";
-				}else{
-					innerHTML += "["+"<a  id='page' style='font-weight:bold;' > "+i+" </a>"+"]";		
-				};
-				
-			}else{
-				innerHTML += "["+"<a  id='page' style='font-weight:bold;' > "+i+" </a>"+"]";		
-			};
-			
-		};
+		for(var i= startPage; i <= endPage; i++){
+			innerHTML += "["+"<a id='page' style='font-weight:bold'> "+i+" </strong></a>"+"]";
+		}
 		
+		if(total % 100 == 1 && endPage > 10){
+			innerHTML += "["+"<a id='page' style='font-weight:bold;'> "+"다음"+" </strong></a>"+" ]";
+		}
+
 		return innerHTML;
 	};
 	
 	function movePage(page){
-		location.href="list?page="+page+"&keyword=${sessionScope.cri.keyword}&type=${sessionScope.cri.type}";
+		location.href="list?page="+page+"&type=${sessionScope.cri.type}&keyword=${sessionScope.cri.keyword}";
 	}
 	
 	$("#paging").html(paging()).delegate('a', 'click', function(){
 		
 		if($(this).html() == "이전"){
 			
-			movePage(start-1);
-		}else if($(this).html() == "다음"){
-			movePage(end);
-		}else{
+			movePage(startPage - 1);
+		} else if($(this).html() == "다음"){
+			movePage(Math.floor(endPage) + 1);
+		} else{
 			movePage($(this).html());
 		}		
 	});	

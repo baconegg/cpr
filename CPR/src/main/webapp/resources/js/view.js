@@ -72,26 +72,26 @@ function autoCalc(){
 
 
 // "예약하기" 버튼 클릭시...
-//$("#btnRegist").on('click', function(){
-//	if('${sessionScope.memberLev}'!=null){
-//		var formData = $("#reserve");	
-//		var json_formData = JSON.parse(JSON.stringify(formData.serializeObject()));	
-//		$.post('/cpr/reserve/register', json_formData).done(function(data){
-//			// 0: 실패 1: 성공
-//			if(data == 0){
-//				alert('알수 없는 오류 입니다');
-//			}else if(data == 1){
-//				var selIdx = $('#customerIdx').val();		
-//				alert("예약이 완료되었습니다.");		
-//				location.href="../list/" + selIdx;
-//			}else {			
-//				alert('로그인해 주세요');			
-//			}		
-//		});//end $.post...
-//	}else {
-//		alert('로그인 해 주세요');
-//	}
-//});
+$("#btnRegist").on('click', function(){
+	if('${sessionScope.memberLev}'!=null){
+		var formData = $("#reserve");	
+		var json_formData = JSON.parse(JSON.stringify(formData.serializeObject()));	
+		$.post('/cpr/reserve/register', json_formData).done(function(data){
+			// 0: 실패 1: 성공
+			if(data == 0){
+				alert('알수 없는 오류 입니다');
+			}else if(data == 1){
+				var selIdx = $('#customerIdx').val();		
+				alert("예약이 완료되었습니다.");		
+				location.href="/cpr/product/list/" + selIdx;
+			}else {			
+				alert('로그인해 주세요');			
+			}		
+		});//end $.post...
+	}else {
+		alert('로그인 해 주세요');
+	}
+});
 
 
 //달력 설정

@@ -71,11 +71,11 @@
 	    var longitude = position.coords.longitude;
 	   /*  $('body').append("<p>Your location is: " + latitude + "," + longitude+" </p><p>Accuracy="+position.coords.accuracy+"m"); */
 	    
-// 	    $('#traceLat').val(latitude);
-// 	    $('#traceLng').val(longitude);
 // 		현재위치 신원시장 입구로 강제설정 -- 나중에 값 받아와서 세팅...
-		$('#traceLat').val(37.4815787);
-		$('#traceLng').val(126.9284316);
+// 		$('#traceLat').val(37.4815787);
+// 		$('#traceLng').val(126.9284316);
+	    $('#traceLat').val(latitude);
+	    $('#traceLng').val(longitude);
 	    
 	    showMap(latitude, longitude);
 	}
@@ -89,9 +89,9 @@
 		console.log('창 넓이 : ' + browserWidth);
 		console.log('창 높이 : ' + browserHeight);
 		
-// 		currentPoint = new nhn.api.map.LatLng(latitude, longitude);
 		// 현재위치 신원시장 입구로 강제설정 -- 나중에 값 받아와서 세팅...
-		currentPoint = new nhn.api.map.LatLng(37.4815787, 126.9284316);
+// 		currentPoint = new nhn.api.map.LatLng(37.4815787, 126.9284316);
+		currentPoint = new nhn.api.map.LatLng(latitude, longitude);
 		
 		//자기중심 반경 계산해 찍을 때 - 12
 		//서울시 - 8~9

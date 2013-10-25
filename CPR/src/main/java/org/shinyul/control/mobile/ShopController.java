@@ -7,13 +7,14 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.shinyul.domain.mobile.ShopListVO;
 import org.shinyul.service.mobile.ShopService;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("/Shop")
+@RequestMapping(Constant.ControllerName.DEFALT + Constant.ControllerName.SHOP)
 public class ShopController {
 	
 	private static final Logger logger = Logger.getLogger(LogInController.class);
@@ -24,7 +25,7 @@ public class ShopController {
 	///////////////////////////////////////////////////////////////////////////////////
 	//shop																			          //
 	//////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/list", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerForm.LIST, method = RequestMethod.POST)
 	public @ResponseBody List<ShopListVO> shop(int selIdx, int page){
 		logger.info("mobile shop~ selIdx: " + selIdx + " page : " + page);
 		

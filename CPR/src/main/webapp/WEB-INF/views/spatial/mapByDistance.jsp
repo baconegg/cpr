@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <link rel="stylesheet" href="/cpr/resources/css/nivo/nivo-slider.css" type="text/css" media="screen" />
@@ -27,8 +28,8 @@
 	function showMap(latitude, longitude){
 		
 		
-      //currentPoint = new nhn.api.map.LatLng(latitude, longitude);
-	   currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 현재 위치 신원시장 입구로 강제설정 
+      currentPoint = new nhn.api.map.LatLng(latitude, longitude);
+// 	   currentPoint = new nhn.api.map.LatLng(37.4823, 126.9271); // 현재 위치 신원시장 입구로 강제설정 
 //currentPoint = new nhn.api.map.LatLng(37.4833, 126.9371); // 현재 위치 신원시장 입구로 강제설정 
 	 	
 		// 맵 초기 환경 설정 
@@ -127,7 +128,7 @@
 	// a.1. 상점 정보 불러와서 지도에 찍기 
 	function fnShopInfo(marIdx, targetLat, targetLng){
 		
-		$.post('/cpr/shopInfo', {"marIdx" : marIdx}).done(function(data2){
+		$.post('/cpr/shopInfo', {marIdx : marIdx}).done(function(data2){
 
 			oMap.setLevel(14);
 // 			drawCircle(100);

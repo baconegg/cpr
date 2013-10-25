@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  
 <html>
@@ -65,11 +66,11 @@
 																<br/>	
 																<form id="reserve" method="post">
 																<!-- hidden start  node용 -->
-																<input type="hidden"  name="memberId" value="${sessionScope.memberId}" readonly="readonly"> 
-																<input type="hidden"  name="memberName" value="${sessionScope.memberName}" readonly="readonly">
-																<input type="hidden" name="memberIdx" value="${sessionScope.memberIdx}" readonly="readonly">
-																<input type="hidden"  name="memberLev" value="${sessionScope.memberLev}" readonly="readonly">
-																<input type="hidden" value="${sessionScope.customerIdx}" id="customerIdx" name="customerIdx" readonly="readonly">
+																<input type="hidden"  name=<%=Constant.Session.MEMBER_ID %> value="${sessionScope.memberId}" readonly="readonly"> 
+																<input type="hidden"  name=<%=Constant.Session.MEMBER_NAME %> value="${sessionScope.memberName}" readonly="readonly">
+																<input type="hidden" name=<%=Constant.Session.MEMBER_IDX %> value="${sessionScope.memberIdx}" readonly="readonly">
+																<input type="hidden"  name=<%=Constant.Member.LEV %> value="${sessionScope.memberLev}" readonly="readonly">
+																<input type="hidden" value="${sessionScope.customerIdx}" id="customerIdx" name=<%=Constant.Session.CUSTOMER_IDX %> readonly="readonly">
 																<input type="hidden" value="${msVo.selIdx}" id="selIdx" name="selIdx" readonly="readonly">
 																<input type="hidden" value="${pVo.productIdx}" name="productIdx" id="productIdx">
 																<input type="hidden" value="${pVo.productInfo}" name="productInfo" id="productInfo">
@@ -237,15 +238,15 @@
 								  <c:forEach var="list" items="${preList}">
 							          <article id="post-72" class="post-72 portfolio type-portfolio status-publish hentry portfolio_thumb span2">
 							          
-							          	  <c:choose>							          	  
-							          	  		<c:when test="${sessionScope.memberIdx == msVo.memberIdx}">
-							          	  			<a href="/cpr/product/view/seller?productIdx=${list.productIdx }">	
-							          	  		</c:when>
+<%-- 							          	  <c:choose>							          	   --%>
+<%-- 							          	  		<c:when test="${sessionScope.memberIdx == msVo.memberIdx}"> --%>
+							          	  			<a href="/cpr/product/view?productIdx=${list.productIdx }">	
+<%-- 							          	  		</c:when> --%>
 							          	  		
-							          	  		<c:otherwise>
-							          	  			<a href="/cpr/product/view/customer?productIdx=${list.productIdx }">
-							          	  		</c:otherwise>
-							          	  </c:choose>
+<%-- 							          	  		<c:otherwise> --%>
+<%-- 							          	  			<a href="/cpr/product/view?productIdx=${list.productIdx }"> --%>
+<%-- 							          	  		</c:otherwise> --%>
+<%-- 							          	  </c:choose> --%>
 							          								          
 								             <div class="post-thumb" style="top: 0px; z-index: 0;" >
 								           		<div class="cover"></div>								            

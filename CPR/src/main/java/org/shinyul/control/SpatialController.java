@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.shinyul.domain.PriceVO;
 import org.shinyul.domain.SpatialVO;
 import org.shinyul.service.SpatialService;
+import org.shinyul.util.Constant;
 import org.shinyul.util.GetAddressUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,7 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @param <MultipartServletRequest>
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping(Constant.ControllerName.DEFALT)
 public class SpatialController {
 	
 	private static final Logger logger = Logger.getLogger(SpatialController.class);
@@ -37,13 +38,13 @@ public class SpatialController {
 	///////////////////////////////////////////////////////////////////////////////////
 	// GET *******************************
 	//////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = Constant.ControllerForm.DEFALT, method = RequestMethod.GET)
 	public ModelAndView index() {		
 		logger.info("index popMap!!! ");				
-		return new ModelAndView("spatial/index");
+		return new ModelAndView(Constant.ControllerName.SPATIAL + Constant.ControllerForm.INDEX);
 	}
 	
-//	// index -> shopInfo 이동
+	// index -> shopInfo 이동
 //	@RequestMapping(value = "/shopInfo", method = RequestMethod.GET)
 //	public ModelAndView moveToShopInfo(SpatialVO vo) {		
 //		logger.info("shopInfo popMap!!! ");
@@ -53,16 +54,16 @@ public class SpatialController {
 //		return model;
 //	}	
 	
-	@RequestMapping(value = "/mapByDistance", method = RequestMethod.GET)
+	@RequestMapping(value = Constant.ControllerForm.MAP_BY_DISTANCE, method = RequestMethod.GET)
 	public ModelAndView mapByDistance(Model model) {		
 		logger.info("mapByDistance popMap!!! ");
-		return new ModelAndView("spatial/mapByDistance");	
+		return new ModelAndView(Constant.ControllerName.SPATIAL + Constant.ControllerForm.MAP_BY_DISTANCE);	
 	}
 	
-	@RequestMapping(value = "/price", method = RequestMethod.GET)
+	@RequestMapping(value = Constant.ControllerForm.PRICE, method = RequestMethod.GET)
 	public ModelAndView price() {		
 		logger.info("price!!! ");		
-		return new ModelAndView("spatial/price");
+		return new ModelAndView(Constant.ControllerName.SPATIAL + Constant.ControllerForm.PRICE);
 	}
 		
 	///////////////////////////////////////////////////////////////////////////////////
@@ -70,7 +71,7 @@ public class SpatialController {
 	//////////////////////////////////////////////////////////////////////////////////		
 	
 	// 시장 마커 띄우기
-	@RequestMapping(value="/popMarket", method = RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerAction.POP_MARKET, method = RequestMethod.POST)
 	public @ResponseBody List<SpatialVO> popMarket(SpatialVO vo){		
 		logger.info("popMarket!!! " + vo);
 						
@@ -102,7 +103,7 @@ public class SpatialController {
 //	}	
 		
 	// index에서 시장 클릭 -> 상점들의 marIdx 및 위치를 받아옴...
-	@RequestMapping(value="/getMarketCoord", method = RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerAction.GET_MARKET_COORD, method = RequestMethod.POST)
 	public @ResponseBody SpatialVO getMarketCoord(SpatialVO vo){
 		logger.info("getMarketCoord...");
 		logger.info(vo);
@@ -112,18 +113,18 @@ public class SpatialController {
 	}
 	
 	// 상점 데이터 보기 페이지
-	@RequestMapping(value = "/shopInfo", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerAction.SHOP_INFO, method = RequestMethod.POST)
 	public @ResponseBody List<SpatialVO> shopInfo(int marIdx, HttpSession session) {		
 		logger.info("shopInfo!!! " + marIdx);	
 		
 		//역경매를 위한 세션값 넣기
-		session.setAttribute("marIdx", marIdx);
+		session.setAttribute(Constant.Session.MAR_IDX, marIdx);
 		logger.info("spatial marIdx : " +  marIdx);		
 		
 		return service.shopInfo(marIdx);	
 	}	
 		
-	@RequestMapping(value = "/distanceMap", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerAction.DISTANCE_MAP, method = RequestMethod.POST)
 	public @ResponseBody List<SpatialVO> distanceMap(SpatialVO vo, HttpSession session) {		
 		logger.info("shopInfo!!! " + vo);	
 		
@@ -135,15 +136,15 @@ public class SpatialController {
 	}	
 		
 	// 상점 데이터 로드 (+ 상인 이미지, 상품 이미지)
-	@RequestMapping(value="/loadShopSlideData", method = RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerAction.LOAD_SHOP_SLIDE_DATA, method = RequestMethod.POST)
 	public @ResponseBody List<SpatialVO> loadShopSlideData(SpatialVO vo){
 		logger.info("loading...ShopSlideData...");
 		logger.info(vo);
 		//List<SpatialVO> list = service.loadShopSlideData(vo);
 		Map<String, List<SpatialVO>>  map = service.loadShopSlideData(vo);
 		
-		List<SpatialVO> sellerData = map.get("sellerData");
-		List<SpatialVO> productData = map.get("productData");
+		List<SpatialVO> sellerData = map.get(Constant.Session.SELLER_DATA);
+		List<SpatialVO> productData = map.get(Constant.Session.PRODUCT_DATA);
 		
 		for(int i = 0; i < productData.size(); i++){
 			sellerData.add(productData.get(i));
@@ -158,7 +159,7 @@ public class SpatialController {
 	//////////////////////////////////////////////////////////////////////////////////
 	//위도 경도로 상세주소 얻어오는 부분											//
 	//////////////////////////////////////////////////////////////////////////////////	
-	@RequestMapping(value="/getAddress", method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
+	@RequestMapping(value=Constant.ControllerAction.GET_ADDRESS, method=RequestMethod.POST, produces="text/plain;charset=UTF-8")
 	public @ResponseBody  ResponseEntity<String> getAddress(String LNG, String LAT){
 		logger.info("getAddress!!!");
 		String address = GetAddressUtil.mapXmlParser(LNG, LAT);
@@ -172,7 +173,7 @@ public class SpatialController {
 	
 	// map by distance
 	///////////////////////////////////////////////////////////////////////////////////////////////
-	@RequestMapping(value="/isNearShop", method = RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerAction.IS_NEAR_SHOP, method = RequestMethod.POST)
 	public @ResponseBody SpatialVO isNearestShop(SpatialVO vo){
 		logger.info("loadIsNearShop...");
 		logger.info("currentLocation...confirming : " + vo);
@@ -184,7 +185,7 @@ public class SpatialController {
 		return svo;
 	}
 	
-	@RequestMapping(value="/nearestMarket", method = RequestMethod.POST)
+	@RequestMapping(value=Constant.ControllerAction.NEAREST_MARKET, method = RequestMethod.POST)
 	public @ResponseBody List<SpatialVO> nearestMarket(SpatialVO vo){
 		logger.info("loadNearestMarket...");
 		logger.info("currentLocation...confirming : " + vo);
@@ -195,13 +196,13 @@ public class SpatialController {
 	
 	/////////////////////////////////////////////////////////////////////////////////
 	
-	@RequestMapping(value = "/popSuperstore", method = RequestMethod.POST)
+	@RequestMapping(value = Constant.ControllerAction.POP_SUPERSTORE, method = RequestMethod.POST)
 	public @ResponseBody List<PriceVO> popSuperstore(PriceVO vo) {	
 		logger.info("popSuperstore!!! ");		
 		return service.popSuperstore(vo);
 	}	
 	
-	@RequestMapping(value="/loadPriceData")
+	@RequestMapping(value=Constant.ControllerAction.LOAD_PRICE_DATA)
 	public @ResponseBody List<PriceVO> loadPriceData(PriceVO vo){		
 		logger.info("loadPriceData!!!");
 		return service.loadPriceData(vo);

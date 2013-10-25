@@ -62,12 +62,14 @@ public class RequestService {
 	}
 	
 	
-	public String register (RequestVO vo){
-		String check = "성공";
+	public int register (RequestVO vo){
+		int check = 0;
 		try {
 			mapper.create(vo);
+			check = 1;
 		} catch (Exception e) {
-			check ="실패";
+			e.printStackTrace();
+			check = 0;
 		}
 		
 		return check;

@@ -19,43 +19,55 @@ btnReg.click(function(){
 	  	var jdata = JSON.stringify($('#reserve').serializeObject());    	
 		//console.log(jdata);
 		connection.send(jdata);
-		
-		// -- gcm
-		var fdata = new FormData($("#reserve")[0]);
-		var data = JSON.parse(jdata);
-		$.post('/cpr/gcm/alert', data).done(function(data){
-//			alert(data);
-			alert("예약되셨습니다.");
-			var selIdx = $('input[name=selIdx]').val();		
-			location.href= '/cpr/product/list/' + selIdx;
-		});
+	
 	}    	
 });
 
 connection.onmessage = function (message) {
-    try {
-        var json = JSON.parse(message.data);
+	var json;
+	try {
+        json = JSON.parse(message.data);
+        console.log("onmessage json : " + json);
     } catch (e) {
         console.log('This doesn\'t look like a valid JSON: ', message.data);
         return;
     }
 
 	 if (json.type === 'message') {
-		 var msg = JSON.parse(json.data);
+		 var msg = JSON.parse(json.data.text);
 		 
 		 //if문 걸것...예약한 사람 본인만 넘어가도록 해야됨...		 
-		//console.log('msg : ' + msg.chunk);
+		console.log('msg : ' + msg);
+		console.log('msg chunk : ' + msg.chunk);
 		if(msg.chunk == 1){
 			var customerIdx = $('#customerIdx').val();
 			if(customerIdx == msg.customerIdx){
 				
+				// -- gcm
+//				var fdata = new FormData($("#reserve")[0]);
+				var data = JSON.parse(jdata);
+				$.post('/cpr/gcm/alert', data).done(function(data){
+//					alert(data);
+					if(data == "실패"){
+						alert("예약실패");
+					}else{
+						alert("예약되셨습니다.");
+						var selIdx = $('input[name=selIdx]').val();		
+						location.href= '/cpr/product/list/' + selIdx;
+					}
+				});
+				
+				
+//					alert("예약되셨습니다.");
 //					var selIdx = $('input[name=selIdx]').val();		
 //					location.href= '/cpr/product/list/' + selIdx;					
 			}
 		
 		}		 
     } else {
-        console.log('Hmm..., I\'ve never seen JSON like this: ', json);
+        console.log('Hmm..., I\'ve never seen JSON like this: ' + json);
+//        var msg2 = JSON.parse(json.data.text);
+//        console.log('Hmm..., msg2: ' + msg2);
     }
 };    
 

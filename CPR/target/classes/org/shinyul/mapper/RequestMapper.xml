@@ -36,6 +36,7 @@
             ,REQUEST_MEMO
             ,REQUEST_RECEIVE_TIME
             ,GUNAME_MARID
+            ,MEMBER_ID
             )
        VALUES
        		(
@@ -44,8 +45,9 @@
             ,#{title}
             ,#{items}
             ,#{memo}
-            ,#{receiveTime}
-            ,#{guName}||#{marketName}
+            ,#{reserveReceiveTime}	<!--             ,#{receiveTime} -->
+			,#{gunameMarid} 	<!--             ,#{guName}||#{marketName} -->
+            ,#{memberId}
             )
  	
  	</insert>
@@ -84,7 +86,7 @@
 
 	FROM  TBL_PRODUCT a, tbl_product_img b
 
-	WHERE a.guname_marid = #{gunamemarid}
+	WHERE a.guname_marid = #{gunameMarid}
 	AND   a.PRODUCT_STATUS = 1 
     AND   a.product_Idx = b.product_Idx
     AND   rownum < 11   
@@ -109,7 +111,7 @@
 	          ,REQUEST_ITEM = #{items}
 	          ,REQUEST_MEMO = #{memo}
 	          ,REQUEST_RECEIVE_TIME = #{receiveTime}
-	          ,GUNAME_MARID = #{guName}||#{marketName}
+	          ,GUNAME_MARID = #{gunameMarid} <!-- 	          #{guName}||#{marketName} -->
        where   REQUEST_IDX = #{idx}
  	
  	
@@ -191,7 +193,7 @@
  		
 		update TBL_REQUEST
         set    REQUEST_FLAG = 2
-       where   REQUEST_IDX = #{reqestIdx}
+       where   REQUEST_IDX = #{requestIdx}
        
  	</update>
  

@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@page import="org.shinyul.util.Constant"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <html>
 <body style="margin-left: 1px">
@@ -59,15 +60,15 @@
 												<form id="info" method="post" enctype="multipart/form-data">
 													<br />
 													<p>
-														<br />회원 아이디(수정불가)</br> <input type="text" id="member_ID" name="memberId" class="" value="${vo.memberId}" readonly="readonly" style="background-color: transparent;">
+														<br />회원 아이디(수정불가)</br> <input type="text" id="member_ID" name=<%=Constant.Session.MEMBER_ID %> class="" value="${vo.memberId}" readonly="readonly" style="background-color: transparent;">
 													</p>
 													<br />
 													<p>
-														<br />회원 비밀번호</br> <input type="password" id="member_PW" name="memberPw" class="change" value="${vo.memberPw }" readonly="readonly">
+														<br />회원 비밀번호</br> <input type="password" id="member_PW" name=<%=Constant.Session.MEMBER_PW %> class="change" value="${vo.memberPw }" readonly="readonly">
 													</p>
 													<br />
 													<p>
-														</br>회원 이름(수정불가)</br> <input type="text" id="member_NAME" name="memberName" class="" value="${vo.memberName }" readonly="readonly" style="background-color: transparent;">
+														</br>회원 이름(수정불가)</br> <input type="text" id="member_NAME" name=<%=Constant.Session.MEMBER_NAME %> class="" value="${vo.memberName }" readonly="readonly" style="background-color: transparent;">
 													</p>
 													<br />
 													<p>
@@ -84,7 +85,7 @@
 													</p>
 													<br />
 													<!-- 버튼 -->
-													<input type="hidden" id="member_IDX" name="memberIdx" value="${vo.memberIdx }">
+													<input type="hidden" id="member_IDX" name=<%=Constant.Session.MEMBER_IDX %> value="${vo.memberIdx }">
 													<input type="button" id="customerBtn" class="hides" value="수정하기">
 													<input type="hidden" id="modifyCustomer" class="shows" value="수정 제출">
 													<input type="button" id="removeCustomer" class="remove" value="탈퇴!!!">
@@ -161,8 +162,14 @@
 			if (confirm('탈퇴하시겠습니까?') == true) {
 				var jsonObj = JSON.parse(JSON.stringify($('#info').serializeObject()));
 				$.post('/cpr/member/remove/customer', jsonObj).done(function(data) {
-					alert("탈퇴되셨습니다.");
-					location.href = "/cpr/member/join";
+					if(data == 1){
+						alert("탈퇴되셨습니다.");
+						$.post('/cpr/member/logout', jsonObj).done(function(data){
+							location.href = "/cpr/member/join";
+						});
+					}else{
+						alert("탈퇴에 실패했습니다.");
+					}
 				});
 			} else {
 // 				alert('탈퇴 취소');

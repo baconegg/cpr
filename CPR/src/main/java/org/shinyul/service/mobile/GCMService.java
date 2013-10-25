@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.apache.log4j.Logger;
 import org.shinyul.domain.mobile.GCMVO;
 import org.shinyul.mapper.mobile.GCMMapper;
+import org.shinyul.util.Constant;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,10 +19,10 @@ public class GCMService {
 	public String control(String cmd, GCMVO vo){
 		String check = null;
 		switch(cmd){
-		case "addRegId":
+		case Constant.GCM.ADD_REG_ID:
 			check = updateRegId(vo);
 			break;
-		case "alertReserve":
+		case Constant.GCM.ALERT_RESERVE:
 			check = selectByRegId(vo);
 			break;
 		}
