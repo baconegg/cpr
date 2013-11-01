@@ -17,7 +17,7 @@ public class GCMUtil {
 	/**
 	 * 전체 사용하는 스트링 값
 	 */
-	public static final String GCM_PATH = "";
+	public static final String GCM_PATH = ""; 
 	//서버의 API KEY 값
 	public static final String API_KEY = "AIzaSyDyIO7hdp9O2J3yIz93XjNORnT9AqY1Cx4";
 }
