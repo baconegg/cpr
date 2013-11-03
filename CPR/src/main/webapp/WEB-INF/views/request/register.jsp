@@ -71,7 +71,8 @@
 															</p><br/><br/>
 															<p>
 															<h2> 수취시간</h2><br/>
-																 <input placeholder="수취시간을 선택해 주세요." type="text" id="receiveTime" name="receiveTime">
+<!-- 																 <input placeholder="수취시간을 선택해 주세요." type="text" id="receiveTime" name="receiveTime"> -->
+																 <input placeholder="수취시간을 선택해 주세요." type="text" id="reserveReceiveTime" name="reserveReceiveTime">
 															</p><br/><br/>			
 															<p>
 																<h2>요청 사항</h2><br/>
@@ -184,9 +185,19 @@
   }); 
  
  
- $("#receiveTime").on('click', function(){
+//  $("#receiveTime").on('click', function(){
 	
-		$('#receiveTime').datetimepicker({
+// 		$('#receiveTime').datetimepicker({
+// 			dateFormat: 'yy-mm-dd',
+// 			controlType: 'select',
+// 			timeFormat: 'TT HH:mm'
+// 		});
+		
+// 	});
+ 
+ $("#reserveReceiveTime").on('click', function(){
+	
+		$('#reserveReceiveTime').datetimepicker({
 			dateFormat: 'yy-mm-dd',
 			controlType: 'select',
 			timeFormat: 'TT HH:mm'
@@ -198,7 +209,13 @@
  
  window.onload = function(){
 	 
-		$('#receiveTime').datetimepicker({
+// 		$('#receiveTime').datetimepicker({
+// 			dateFormat: 'yy-mm-dd',
+// 			controlType: 'select',
+// 			timeFormat: 'TT HH:mm'
+// 		});
+		
+		$('#reserveReceiveTime').datetimepicker({
 			dateFormat: 'yy-mm-dd',
 			controlType: 'select',
 			timeFormat: 'TT HH:mm'
