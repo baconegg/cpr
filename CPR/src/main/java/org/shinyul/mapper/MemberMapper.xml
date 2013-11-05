@@ -13,6 +13,7 @@
 			member_idx
 			,member_id
 			,member_pw
+			,member_salt
 			,member_tel
 			,member_lev
 			,member_name
@@ -22,6 +23,7 @@
 			seq_member.nextval
 			,#{memberId}
 			,#{memberPw}
+			,#{memberSalt}
 			,#{memberTel}
 			,2
 			,#{memberName}		
@@ -156,6 +158,7 @@
 		UPDATE
 			tbl_member
 		SET
+			member_salt=#{memberSalt},
 			member_pw=#{memberPw},
 			member_tel=#{memberTel}
 		WHERE
@@ -217,6 +220,7 @@
 			member_idx
 			,member_id
 			,member_pw
+			,member_salt
 			,member_tel
 			,member_lev
 			,member_name
@@ -226,6 +230,7 @@
 			seq_member.nextval
 			,#{memberId}
 			,#{memberPw}
+			,#{memberSalt}
 			,#{memberTel}
 			,1
 			,#{memberName}		
@@ -280,6 +285,7 @@
 		UPDATE
 			tbl_member
 		SET
+			member_salt=#{memberSalt},
 			member_pw=#{memberPw},
 			member_tel=#{memberTel}
 		WHERE
@@ -314,6 +320,7 @@
 			member_idx memberIdx,
 			member_id memberId,
 			member_pw memberPw,
+			member_salt memberSalt,
 			member_lev memberLev,
 			member_name memberName
 		FROM

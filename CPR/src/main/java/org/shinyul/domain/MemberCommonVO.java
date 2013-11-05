@@ -7,13 +7,15 @@ public class MemberCommonVO{
 	
 	protected int memberIdx;	//회원 idx
 	
-	/*@NotNull(message="아이디를 입력하세요")
-	@Size(min=6, max=12, message="아이디는 6~12자 사이로 입력해 주세요")*/
+	@NotNull(message="아이디를 입력하세요")
+	@Size(min=6, max=12, message="아이디는 6~12자 사이로 입력해 주세요")
 	protected String memberId;	//회원 id
 	
 	@NotNull(message="패스워드를 입력하세요")
 	@Size(min=6, max=12, message="패스워드는 6~12자 사이로 입력해 주세요")
 	protected String memberPw;	//회원 비밀번호	
+	
+	protected String memberSalt; 
 	
 	/*@MaskFormat("(###) ###-####")*/
 	@NotNull(message="연락처를 입력하세요")
@@ -81,13 +83,19 @@ public class MemberCommonVO{
 	public void setMemberLNG(String memberLNG) {
 		this.memberLNG = memberLNG;
 	}
+	public String getMemberSalt() {
+		return memberSalt;
+	}
+	public void setMemberSalt(String memberSalt) {
+		this.memberSalt = memberSalt;
+	}
 	@Override
 	public String toString() {
 		return "MemberCommonVO [memberIdx=" + memberIdx + ", memberId="
 				+ memberId + ", memberPw=" + memberPw + ", memberTel="
 				+ memberTel + ", memberLev=" + memberLev + ", memberReg="
 				+ memberReg + ", memberName=" + memberName + ", memberLAT="
-				+ memberLAT + ", memberLNG=" + memberLNG + "]";
+				+ memberLAT + ", memberLNG=" + memberLNG + ", memberSalt=" + memberSalt + "]";
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////

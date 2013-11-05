@@ -10,6 +10,7 @@ import org.shinyul.domain.MemberCommonVO;
 import org.shinyul.domain.MemberCustomerVO;
 import org.shinyul.domain.MemberSellerVO;
 import org.shinyul.mapper.MemberMapper;
+import org.shinyul.util.PBKDF2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,16 @@ public class MemberService {
 	public int registSeller(MemberSellerVO vo){
 		int check = 1;
 		try {
+			
+			//pbkdf2////////////////////////////////////
+			String tmpPw = vo.getMemberPw();
+			byte[] salt = PBKDF2.createSalt();
+			vo.setMemberSalt(PBKDF2.changeDiget(salt));
+			byte[] changePw = PBKDF2.pbkdf2(tmpPw.toCharArray(), salt);
+			vo.setMemberPw(PBKDF2.changeDiget(changePw));
+			///////////////////////////////////////////
+			
+			logger.info("service vo check : " + vo);	
 			member.createSeller(vo);
 		} catch (Exception e) {			
 			logger.error("Service ------- registSeller Error~!!!!");
@@ -52,6 +63,15 @@ public class MemberService {
 	public int modifySeller(MemberSellerVO vo){
 		int check = 1;
 		try {			
+			
+			//pbkdf2////////////////////////////////////
+			String tmpPw = vo.getMemberPw();
+			byte[] salt = PBKDF2.createSalt();
+			vo.setMemberSalt(PBKDF2.changeDiget(salt));
+			byte[] changePw = PBKDF2.pbkdf2(tmpPw.toCharArray(), salt);
+			vo.setMemberPw(PBKDF2.changeDiget(changePw));
+			///////////////////////////////////////////
+			
 			member.updateSeller(vo);
 			member.updateSellerTwo(vo);
 			member.updateSellerThree(vo);
@@ -84,6 +104,15 @@ public class MemberService {
 	@Transactional
 	public void registCustomer(MemberCustomerVO vo){
 		try {
+			
+			//pbkdf2////////////////////////////////////
+			String tmpPw = vo.getMemberPw();
+			byte[] salt = PBKDF2.createSalt();
+			vo.setMemberSalt(PBKDF2.changeDiget(salt));
+			byte[] changePw = PBKDF2.pbkdf2(tmpPw.toCharArray(), salt);
+			vo.setMemberPw(PBKDF2.changeDiget(changePw));
+			///////////////////////////////////////////
+			
 			logger.info("service vo check : " + vo);			
 			member.createCustomer(vo);
 		} catch (Exception e) {
@@ -110,6 +139,15 @@ public class MemberService {
 	@Transactional
 	public void modifyCustomer(MemberCustomerVO vo){
 		try {
+			
+			//pbkdf2////////////////////////////////////
+			String tmpPw = vo.getMemberPw();
+			byte[] salt = PBKDF2.createSalt();
+			vo.setMemberSalt(PBKDF2.changeDiget(salt));
+			byte[] changePw = PBKDF2.pbkdf2(tmpPw.toCharArray(), salt);
+			vo.setMemberPw(PBKDF2.changeDiget(changePw));
+			///////////////////////////////////////////
+			
 			member.updateCustomer(vo);
 			member.updateCustomerTwo(vo);
 		} catch (Exception e) {

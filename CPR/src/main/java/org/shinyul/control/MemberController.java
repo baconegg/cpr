@@ -1,13 +1,15 @@
 package org.shinyul.control;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.ibatis.annotations.Param;
 import org.apache.log4j.Logger;
 import org.shinyul.domain.MarketVO;
 import org.shinyul.domain.MemberCommonVO;
@@ -17,6 +19,7 @@ import org.shinyul.service.MemberService;
 import org.shinyul.util.Constant;
 import org.shinyul.util.FileIOUtil;
 import org.shinyul.util.GetAddressUtil;
+import org.shinyul.util.PBKDF2;
 import org.shinyul.util.SessionUtil;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,17 +52,18 @@ public class MemberController {
 	//Login																			          //
 	//////////////////////////////////////////////////////////////////////////////////
 	@RequestMapping(value = Constant.ControllerAction.LOGIN, method = RequestMethod.POST)
-	public void login(String hpath, @RequestParam(Constant.Session.MEMBER_ID) String memberId, @RequestParam(Constant.Session.MEMBER_PW) String memberPw, HttpSession session,HttpServletResponse response){
+	public void login(String hpath, @RequestParam(Constant.Session.MEMBER_ID) String memberId, @RequestParam(Constant.Session.MEMBER_PW) String memberPw, HttpSession session,HttpServletResponse response) throws Exception, InvalidKeySpecException{
 		logger.info("로그인 하러 들어왓슴미다");
 		logger.info("hpath : " + hpath);
 		//hpath ="redirect:"+hpath;
 		
-		SessionUtil sUtil = new SessionUtil();
+//		SessionUtil sUtil = new SessionUtil();
 		MemberCommonVO vo = null;
 		int chk = 0;
 		//아이디만 체크해서 값을 가져옴
 		vo = member.loginchk(memberId);
-		logger.info(vo);
+//		logger.info(vo);
+		
 		if(vo == null){
 			//아이디 없음
 			logger.info("이푸 vo가 널이라면!!! 아이디나 패스워드가 없는거임...혹은 암것도 안쓴거...");
@@ -67,7 +71,7 @@ public class MemberController {
 		}else{
 			//요기부터
 			//아이디가 있는 경우 비번 체크
-			chk = sUtil.pwChk(memberPw, vo);
+			chk = SessionUtil.pwChk(memberPw, vo);
 			if(chk == Constant.Session.PW_OK){	//비번이 맞을경우 세션을 한번 비우고 셋팅
 				logger.info("if(chk==0)");
 				session.setAttribute(Constant.Session.LOGIN_CHK, Constant.Session.PW_OK);				
