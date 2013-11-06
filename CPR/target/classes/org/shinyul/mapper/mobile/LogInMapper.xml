@@ -11,6 +11,7 @@
 			member_idx memberIdx,
 			member_id memberId,
 			member_pw memberPw,
+			member_salt memberSalt,
 			member_lev memberLev,
 			member_name memberName
 		FROM

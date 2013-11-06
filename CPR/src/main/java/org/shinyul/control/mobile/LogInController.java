@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.shinyul.domain.MemberCommonVO;
-import org.shinyul.service.mobile.LogInService;
+import org.shinyul.service.MemberService;
 import org.shinyul.util.Constant;
 import org.shinyul.util.SessionUtil;
 import org.springframework.stereotype.Controller;
@@ -25,7 +24,8 @@ public class LogInController {
 	private static final Logger logger = Logger.getLogger(LogInController.class);
 	
 	@Inject
-	private LogInService member;
+//	private LogInService member;
+	private MemberService member;
 	
 	///////////////////////////////////////////////////////////////////////////////////
 	//Login																			          //
@@ -34,7 +34,7 @@ public class LogInController {
 	public @ResponseBody List<Map<String, String>> login(HttpSession session, String memberId,String memberPw){
 		logger.info("mobile 로그인 하러 들어왓슴미다 : " + memberId + " : " + memberPw);
 		
-		SessionUtil sUtil = new SessionUtil();
+//		SessionUtil sUtil = new SessionUtil();
 		MemberCommonVO vo = null;
 		Map<String, String> toMobile = new HashMap<String, String>();
 		
@@ -49,7 +49,7 @@ public class LogInController {
 		}else{
 			//요기부터
 			//아이디가 있는 경우 비번 체크
-			chk = sUtil.pwChk(memberPw, vo);
+			chk = SessionUtil.pwChk(memberPw, vo);
 			if(chk == Constant.Session.PW_OK){	//비번이 맞을경우 세션을 한번 비우고 셋팅
 				logger.info("if(chk==0)");
 				toMobile.put(Constant.Session.CHK, String.valueOf(Constant.Session.PW_OK));
