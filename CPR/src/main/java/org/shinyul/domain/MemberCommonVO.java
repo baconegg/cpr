@@ -23,6 +23,9 @@ public class MemberCommonVO{
 	protected String memberTel;	//회원 연락처	
 	protected int memberLev; //회원등급 <- 왜 스트링이지???
 	protected String memberReg; //가입일
+	
+	@NotNull(message="이름을 입력하세요")
+	@Size(min=2, max=6, message="이름을 입력해 주세요.(2자~6자)")
 	protected String memberName;
 	
 	protected String memberLAT;

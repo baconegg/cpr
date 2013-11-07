@@ -107,18 +107,39 @@ $('#agreeBtn_cu').on('click',function() {
 
 //								console.log($message_id.val());
 
-								$message_id.attr('value', function() {
-									for ( var i = 0; i < data.length; i++) {
+//								$message_id.attr('value', function() {
+								$('strong').remove();	
+								for ( var i = 0; i < data.length; i++) {
+//										console.log('field : ' + data[i].field);
 //										console.log('error message : ' + data[i].defaultMessage);
-										alert('error message : ' + data[i].defaultMessage);
-//										if (data[i].defaultMessage == '아이디') {
-//											console.log(data[i].defaultMessage);
-//											alert(data[i].defaultMessage);
-//										}
+//										alert('error message : ' + data[i].defaultMessage);
+										
+										if(data[i].field == "memberTel"){
+											var tmpMsg = data[i].defaultMessage;
+											console.log("memberTel : " + tmpMsg);
+											$('#Member_TEL').after("<strong>" + tmpMsg + "</strong>");
+										}
+										
+										if (data[i].field == "memberId") {
+											var tmpMsg = data[i].defaultMessage;
+											console.log("memberId : " + tmpMsg);
+											$('#Member_ID').after("<strong>" + tmpMsg + "</strong>");
+//											alert('error message : ' + data[i].defaultMessage);
+										}
 
-										return data[i].defaultMessage;
+										if (data[i].field == "memberName") {
+											var tmpMsg = data[i].defaultMessage;
+											console.log("memberName : " + tmpMsg);
+											$('#Member_NAME').after("<strong>" + tmpMsg + "</strong>");
+//											alert('error message : ' + data[i].defaultMessage);
+										}
+										
+										$('strong').css("color","red");
+										
+//										return data[i].defaultMessage;
 									}
-								});
+									$('strong').fadeToggle(2000, "linear");									
+//								});
 
 								//}
 
@@ -141,11 +162,14 @@ $('#agreeBtn_cu').on('click',function() {
 
 // step #2 상세 기입
 // 판매자
-//버튼을 눌렀을 떄_ 예외처리는 나중에...
+//버튼을 눌렀을 떄_ 
 $('#agreeBtn_se').on('click', function(){		
 	//콜백
 	function banana(data, state){
 		 
+		console.log("data : " + data);
+		console.log("state : " + state);
+		
 		if (data=="error"){
 		      alert("에러 발생!!");
 		      return false;
