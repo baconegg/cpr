@@ -46,7 +46,7 @@
 		FROM TBL_RESERVE R , TBL_PRODUCT P , TBL_MEMBER M , TBL_CUSTOMER C , tbl_product_img pi
 		WHERE R.RESERVE_IDX = #{reserveIdx}
 		AND   C.CUSTOMER_IDX=R.CUSTOMER_IDX
-		AND   M.MEMBER_IDX = C.CUSTOMER_IDX
+		AND   M.MEMBER_IDX = C.MEMBER_IDX
 		AND   R.PRODUCT_IDX = P.PRODUCT_IDX
 		and 	 p.product_idx = pi.product_idx
 	</select>
