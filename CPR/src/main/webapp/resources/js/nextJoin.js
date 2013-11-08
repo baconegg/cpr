@@ -169,7 +169,7 @@ $('#agreeBtn_se').on('click', function(){
 		 
 		console.log("data : " + data);
 		console.log("state : " + state);
-		
+						
 		if (data=="error"){
 		      alert("에러 발생!!");
 		      return false;

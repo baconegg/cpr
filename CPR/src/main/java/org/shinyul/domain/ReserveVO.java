@@ -122,7 +122,6 @@ public class ReserveVO {
 	public void setMemberTel(String memberTel) {
 		this.memberTel = memberTel;
 	}
-	
 	public int getMemberLev() {
 		return memberLev;
 	}

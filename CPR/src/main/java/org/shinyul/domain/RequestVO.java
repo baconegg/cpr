@@ -1,22 +1,24 @@
 package org.shinyul.domain;
 
 public class RequestVO {
-	int idx;
-	int customerIdx;
-	String title;
-	int marketIdx;
-	String items;
-	String memo;
-	String receiveTime;
-	String time;
-	int flag;
-	String guName;
-	String marketName;
-	String gunameMarid;
-	int deleteFlag;
-	int replyCnt;
-	int total;
-	String memberId;
+	private int idx;
+	private int customerIdx;
+	private String title;
+	private int marketIdx;
+	private String items;
+	private String memo;
+	private String receiveTime;
+	private String time;
+	private int flag;
+	private String guName;
+	private String marketName;
+	private String gunameMarid;
+	private int deleteFlag;
+	private int replyCnt;
+	private int total;
+	private String memberId;
+	private String reserveReceiveTime;
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -113,6 +115,13 @@ public class RequestVO {
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
 	}
+	public String getReserveReceiveTime() {
+		return reserveReceiveTime;
+	}
+	public void setReserveReceiveTime(String reserveReceiveTime) {
+		this.reserveReceiveTime = reserveReceiveTime;
+	}
+	
 	@Override
 	public String toString() {
 		return "RequestVO [idx=" + idx + ", customerIdx=" + customerIdx
@@ -121,6 +130,19 @@ public class RequestVO {
 				+ ", time=" + time + ", flag=" + flag + ", guName=" + guName
 				+ ", marketName=" + marketName + ", gunameMarid=" + gunameMarid
 				+ ", deleteFlag=" + deleteFlag + ", replyCnt=" + replyCnt
-				+ ", total=" + total + ", memberId=" + memberId + "]";
+				+ ", total=" + total + ", memberId=" + memberId
+				+ ", reserveReceiveTime=" + reserveReceiveTime + ", getIdx()="
+				+ getIdx() + ", getCustomerIdx()=" + getCustomerIdx()
+				+ ", getTitle()=" + getTitle() + ", getMarketIdx()="
+				+ getMarketIdx() + ", getItems()=" + getItems()
+				+ ", getMemo()=" + getMemo() + ", getReceiveTime()="
+				+ getReceiveTime() + ", getTime()=" + getTime()
+				+ ", getFlag()=" + getFlag() + ", getGuName()=" + getGuName()
+				+ ", getMarketName()=" + getMarketName()
+				+ ", getGunameMarid()=" + getGunameMarid()
+				+ ", getDeleteFlag()=" + getDeleteFlag() + ", getReplyCnt()="
+				+ getReplyCnt() + ", getTotal()=" + getTotal()
+				+ ", getMemberId()=" + getMemberId()
+				+ ", getReserveReceiveTime()=" + getReserveReceiveTime() + "]";
 	}
 }
